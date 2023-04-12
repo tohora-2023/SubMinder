@@ -4,7 +4,6 @@ interface Props {
   firstName?: string
   lastName?: string
   userName?: string
-
   image?: string
 }
 

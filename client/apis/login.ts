@@ -10,7 +10,7 @@ interface User {
 export default async function addLogInInfo(user: User, token: string) {
   try {
     const response = await request
-      .post('/api/log-in')
+      .post('/')
       .send({ user, token })
       .set('Authorization', `Bearer ${token}`)
     if (response.body.message === 'User already exists') {

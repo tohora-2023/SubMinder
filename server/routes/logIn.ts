@@ -32,4 +32,4 @@ router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
       .json({ success: false, message: 'Internal server error' })
   }
 })
-module.exports = router
+export default router
