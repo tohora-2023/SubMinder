@@ -12,9 +12,11 @@ export default async function addLogInInfo(user: User, token: string) {
     const response = await request
       .post('/api/log-in')
       .send({ user, token })
-      .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`)
-
+    if (response.body.message === 'User already exists') {
+      console.log('User already exists in the database')
+      return null
+    }
     return response.body
   } catch (error) {
     console.error(error)
