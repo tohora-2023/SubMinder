@@ -11,3 +11,31 @@ exports.seed = function (knex) {
       ])
     })
 }
+
+// //Table subscription {
+//  id integer
+//  userId integer
+//  userAuthId varchar
+//  image varchar
+//  frequency varchar
+//  endDate varchar
+//  category varchar
+//  website varchar
+//  price integer
+// }
+// Table users {
+//  id integer
+//  firstName varchar
+//  lastName varchar
+//  userName varchar
+//  authId varchar
+//  image varchar
+// }
+
+// Table calendarEvents {
+//  id integer
+//  subscriptionId integer
+//  scheduleDate varchar
+//  createDate varchar
+//  isLastDate boolean
+// }
