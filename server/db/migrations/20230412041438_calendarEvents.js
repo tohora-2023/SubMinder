@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments('id')
     table.integer('subscriptionId')
     table.string('scheduleDate')
-    table.string('createDate')
+    table.timestamps(true, true)
     table.boolean('isLastDate')
   })
 }
