@@ -7,11 +7,13 @@ function SubItem(props: Props) {
   return (
     <div>
       <h2>
-        <a href={props.subscription.website}>Name: {props.subscription.name}</a>
+        <a href={props.subscription.website} target="_blank" rel="noreferrer">
+          Name: {props.subscription.name}
+        </a>
       </h2>
       <h2>Category: {props.subscription.category}</h2>
       {props.subscription.isLastDate ? (
-        <h2>Last Payment Date: {props.subscription.endDate}</h2>
+        <h2>Last Payment Date: {props.subscription.scheduleDate}</h2>
       ) : (
         <h2>Next Payment Date: {props.subscription.scheduleDate}</h2>
       )}
