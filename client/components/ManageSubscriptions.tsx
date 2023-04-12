@@ -16,15 +16,17 @@ function ManageSubscription() {
 
   return (
     <>
-      <ul>
-        {data.map((sub) => {
-          return (
-            <li className="w-3/10 py-2" key={sub.id}>
-              <SubItem subscription={sub} />
-            </li>
-          )
-        })}
-      </ul>
+      <div style={{ width: '30%' }}>
+        <ul>
+          {data.map((sub) => {
+            return (
+              <li className="py-2" key={sub.id}>
+                <SubItem subscription={sub} />
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </>
   )
 }

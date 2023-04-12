@@ -7,11 +7,11 @@ interface Props {
 function SubItem(props: Props) {
   return (
     <div
-      className="border  border-2 border-black p-6"
+      className="border border-2 border-black p-6"
       style={{ fontFamily: 'sans-serif' }}
     >
       <h1>
-        <div className="flex justify-between">
+        <div className="p4 flex justify-between">
           <a
             href={props.subscription.website}
             target="_blank"
@@ -23,15 +23,23 @@ function SubItem(props: Props) {
           <h2>${props.subscription.price}</h2>
         </div>
       </h1>
+
+      {props.subscription.isLastDate ? (
+        <div className="flex justify-between">
+          <h2>last payment date:</h2>
+          <h2>{props.subscription.scheduleDate}</h2>
+        </div>
+      ) : (
+        <div className="flex justify-between">
+          <h2>next payment date:</h2>
+          <h2>{props.subscription.scheduleDate}</h2>
+        </div>
+      )}
+
       <h2>
         {props.subscription.category.toLowerCase()} -{' '}
         {props.subscription.frequency.toLowerCase()}
       </h2>
-      {props.subscription.isLastDate ? (
-        <h2>last payment date: {props.subscription.scheduleDate}</h2>
-      ) : (
-        <h2>next payment date: {props.subscription.scheduleDate}</h2>
-      )}
     </div>
   )
 }
