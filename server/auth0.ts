@@ -6,8 +6,8 @@ import type { JwtPayload } from 'jsonwebtoken'
 import jwks from 'jwks-rsa'
 
 // TODO: set the domain and audience (API Identifier)
-const domain = 'https://'
-const audience = 'https://'
+const domain = 'https://tohora-2023-roisin.au.auth0.com'
+const audience = 'https://subminder/api'
 
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({

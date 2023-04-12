@@ -8,17 +8,11 @@ import { Auth0Provider } from '@auth0/auth0-react'
 
 const root = createRoot(document.getElementById('app') as HTMLElement)
 root.render(
-  /**
-   * Auth0Provider is a component that has a hook that provides
-   * all authentication operations
-   *
-   * TODO: replace the empty strings below with your own domain, clientId, and audience
-   */
   <Auth0Provider
-    domain=""
-    clientId=""
+    domain="tohora-2023-roisin.au.auth0.com"
+    clientId="YSI0r6oMGzh2bTgvNLP5iqsSKYKgTHbo"
     redirectUri={window.location.origin}
-    audience=""
+    audience="https://subminder/api"
   >
     <Provider store={store}>
       <App />
