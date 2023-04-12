@@ -4,12 +4,12 @@ import {
   SET_ERROR,
 } from '../actions/subscriptions'
 import { SubscriptionAction } from '../actions/subscriptions'
-import Subscription from '../../models/subscriptions'
+import * as Models from '../../models/subscription'
 
 export interface SubscriptionState {
   loading: boolean
   error: string | undefined
-  data: Subscription[]
+  data: Models.Subscription[]
 }
 
 const initialState: SubscriptionState = {
@@ -17,28 +17,60 @@ const initialState: SubscriptionState = {
   error: undefined,
   data: [
     {
+      id: 1,
+      userAuthId: '1',
+      userId: 1,
       name: 'netflix',
       category: 'Entertainment',
-      currentPaymentDate: '10 May',
-      isLastPayment: false,
+      scheduleDate: '10 May',
+      isLastDate: true,
+      price: 14.0,
+      frequency: 'weekly',
+      image: '',
+      website: 'https://www.netflix.com',
+      endDate: '',
     },
     {
+      id: 2,
+      userAuthId: '1',
+      userId: 1,
       name: 'vodafone',
-      category: 'Bills',
-      currentPaymentDate: '25 May',
-      isLastPayment: false,
+      category: 'bills',
+      scheduleDate: '25 May',
+      isLastDate: false,
+      price: 150.0,
+      frequency: 'fortnightly',
+      image: '',
+      website: 'https://www.vodafone.co.nz',
+      endDate: '',
     },
     {
+      id: 3,
+      userAuthId: '1',
+      userId: 1,
       name: 'my food bag',
       category: 'food & drink',
-      currentPaymentDate: '12 May',
-      isLastPayment: true,
+      scheduleDate: '1 July',
+      isLastDate: false,
+      price: 120.0,
+      frequency: 'weekly',
+      image: '',
+      website: 'https://www.myfoodbag.co.nz',
+      endDate: '',
     },
     {
+      id: 4,
+      userAuthId: '1',
+      userId: 1,
       name: 'metlink',
       category: 'travel',
-      currentPaymentDate: '1 July',
-      isLastPayment: false,
+      scheduleDate: '30 May',
+      isLastDate: false,
+      price: 160.0,
+      frequency: 'monthly',
+      image: '',
+      website: 'https://www.metlink.org.nz',
+      endDate: '',
     },
   ],
 }
