@@ -19,7 +19,7 @@ function ManageSubscription() {
       <ul>
         {data.map((sub) => {
           return (
-            <li key={sub.id}>
+            <li className="w-3/10 py-2" key={sub.id}>
               <SubItem subscription={sub} />
             </li>
           )
