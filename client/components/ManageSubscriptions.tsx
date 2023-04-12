@@ -1,6 +1,5 @@
 import { useAppSelector } from '../hooks'
-
-import Subscription from './Subscription'
+import SubItem from './SubItem'
 
 function ManageSubscription() {
   const { loading, error, data } = useAppSelector(
@@ -15,12 +14,19 @@ function ManageSubscription() {
     return <p>There was an error</p>
   }
 
-  return data.map((subscription, index) => {
-    ;<ul>
-      <li>
-        <Subscription subscription={subscription} />
-      </li>
-    </ul>
-  })
+  return (
+    <>
+      <ul>
+        {data.map((sub) => {
+          return (
+            <li key={sub.id}>
+              <SubItem subscription={sub} />
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
 }
+
 export default ManageSubscription
