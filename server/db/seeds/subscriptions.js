@@ -9,7 +9,7 @@ exports.seed = async function (knex) {
     {
       id: 1,
       userId: 1,
-      userAuthId: null,
+      userAuthId: '1',
       image: '',
       frequency: 'week',
       endDate: '2023-04-12T08:41:30.872Z',
@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     {
       id: 2,
       userId: 1,
-      userAuthId: null,
+      userAuthId: '1',
       image: '',
       frequency: 'fortnight',
       endDate: '2023-04-12T08:41:30.872Z',
@@ -31,7 +31,7 @@ exports.seed = async function (knex) {
     {
       id: 3,
       userId: 2,
-      userAuthId: null,
+      userAuthId: '2',
       image: '',
       frequency: 'week',
       endDate: '2023-04-12T08:41:30.872Z',
@@ -42,7 +42,7 @@ exports.seed = async function (knex) {
     {
       id: 4,
       userId: 2,
-      userAuthId: null,
+      userAuthId: '2',
       image: '',
       frequency: 'month',
       endDate: '2023-04-12T08:41:30.872Z',
@@ -53,7 +53,7 @@ exports.seed = async function (knex) {
     {
       id: 5,
       userId: 3,
-      userAuthId: null,
+      userAuthId: '4',
       image: '',
       frequency: 'week',
       endDate: '2023-04-12T08:41:30.872Z',
@@ -64,7 +64,7 @@ exports.seed = async function (knex) {
     {
       id: 6,
       userId: 3,
-      userAuthId: null,
+      userAuthId: '4',
       image: '',
       frequency: 'fortnight',
       endDate: '2023-04-12T08:41:30.872Z',
