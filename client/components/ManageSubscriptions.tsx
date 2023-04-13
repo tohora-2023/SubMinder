@@ -2,7 +2,6 @@ import { fetchSubscriptions } from '../actions/subscriptions'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
-import { ThunkAction } from '../store'
 import SubItem from './SubItem'
 
 function ManageSubscription() {

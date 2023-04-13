@@ -20,7 +20,7 @@ function SubItem(props: Props) {
           >
             {props.subscription.name.toUpperCase()}
           </a>
-          <h2>${props.subscription.price}</h2>
+          <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
 
@@ -37,7 +37,8 @@ function SubItem(props: Props) {
       )}
 
       <h2>
-        {props.subscription.category} - {props.subscription.frequency}
+        {props.subscription.category.toLocaleLowerCase()} -{' '}
+        {props.subscription.frequency.toLocaleLowerCase()}
       </h2>
     </div>
   )
