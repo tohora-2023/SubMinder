@@ -4,7 +4,6 @@ interface Props {
   firstName?: string
   lastName?: string
   userName?: string
-
   image?: string
 }
 
@@ -18,5 +17,8 @@ export async function addUserLogIn(
     return null
   }
 
-  return db('users').insert({ firstName, lastName, userName, authID, image })
+  const newUser = await db('users')
+    .insert({ firstName, lastName, userName, authID, image })
+    .returning('*')
+  return newUser[0]
 }
