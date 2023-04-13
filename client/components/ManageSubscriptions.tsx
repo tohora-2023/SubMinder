@@ -43,10 +43,7 @@ function ManageSubscription() {
         </button>
       </div>
       <div className="main-page-container">
-        <h1
-          style={{ textAlign: 'left' }}
-          className="py-2 text-2xl font-bold text-subminder-indigo"
-        >
+        <h1 className="left-align  py-2 text-2xl font-bold text-subminder-indigo">
           Manage Subscriptions
         </h1>
         <ul>

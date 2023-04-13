@@ -15,3 +15,12 @@
   width: 60%;
   
 }
+
+.left-align {
+  text-align: left;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
