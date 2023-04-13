@@ -10,7 +10,6 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
       const subscriptions = response.map((subscription: Subscription) => {
         //Format fields for display
         subscription.name = subscription.name.toUpperCase()
-        subscription.price = parseFloat(subscription.price.toFixed(2))
         subscription.category = subscription.category.toLowerCase()
         subscription.frequency = subscription.frequency.toLowerCase()
         //Format the date to 1 May
@@ -20,7 +19,7 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
           month: 'long',
         })
 
-        return subscription // Add this line to return the formatted subscription object
+        return subscription
       })
 
       console.log(subscriptions)

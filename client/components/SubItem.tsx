@@ -1,4 +1,5 @@
 import * as Models from '../../models/subscription'
+import SubItemMenu from './SubItemMenu'
 
 interface Props {
   subscription: Models.Subscription
@@ -10,7 +11,8 @@ function SubItem(props: Props) {
       className="border border-2 border-black p-6"
       style={{ fontFamily: 'sans-serif' }}
     >
-      <h1>
+      <SubItemMenu />
+      <h1 className="pt-3">
         <div className="p4 flex justify-between">
           <a
             href={props.subscription.website}
@@ -20,7 +22,7 @@ function SubItem(props: Props) {
           >
             {props.subscription.name}
           </a>
-          <h2>${props.subscription.price}</h2>
+          <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
 
