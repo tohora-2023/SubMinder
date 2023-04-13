@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import LogIn from './Login'
 import { useAuth0 } from '@auth0/auth0-react'
+import Nav from './Nav'
 import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
-  const { isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
   interface UserLogInProp {
     firstName?: string
     lastName?: string
@@ -39,21 +41,31 @@ function App() {
     }
   }, [getAccessTokenSilently, isAuthenticated])
 
-  const handleSignOut = () => {
-    logout()
-  }
-
   return (
     <>
       {isAuthenticated ? (
         //please add stuff here
-        <div className="mt-8 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold">Fullstack Boilerplate</h1>
-          <button type="button" onClick={handleSignOut}>
-            sign out
-          </button>
-          <Home />
-        </div>
+        <>
+          <Nav />
+          <div className="mt-8 flex flex-col items-center justify-center">
+            <Routes>
+              {/* <Route path='/' element={<Home/>} /> */}
+              {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
+              <Route
+                path="/managesubscriptions"
+                element={<ManageSubscription />}
+              />
+              {/* <Route
+                path="/addsubscription"
+                element={<AddSubscription />} */}
+
+              {/* <Route
+                path="/profile"
+                // element={<Profile />}
+              /> */}
+            </Routes>
+          </div>
+        </>
       ) : (
         <LogIn />
       )}

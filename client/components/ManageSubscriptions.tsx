@@ -52,7 +52,7 @@ function ManageSubscription() {
           Manage Subscriptions
         </h1>
         <ul>
-          {data.map((sub) => {
+          {data?.map((sub) => {
             return (
               <li className="py-2" key={sub.id}>
                 <SubItem subscription={sub} />
