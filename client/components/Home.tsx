@@ -5,85 +5,30 @@ import PieChart from './PieChart'
 import '../../node_modules/tui-date-picker/dist/tui-date-picker'
 import '../../node_modules/tui-time-picker/dist/tui-time-picker'
 import SubChart from './SubChart'
+import { useSelector } from 'react-redux'
+import { fetchSubscriptions } from '../actions/subscriptions'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Home() {
+  const { getAccessTokenSilently } = useAuth0()
+  const { loading, error, data } = useAppSelector(
+    (state) => state.subscriptions
+  )
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await getAccessTokenSilently()
+        dispatch(fetchSubscriptions(token))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [dispatch, getAccessTokenSilently])
+
   const [currentView, setView] = useState('month')
   const [currentDate, setCurrentDate] = useState(new Date())
-
-  const data = [
-    {
-      id: 1,
-      userId: 1,
-      userAuthId: '1',
-      name: 'metLink',
-      image: '',
-      frequency: 'week',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Travel',
-      website: 'www.metlink.co.nz',
-      price: 5.0,
-    },
-    {
-      id: 2,
-      userId: 1,
-      userAuthId: '1',
-      name: 'Events',
-      image: '',
-      frequency: 'fortnight',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Entertainment',
-      website: 'www.events.co.nz',
-      price: 50.55,
-    },
-    {
-      id: 3,
-      userId: 2,
-      userAuthId: '2',
-      name: 'OfficeMax',
-      image: '',
-      frequency: 'week',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Productivity',
-      website: 'www.officemax.co.nz',
-      price: 10.0,
-    },
-    {
-      id: 4,
-      userId: 2,
-      userAuthId: '2',
-      name: 'myFoodBag',
-      image: '',
-      frequency: 'month',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Food & Drink',
-      website: 'www.myfoodbag.co.nz',
-      price: 150.0,
-    },
-    {
-      id: 5,
-      userId: 3,
-      userAuthId: '4',
-      name: 'Countdown',
-      image: '',
-      frequency: 'week',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Necessities',
-      website: 'www.countdown.co.nz',
-      price: 150.0,
-    },
-    {
-      id: 6,
-      userId: 3,
-      userAuthId: '4',
-      name: 'Contact',
-      image: '',
-      frequency: 'fortnight',
-      endDate: '2023-04-12T08:41:30.872Z',
-      category: 'Bills',
-      website: 'www.contact.co.nz',
-      price: 300.0,
-    },
-  ]
 
   const calendars = [
     {
@@ -196,6 +141,14 @@ export default function Home() {
   function handleClick(event: React.ChangeEvent<HTMLSelectElement>) {
     const value = event.target.value
     setView(value)
+  }
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>There was an error</p>
   }
 
   return (

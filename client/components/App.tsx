@@ -52,6 +52,7 @@ function App() {
           <button type="button" onClick={handleSignOut}>
             sign out
           </button>
+          <Home />
         </div>
       ) : (
         <LogIn />
