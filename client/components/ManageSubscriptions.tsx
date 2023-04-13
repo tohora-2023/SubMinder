@@ -47,13 +47,17 @@ function ManageSubscription() {
           Manage Subscriptions
         </h1>
         <ul>
-          {data?.map((sub) => {
-            return (
-              <li className="py-2" key={sub.id}>
-                <SubItem subscription={sub} />
-              </li>
-            )
-          })}
+          {data && data.length > 0 ? (
+            data.map((sub) => {
+              return (
+                <li className="py-2" key={sub.id}>
+                  <SubItem subscription={sub} />
+                </li>
+              )
+            })
+          ) : (
+            <p>You have no subscriptions, please add one</p>
+          )}
         </ul>
       </div>
     </>
