@@ -17,6 +17,7 @@ export default async function addLogInInfo(user: User, token: string) {
       console.log('User already exists in the database')
       return null
     }
+    console.log(response.body)
     return response.body
   } catch (error) {
     console.error(error)

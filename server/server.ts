@@ -6,6 +6,11 @@ const server = express()
 
 server.use(express.json())
 server.use(express.static(join(__dirname, 'public')))
+
 server.use('/', logIn)
+
+server.get('*', (req, res) => {
+  res.sendFile(join(__dirname, 'public', 'index.html'))
+})
 
 export default server
