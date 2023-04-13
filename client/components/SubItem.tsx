@@ -15,31 +15,31 @@ function SubItem(props: Props) {
       <h1 className="pt-3">
         <div className="p4 flex justify-between">
           <a
-            href={props.subscription.website}
+            href={props.subscription?.website}
             target="_blank"
             rel="noreferrer"
             className="font-bold text-subminder-purple hover:text-accent-yellow"
           >
-            {props.subscription.name}
+            {props.subscription?.name}
           </a>
           <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
 
-      {props.subscription.isLastDate ? (
+      {props.subscription?.isLastDate ? (
         <div className="flex justify-between">
           <h2>last payment date:</h2>
-          <h2>{props.subscription.scheduleDate}</h2>
+          <h2>{props.subscription?.scheduleDate}</h2>
         </div>
       ) : (
         <div className="flex justify-between">
           <h2>next payment date:</h2>
-          <h2>{props.subscription.scheduleDate}</h2>
+          <h2>{props.subscription?.scheduleDate}</h2>
         </div>
       )}
 
       <h2>
-        {props.subscription.category} - {props.subscription.frequency}
+        {props.subscription?.category} - {props.subscription?.frequency}
       </h2>
     </div>
   )
