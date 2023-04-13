@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.string('userAuthId')
     table.string('image')
     table.string('frequency')
+    table.string('startDate')
     table.string('endDate')
     table.string('category')
     table.string('website')
