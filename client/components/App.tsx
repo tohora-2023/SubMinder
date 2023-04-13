@@ -19,6 +19,7 @@ function App() {
       userName: user?.nickname,
       image: user?.picture,
     }
+    console.log(userInfo)
     console.log(user)
     await addLogInInfo(userInfo, token)
   }
