@@ -9,6 +9,7 @@ const router = express.Router()
 router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
   try {
     const auth0Id = req.auth?.sub
+
     if (auth0Id) {
       const {
         name,

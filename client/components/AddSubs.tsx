@@ -12,7 +12,8 @@ export default function AddSubs() {
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
   const dispatch = useAppDispatch()
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const { getAccessTokenSilently } = useAuth0()
+  const { loading, error } = useAppSelector((state) => state.subscriptions)
 
   function clearForm() {
     setName('')
@@ -38,6 +39,14 @@ export default function AddSubs() {
     const token = await getAccessTokenSilently()
     dispatch(fetchAddSubs(newSub, token))
     clearForm()
+  }
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>There was an error</p>
   }
 
   return (
