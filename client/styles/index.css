@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+* {
+  font-family: sans-serif;
+}
+
+.main-page-container {
+  width: 30%;
+}
+
+.main-page-heading-container {
+  width: 50%;
+
+}
+
+.align-left {
+  text-align: left;
+}

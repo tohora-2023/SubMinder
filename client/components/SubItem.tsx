@@ -7,10 +7,7 @@ interface Props {
 
 function SubItem(props: Props) {
   return (
-    <div
-      className="border border-2 border-black p-6"
-      style={{ fontFamily: 'sans-serif' }}
-    >
+    <div className="border border-2 border-black p-6">
       <SubItemMenu />
       <h1 className="pt-3">
         <div className="p4 flex justify-between">

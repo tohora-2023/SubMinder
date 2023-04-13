@@ -37,17 +37,15 @@ function ManageSubscription() {
   return (
     <>
       <div
-        style={{ fontFamily: 'sans-serif', width: '60%' }}
-        className="right flex py-2"
+        className="right flex py-2 main-page-heading-container"
       >
-        <button className="ml-auto border border-accent-yellow py-2 px-4 font-medium text-accent-yellow">
+        <button className="ml-auto border border-accent-yellow px-4 py-2 font-medium text-accent-yellow">
           Add a new subscription
         </button>
       </div>
-      <div style={{ width: '30%' }}>
+      <div className="main-page-container">
         <h1
-          style={{ textAlign: 'left' }}
-          className="py-2 text-2xl font-bold text-subminder-indigo"
+          className="py-2 text-2xl font-bold text-subminder-indigo align-left"
         >
           Manage Subscriptions
         </h1>
