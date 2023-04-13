@@ -34,7 +34,7 @@ function ManageSubscription() {
 
   return (
     <>
-      <div className="right main-page-heading-container flex py-2">
+      <div className="right main-page-container flex py-2">
         <button className="ml-auto border border-accent-yellow px-4 py-2 font-medium text-accent-yellow">
           Add a new subscription
         </button>
