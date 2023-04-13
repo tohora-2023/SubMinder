@@ -1,0 +1,27 @@
+import { Subscription } from 'react-redux'
+import connection from './connection'
+
+export function getEvents(db = connection): Promise<Subscription[]> {
+  return db('calendarEvents')
+    .join('subscriptions', 'calendarEvents.subscriptionId', 'subscriptions.id')
+    .select(
+      'subscriptions.name as name',
+      'subscriptions.category as category',
+      'subscriptions.price as price',
+      'calendarEvents.*'
+    )
+}
+interface Prop {
+  scheduleDate?: Date
+  isLastDate?: boolean
+}
+
+export async function addEvent(
+  subsId: number,
+  { scheduleDate, isLastDate }: Prop,
+  db = connection
+) {
+  return db('calendarEvents')
+    .insert({ subsId, scheduleDate, isLastDate })
+    .returning('*')
+}
