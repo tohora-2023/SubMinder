@@ -30,13 +30,13 @@ export default function Home() {
   const [currentView, setView] = useState('month')
   const [currentDate, setCurrentDate] = useState(new Date())
 
+  //CALENDER SET UP
   const calendars = [
     {
       id: 'cal1',
       name: 'Month',
     },
   ]
-
   const currentMonth = currentDate.getMonth()
   const currentYear = currentDate.getFullYear()
   const months = [
@@ -154,6 +154,11 @@ export default function Home() {
   return (
     <>
       <h2 className="mb-10 text-center text-5xl text-subminder-purple">{`${months[currentMonth]} ${currentYear}`}</h2>
+      <ul>
+        {data.map((item) => {
+          return <p key={item.id}>{item.name}</p>
+        })}
+      </ul>
       <div
         className="ml-auto mr-auto flex justify-center"
         style={{ width: '80%' }}
