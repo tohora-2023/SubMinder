@@ -1,10 +1,17 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { Link } from 'react-router-dom'
+
 function Nav() {
+  const { logout } = useAuth0()
+  const handleSignOut = () => {
+    logout()
+  }
   return (
     <>
-      <nav className=" flex flex w-full items-center justify-center bg-purple-900 py-2 px-4 sm:flex-row sm:justify-between sm:text-left">
+      <nav className=" flex flex w-full items-center justify-center bg-purple-900 px-4 py-2 sm:flex-row sm:justify-between sm:text-left">
         <div className="mb-2 sm:mb-0 ">
-          <a
-            href="/"
+          <Link
+            to={'/'}
             className="hover:text-blue-dark text-2xl text-white no-underline"
           >
             <img
@@ -12,39 +19,40 @@ function Nav() {
               src="/images/subminder-logo.png"
               alt="home"
             ></img>
-          </a>
+          </Link>
         </div>
         <div>
-          <a
-            href="/paymenthistory"
-            className="hover:text-blue-dark mr-10 ml-10 text-lg  text-white no-underline"
+          <Link
+            to="/paymenthistory"
+            className="hover:text-blue-dark ml-10 mr-10 text-lg  text-white no-underline"
           >
             Payment History
-          </a>
-          <a
-            href="/managesubscriptions"
-            className="hover:text-blue-dark mr-10 ml-10 text-lg  text-white no-underline"
+          </Link>
+          <Link
+            to="/managesubscriptions"
+            className="hover:text-blue-dark ml-10 mr-10 text-lg  text-white no-underline"
           >
             Manage Subscriptions
-          </a>
-          <a
-            href="/addsubscription"
-            className="hover:text-blue-dark mr-10 ml-10 text-lg  text-white no-underline"
+          </Link>
+          <Link
+            to="/addsubscription"
+            className="hover:text-blue-dark ml-10 mr-10 text-lg  text-white no-underline"
           >
             Add Subscription
-          </a>
-          <a
-            href="/profile"
-            className="hover:text-blue-dark mr-10 ml-10 text-lg text-white no-underline"
+          </Link>
+          <Link
+            to="/profile"
+            className="hover:text-blue-dark ml-10 mr-10 text-lg text-white no-underline"
           >
             Profile
-          </a>
-          <a
-            href="/profile"
-            className="hover:text-blue-dark mr-10 ml-10 text-lg text-white no-underline"
+          </Link>
+          <button
+            className="hover:text-blue-dark ml-10 mr-10 text-lg text-white no-underline"
+            type="button"
+            onClick={handleSignOut}
           >
             Sign Out
-          </a>
+          </button>
         </div>
       </nav>
     </>
