@@ -36,18 +36,18 @@ function ManageSubscription() {
 
   return (
     <>
-      <div className="right flex py-2" style={{ width: '70%' }}>
+      <div style={{ fontFamily: 'sans-serif' }} className="right flex py-2" style={{ width: '60%' }}>
         <button className="ml-auto border border-accent-yellow py-2 px-4 font-medium text-accent-yellow">
           Add a new subscription
         </button>
       </div>
-      <h1
-        style={{ textAlign: 'left' }}
-        className="text-2xl font-bold text-subminder-indigo"
-      >
-        Manage Subscriptions
-      </h1>
       <div style={{ width: '30%' }}>
+        <h1
+          style={{ textAlign: 'left' }}
+          className="py-2 text-2xl font-bold text-subminder-indigo"
+        >
+          Manage Subscriptions
+        </h1>
         <ul>
           {data.map((sub) => {
             return (

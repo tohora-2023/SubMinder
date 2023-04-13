@@ -37,7 +37,7 @@ function SubItem(props: Props) {
       )}
 
       <h2>
-        {props.subscription.category} -{props.subscription.frequency}
+        {props.subscription.category} - {props.subscription.frequency}
       </h2>
     </div>
   )
