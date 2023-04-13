@@ -83,6 +83,7 @@ export default function AddSubs() {
           value={price}
           onChange={(e) => setPrice(Number(e.target.value))}
         />
+        <br />
 
         <button type="submit">Submit subscription</button>
 
