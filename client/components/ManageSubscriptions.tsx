@@ -6,6 +6,8 @@ function ManageSubscription() {
     (state) => state.subscriptions
   )
 
+  console.log(data)
+
   if (loading) {
     return <p>Loading...</p>
   }

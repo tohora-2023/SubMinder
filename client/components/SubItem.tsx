@@ -37,8 +37,7 @@ function SubItem(props: Props) {
       )}
 
       <h2>
-        {props.subscription.category.toLowerCase()} -{' '}
-        {props.subscription.frequency.toLowerCase()}
+        {props.subscription.category} - {props.subscription.frequency}
       </h2>
     </div>
   )

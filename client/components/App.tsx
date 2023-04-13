@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
+import { getSubscriptions } from '../apis/subscriptions'
+import { fetchSubscriptions } from '../actions/subscriptions'
 
 import ManageSubscription from './ManageSubscriptions'
 
@@ -7,7 +9,7 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    // dispatch(fetchFruits())
+    dispatch(fetchSubscriptions())
   }, [dispatch])
 
   return (

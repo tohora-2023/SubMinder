@@ -1,6 +1,4 @@
 export interface Subscription {
-  name: string
-
   id: number
   userId: number
   userAuthId: string
