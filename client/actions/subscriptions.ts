@@ -2,6 +2,7 @@ import { Subscription } from '../../models/subscription'
 import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
 import { getSubscriptions } from '../apis/subscriptions'
+import { User } from '@auth0/auth0-react'
 export const SET_SUB_PENDING = 'SET_SUB_PENDING'
 export const SET_SUB_SUCCESS = 'SET_SUB_SUCCESS'
 export const SET_ERROR = 'SET_ERROR'
@@ -34,10 +35,10 @@ export function setError(errorMessage: string): SubscriptionAction {
   }
 }
 
-export function fetchSubscriptions(): ThunkAction {
+export function fetchSubscriptions(token: string): ThunkAction {
   return (dispatch: Dispatch) => {
     dispatch(setSubPending())
-    return getSubscriptions()
+    return getSubscriptions(token)
       .then((subscriptions) => {
         dispatch(setSubsSuccess(subscriptions))
       })
