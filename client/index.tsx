@@ -1,7 +1,8 @@
 import { createRoot } from 'react-dom/client'
-
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import './styles/index.css'
 
 import App from './components/App'
 import { Auth0Provider } from '@auth0/auth0-react'
@@ -15,7 +16,9 @@ root.render(
     audience="https://subminder/api"
   >
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </Auth0Provider>
 )
