@@ -51,7 +51,6 @@ export default function AddSubs() {
 
   return (
     <div>
-      ____________________________________________
       <h1>Add a Subscription</h1>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Service Name:</label>
