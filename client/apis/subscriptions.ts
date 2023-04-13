@@ -29,3 +29,17 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
     })
     .catch(() => 'There was an error getting subscriptions')
 }
+
+export async function deleteSubscription(
+  subId: string,
+  token: string
+): Promise<number> {
+  try {
+    const response = await request
+      .post('/delete/' + subId)
+      .set('Authorization', `Bearer ${token}`)
+    return response.statusCode
+  } catch (error) {
+    console.log(errorMessage)
+  }
+}

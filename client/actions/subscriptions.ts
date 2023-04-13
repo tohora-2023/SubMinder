@@ -1,15 +1,17 @@
 import { Subscription } from '../../models/subscription'
 import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
-import { getSubscriptions } from '../apis/subscriptions'
+import { getSubscriptions, deleteSubscription } from '../apis/subscriptions'
 import { User } from '@auth0/auth0-react'
 export const SET_SUB_PENDING = 'SET_SUB_PENDING'
 export const SET_SUB_SUCCESS = 'SET_SUB_SUCCESS'
+export const SET_SUB_REMOVE = 'SET_SUB_REMOVE'
 export const SET_ERROR = 'SET_ERROR'
 
 export type SubscriptionAction =
   | { type: typeof SET_SUB_PENDING; payload: null }
   | { type: typeof SET_SUB_SUCCESS; payload: Subscription[] }
+  | { type: typeof SET_SUB_REMOVE; payload: Subscription[] }
   | { type: typeof SET_ERROR; payload: string }
 
 export function setSubPending(): SubscriptionAction {
@@ -25,6 +27,13 @@ export function setSubsSuccess(
   return {
     type: SET_SUB_SUCCESS,
     payload: subscriptions,
+  }
+}
+
+export function setSubsRemove(subId: string): SubscriptionAction {
+  return {
+    type: SET_SUB_REMOVE,
+    payload: subId,
   }
 }
 
@@ -44,6 +53,22 @@ export function fetchSubscriptions(token: string): ThunkAction {
       })
       .catch((error: Error) => {
         dispatch(setError(error.message))
+      })
+  }
+}
+
+export function removeSub(subId: string, token: string): ThunkAction {
+  return (dispatch: Dispatch) => {
+    return deleteSubscription(subId, token)
+      .then((subScriptions) => {
+        console.log('Testing')
+        console.log(subId)
+        console.log(subscription)
+        dispatch(setSubsRemove(subId))
+      })
+      .catch((err) => {
+        console.log(err)
+        dispatch(setError(err.message))
       })
   }
 }

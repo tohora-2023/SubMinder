@@ -24,14 +24,11 @@ function ManageSubscription() {
     fetchData()
   }, [dispatch, getAccessTokenSilently])
 
-  console.log(data)
-
   if (loading) {
     return <p>Loading...</p>
   }
 
   if (error) {
-    console.log(error)
     return <p>There was an error</p>
   }
 

@@ -9,6 +9,7 @@ export function getSubsWithDate(db = connection): Promise<Subscription[]> {
   return db('subscriptions')
     .join('calendarEvents', 'subscriptions.id', 'calendarEvents.subscriptionId')
     .select(
+      'subscriptions.id as id',
       'subscriptions.name as name',
       'subscriptions.category as category',
       'subscriptions.endDate as endDate',
