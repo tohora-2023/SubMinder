@@ -3,6 +3,7 @@ import LogIn from './Login'
 import { useAuth0 } from '@auth0/auth0-react'
 import addLogInInfo from '../apis/login'
 import Home from './Home'
+import ManageSubscription from './ManageSubscriptions'
 
 function App() {
   const { isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0()
@@ -48,7 +49,6 @@ function App() {
         //please add stuff here
         <div className="mt-8 flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold">Fullstack Boilerplate</h1>
-          <Home />
           <button type="button" onClick={handleSignOut}>
             sign out
           </button>
