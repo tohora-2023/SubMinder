@@ -1,4 +1,5 @@
 import { fetchSubscriptions } from '../actions/subscriptions'
+import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -41,7 +42,7 @@ function ManageSubscription() {
         className="right flex py-2"
       >
         <button className="ml-auto border border-accent-yellow py-2 px-4 font-medium text-accent-yellow">
-          Add a new subscription
+          <Link to="/addsubscription">Add a new subscription</Link>
         </button>
       </div>
       <div style={{ width: '30%' }}>
