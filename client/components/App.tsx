@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import LogIn from './Login'
 import { useAuth0 } from '@auth0/auth0-react'
 import addLogInInfo from '../apis/login'
+import AddSubs from './AddSubs'
 
 function App() {
   const { isAuthenticated, logout, user, getAccessTokenSilently } = useAuth0()
@@ -50,6 +51,7 @@ function App() {
           <button type="button" onClick={handleSignOut}>
             sign out
           </button>
+          <AddSubs/>
         </div>
       ) : (
         <LogIn />

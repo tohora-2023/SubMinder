@@ -1,6 +1,7 @@
 import connection from './connection'
 
 interface Prop {
+  serviceName?: string
   image?: string
   frequency?: string
   startDate?: string
@@ -11,12 +12,13 @@ interface Prop {
 }
 
 export async function addSubs(
-  { image, frequency, startDate, endDate, category, website, price }: Prop,
+  { serviceName,image, frequency, startDate, endDate, category, website, price }: Prop,
   userAuthId: string,
   db = connection
 ) {
   await db('subscriptions')
     .insert({
+      serviceName,
       image,
       frequency,
       startDate,

@@ -6,6 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('subscriptions', (table) => {
     table.increments('id')
     table.integer('userId')
+    table.string('serviceName')
     table.string('userAuthId')
     table.string('image')
     table.string('frequency')

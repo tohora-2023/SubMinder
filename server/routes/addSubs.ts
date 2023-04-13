@@ -10,10 +10,19 @@ router.post('/addsub', checkJwt, async (req: JwtRequest, res: Response) => {
   try {
     const auth0Id = req.auth?.sub
     if (auth0Id) {
-      const { image, frequency, startDate, endDate, category, website, price } =
-        req.body
+      const {
+        serviceName,
+        image,
+        frequency,
+        startDate,
+        endDate,
+        category,
+        website,
+        price,
+      } = req.body
       const newSub = await addSubs(
         {
+          serviceName,
           image,
           frequency,
           startDate,

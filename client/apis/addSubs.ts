@@ -1,6 +1,7 @@
 import request from 'superagent'
 
 interface Prop {
+  serviceName?: string
   image?: string
   frequency?: string
   startDate?: string
