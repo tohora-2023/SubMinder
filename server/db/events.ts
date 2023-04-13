@@ -13,3 +13,17 @@ export function getEvents(db = connection): Promise<Subscription[]> {
       'subscriptions.frequency as frequency'
     )
 }
+interface Prop {
+  scheduleDate?: string
+  isLastDate?: boolean
+}
+
+export async function addEvent(
+  subsId: number,
+  { scheduleDate, isLastDate }: Prop,
+  db = connection
+) {
+  return db('calendarEvents')
+    .insert({ subsId, scheduleDate, isLastDate })
+    .returning('*')
+}
