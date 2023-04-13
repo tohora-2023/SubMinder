@@ -1,17 +1,43 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
+import { fetchAddSubs } from '../actions/subscriptions'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function AddSubs() {
-  const [serviceName, setServiceName] = useState('')
+  const [name, setName] = useState('')
   const [frequency, setFrequency] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
+  const dispatch = useAppDispatch()
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function clearForm() {
+    setName('')
+    setFrequency('')
+    setStartDate('')
+    setEndDate('')
+    setCategory('')
+    setWebsite('')
+    setPrice(0)
+  }
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const newSub = {
+      name,
+      frequency,
+      startDate,
+      endDate,
+      category,
+      website,
+      price,
+    }
+    const token = await getAccessTokenSilently()
+    dispatch(fetchAddSubs(newSub, token))
+    clearForm()
   }
 
   return (
@@ -19,13 +45,13 @@ export default function AddSubs() {
       ____________________________________________
       <h1>Add a Subscription</h1>
       <form onSubmit={onSubmit}>
-        <label htmlFor="serviceName">Service Name:</label>
+        <label htmlFor="name">Service Name:</label>
         <input
           type="text"
-          id="serviceName"
-          name="serviceName"
-          value={serviceName}
-          onChange={(e) => setServiceName(e.target.value)}
+          id="name"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <br />
         <label htmlFor="frequency">Frequency </label>

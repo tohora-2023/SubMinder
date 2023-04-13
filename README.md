@@ -27,9 +27,10 @@ git clone https://github.com/tohora-2023/boilerplate-fullstack-tailwind [your-pr
 cd [your-project-name]
 npm install # to install dependencies
 npm run dev # to start the dev server
+npm run knex migrate:latest # to update the database
+npm run knex seed:run # to run the seeds
+npx tailwindcss -i ./client/styles/index.css -o ./server/public/styles.css # to build tailwind
+
 ```
 
 You can find the server running on [http://localhost:3000](http://localhost:3000).
-
----
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrtskvT4Q/viewform?usp=pp_url&entry.1958421517=boilerplate-fullstack-scss)

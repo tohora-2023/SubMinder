@@ -6,12 +6,12 @@ import { Response } from 'express'
 const express = require('express')
 const router = express.Router()
 
-router.post('/addsub', checkJwt, async (req: JwtRequest, res: Response) => {
+router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
   try {
     const auth0Id = req.auth?.sub
     if (auth0Id) {
       const {
-        serviceName,
+        name,
         image,
         frequency,
         startDate,
@@ -22,7 +22,7 @@ router.post('/addsub', checkJwt, async (req: JwtRequest, res: Response) => {
       } = req.body
       const newSub = await addSubs(
         {
-          serviceName,
+          name,
           image,
           frequency,
           startDate,

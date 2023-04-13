@@ -1,7 +1,7 @@
 import request from 'superagent'
 
 interface Prop {
-  serviceName?: string
+  name?: string
   image?: string
   frequency?: string
   startDate?: string
@@ -11,10 +11,10 @@ interface Prop {
   price?: number
 }
 
-export default async function addLogInInfo(data: Prop, token: string) {
+export default async function addNewSub(data: Prop, token: string) {
   try {
     const response = await request
-      .post('/addsub')
+      .post('/v1/addsub')
       .send({ ...data, token })
       .set('Authorization', `Bearer ${token}`)
 

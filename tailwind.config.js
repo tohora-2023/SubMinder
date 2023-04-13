@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       colors: {
         'accent-yellow': '#FFC400',
+        'subminder-nude': '#F5E1DA',
+        'subminder-indigo': '#3023AE',
+        'subminder-purple': '#C269D6',
       },
     },
   },
