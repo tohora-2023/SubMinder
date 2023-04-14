@@ -12,6 +12,18 @@ interface HomeProps {
   isAuthComplete: boolean
 }
 
+interface CalendarData {
+  id: number
+  calendarId: number
+  title: string
+  body: string
+  start: string
+  end: string
+  category: string
+  backgroundColor: string
+  isAllDay: boolean
+}
+
 export default function Home({ isAuthComplete }: HomeProps) {
   const { getAccessTokenSilently } = useAuth0()
   const dispatch = useAppDispatch()
@@ -68,32 +80,37 @@ export default function Home({ isAuthComplete }: HomeProps) {
     },
   }
 
-  const [initialEvents, setInitialEvents] = useState([
-    data.map((data) => {
-      return {
-        id: data.id,
-        calendarId: 1,
-        title: data.name,
-        body: `${data.price}`,
-        start: data.scheduleDate,
-        end: data.scheduleDate,
-        category: 'time',
-        backgroundColor:
-          data.category === 'Travel'
-            ? '#5DC6FF'
-            : data.category === 'Productivity'
-            ? '#C269D6'
-            : data.category === 'Bills'
-            ? '#FF0000'
-            : data.category === 'Necessities'
-            ? '#FFC400'
-            : data.category === 'Entertainment'
-            ? '#06B300'
-            : '#0011FF',
-        isAllDay: true,
-      }
-    }),
-  ])
+  const [initialEvents, setInitialEvents] = useState([] as CalendarData[])
+  useEffect(() => {
+    if (isAuthComplete) {
+      setInitialEvents(
+        data.map((data) => {
+          return {
+            id: data.id,
+            calendarId: 1,
+            title: data.name,
+            body: `${data.price}`,
+            start: data.scheduleDate,
+            end: data.scheduleDate,
+            category: 'time',
+            backgroundColor:
+              data.category === 'Travel'
+                ? '#5DC6FF'
+                : data.category === 'Productivity'
+                ? '#C269D6'
+                : data.category === 'Bills'
+                ? '#FF0000'
+                : data.category === 'Necessities'
+                ? '#FFC400'
+                : data.category === 'Entertainment'
+                ? '#06B300'
+                : '#0011FF',
+            isAllDay: true,
+          }
+        })
+      )
+    }
+  }, [isAuthComplete, data])
 
   const thisMonths = data.filter((item) => {
     const endDate = new Date(item.scheduleDate)
