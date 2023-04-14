@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { fetchAddSubs } from '../actions/subscriptions'
 import { useAuth0 } from '@auth0/auth0-react'
+import {addNewSub,} from '../apis/addSubs'
+
 
 export default function AddSubs() {
   const [name, setName] = useState('')
@@ -24,6 +26,11 @@ export default function AddSubs() {
     setWebsite('')
     setPrice(0)
   }
+  useEffect(()=>{
+    
+  },[])
+
+  
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -38,6 +45,10 @@ export default function AddSubs() {
     }
     const token = await getAccessTokenSilently()
     dispatch(fetchAddSubs(newSub, token))
+    // const subsDetail = await getaddSubDetails(newSub.id, token)
+    // subId= subsDetail.
+
+    // console.log(subsDetail)
     clearForm()
   }
 
