@@ -5,7 +5,7 @@ interface Prop {
   isLastDate?: boolean
 }
 
-export default async function addNewSub(
+export  async function addNewSub(
   subId: number,
   data: Prop,
   token: string
