@@ -5,8 +5,15 @@ import { addEvent, getEvents } from '../db/events'
 
 const router = express.Router()
 
-
-
+router.post('/:subscriptionId', checkJwt, async (req: JwtRequest, res: Response) => {
+  const auth0Id = req.auth?.sub
+  if (auth0Id) {
+    const subscriptionId = Number(req.params.subscriptionId)
+    const { scheduleDate, isLastDate } = req.body
+    const newEvents = await addEvent(subscriptionId, scheduleDate, isLastDate)
+    res.json(newEvents)
+  }
+})
 router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
   const auth0Id = req.auth?.sub
   if (auth0Id) {
@@ -14,19 +21,5 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
     res.json(events)
   }
 })
-
-router.post(
-  '/:subId',
-  checkJwt,
-  async (req: JwtRequest, res: Response) => {
-    const auth0Id = req.auth?.sub
-    if (auth0Id) {
-      const subId = Number(req.params.subId)
-      const { scheduleDate, isLastDate } = req.body
-      const newEvents = await addEvent(subId, scheduleDate, isLastDate)
-      res.json(newEvents)
-    }
-  }
-)
 
 export default router

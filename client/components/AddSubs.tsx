@@ -4,6 +4,7 @@ import { fetchAddSubs } from '../actions/subscriptions'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addNewSub } from '../apis/addSubs'
 import manageCalendarEvents from '../helper/CallenderEvents'
+import { addNewCalanderDay } from '../apis/events'
 
 export default function AddSubs() {
   const [name, setName] = useState('')
@@ -43,10 +44,22 @@ export default function AddSubs() {
     const token = await getAccessTokenSilently()
     dispatch(fetchAddSubs(newSub, token))
     const { id } = await addNewSub(newSub, token)
-    // const days = manageCalendarEvents(startDate, frequency, endDate, _)
+    const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
     console.log(id)
+    interface DayProp {
+      scheduleDate?: string
+      isLastDate?: boolean
+    }
+    paymentDates.map(async (day) => {
+      const scheduleDate = day.date
+      const subscriptionId = id
+      const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      const newtoken = await getAccessTokenSilently()
 
-    // console.log()
+      await addNewCalanderDay(subscriptionId, dayForCallender, newtoken)
+    })
+
+    console.log(paymentDates)
     clearForm()
   }
 

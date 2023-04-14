@@ -14,16 +14,16 @@ export function getEvents(db = connection): Promise<Subscription[]> {
     )
 }
 interface Prop {
-  scheduleDate?: Date
+  scheduleDate?: string
   isLastDate?: boolean
 }
 
 export async function addEvent(
-  subsId: number,
+  subscriptionId: number,
   { scheduleDate, isLastDate }: Prop,
   db = connection
 ) {
   return db('calendarEvents')
-    .insert({ subsId, scheduleDate, isLastDate })
+    .insert({ subscriptionId, scheduleDate, isLastDate })
     .returning('*')
 }

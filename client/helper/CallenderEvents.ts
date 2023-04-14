@@ -1,13 +1,10 @@
 interface Event {
-  title: string
-  start: Date
-  end: Date
-  category: 'time'
+  date: string
 }
 
 export default function manageCalendarEvents(
   startDate: Date,
-  frequency: 'weekly' | 'fortnightly' | 'monthly',
+  frequency: string,
   endDate?: Date,
   maxOccurrences?: number
 ) {
@@ -20,10 +17,7 @@ export default function manageCalendarEvents(
     (maxOccurrences && occurrenceCount < maxOccurrences)
   ) {
     events.push({
-      title: 'My event',
-      start: currentDate,
-      end: currentDate,
-      category: 'time',
+      date: currentDate.toISOString(),
     })
 
     let interval = 0
@@ -39,6 +33,7 @@ export default function manageCalendarEvents(
       ).getDate()
     }
     currentDate = new Date(currentDate.getTime() + interval * 86400000) // 86400000 = 1 day in milliseconds
+
     occurrenceCount++
   }
   return events

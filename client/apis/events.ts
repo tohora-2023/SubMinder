@@ -1,23 +1,24 @@
 import request from 'superagent'
 
 interface Prop {
-  scheduleDate?: Date
+  scheduleDate?: string
   isLastDate?: boolean
 }
 
-export  async function addNewSub(
-  subId: number,
+export async function addNewCalanderDay(
+  subscriptionId: number,
   data: Prop,
   token: string
 ) {
   try {
     const response = await request
-      .post(`/v1/events/:${subId}`)
-      .send({ subId, ...data })
+      .post(`/v1/events/${subscriptionId}`)
+      .send({ ...data, subscriptionId })
       .set('Authorization', `Bearer ${token}`)
 
     return response.body
   } catch (error) {
+    console.log('cant send the request')
     console.error(error)
   }
 }
