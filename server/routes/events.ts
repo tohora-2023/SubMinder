@@ -10,7 +10,7 @@ router.post('/:subscriptionId', checkJwt, async (req: JwtRequest, res: Response)
   if (auth0Id) {
     const subscriptionId = Number(req.params.subscriptionId)
     const { scheduleDate, isLastDate } = req.body
-    const newEvents = await addEvent(subscriptionId, scheduleDate, isLastDate)
+    const newEvents = await addEvent(subscriptionId, {scheduleDate, isLastDate}, auth0Id)
     res.json(newEvents)
   }
 })

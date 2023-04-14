@@ -21,9 +21,10 @@ interface Prop {
 export async function addEvent(
   subscriptionId: number,
   { scheduleDate, isLastDate }: Prop,
+  auth0Id: string,
   db = connection
 ) {
   return db('calendarEvents')
-    .insert({ subscriptionId, scheduleDate, isLastDate })
+    .insert({ subscriptionId, scheduleDate, isLastDate, auth0Id })
     .returning('*')
 }

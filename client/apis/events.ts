@@ -13,7 +13,7 @@ export async function addNewCalanderDay(
   try {
     const response = await request
       .post(`/v1/events/${subscriptionId}`)
-      .send({ ...data, subscriptionId })
+      .send({ ...data, subscriptionId, auth0Id: token})
       .set('Authorization', `Bearer ${token}`)
 
     return response.body

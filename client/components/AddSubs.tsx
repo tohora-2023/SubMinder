@@ -42,7 +42,7 @@ export default function AddSubs() {
       price,
     }
     const token = await getAccessTokenSilently()
-    dispatch(fetchAddSubs(newSub, token))
+    // dispatch(fetchAddSubs(newSub, token))
     const { id } = await addNewSub(newSub, token)
     const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
     console.log(id)
@@ -50,14 +50,14 @@ export default function AddSubs() {
       scheduleDate?: string
       isLastDate?: boolean
     }
-    paymentDates.map(async (day) => {
+
+    for (const day of paymentDates) {
       const scheduleDate = day.date
       const subscriptionId = id
       const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
-      const newtoken = await getAccessTokenSilently()
 
-      await addNewCalanderDay(subscriptionId, dayForCallender, newtoken)
-    })
+      await addNewCalanderDay(subscriptionId, dayForCallender, token)
+    }
 
     console.log(paymentDates)
     clearForm()
