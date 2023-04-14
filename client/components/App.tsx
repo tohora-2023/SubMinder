@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import LogIn from './Login'
 import { useAuth0 } from '@auth0/auth0-react'
 import Nav from './Nav'
@@ -8,6 +8,8 @@ import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
+  const [isAuthComplete, setIsAuthComplete] = useState(false)
+
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
   interface UserLogInProp {
     firstName?: string
@@ -23,9 +25,8 @@ function App() {
       userName: user?.nickname,
       image: user?.picture,
     }
-    console.log(userInfo)
-    console.log(user)
     await addLogInInfo(userInfo, token)
+    setIsAuthComplete(true)
   }
   useEffect(() => {
     const handleLogIn = async () => {
@@ -49,7 +50,10 @@ function App() {
           <Nav />
           <div className="mt-8 flex flex-col items-center justify-center">
             <Routes>
-              <Route path='/' element={<Home/>} />
+              <Route
+                path="/"
+                element={<Home isAuthComplete={isAuthComplete} />}
+              />
               {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
               <Route
                 path="/managesubscriptions"
