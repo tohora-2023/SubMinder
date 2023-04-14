@@ -13,6 +13,7 @@ export default function AddSubs() {
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
+  const [selected, setSelected] = useState('1')
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
   const { loading, error } = useAppSelector((state) => state.subscriptions)
@@ -78,14 +79,18 @@ export default function AddSubs() {
         />
         <br />
         <label htmlFor="frequency">Frequency </label>
-        <input
-          type="text"
-          id="frequency"
-          name="frequency"
-          value={frequency}
-          onChange={(e) => setFrequency(e.target.value)}
-          className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
-        />
+
+        <select>
+          <option value="0"> Select Frequency</option>
+          <option value="1">Daily</option>
+          <option value="2">Weekly</option>
+          <option value="3">Fortnightly</option>
+          <option value="4">Monthly</option>
+          <option value="5">Quarterly</option>
+          <option value="6">Semianually</option>
+          <option value="7">Yearly</option>
+        </select>
+
         <br />
         <label htmlFor="startDate">Start Date </label>
         <input
