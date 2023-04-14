@@ -1,13 +1,13 @@
 import React from 'react'
-import Chart from 'react-google-charts'
+import { Chart } from 'react-google-charts'
 
 interface pieData {
-  food: number
-  entertainment: number
-  necessities: number
-  bills: number
-  productivity: number
-  travel: number
+  food: number | null
+  entertainment: number | null
+  necessities: number | null
+  bills: number | null
+  productivity: number | null
+  travel: number | null
 }
 
 export default function PieChart({
@@ -26,21 +26,36 @@ export default function PieChart({
 
   const pieData = [
     ['Category', 'Total price'],
-    ['Food & Drink', food],
-    ['Entertainment', entertainment],
-    ['Necessities', necessities],
-    ['Bills', bills],
-    ['Productivity', productivity],
-    ['Travel', travel],
+    ['Food & Drink', food ? food : 1],
+    ['Entertainment', entertainment ? entertainment : 1],
+    ['Necessities', necessities ? necessities : 1],
+    ['Bills', bills ? bills : 1],
+    ['Productivity', productivity ? productivity : 1],
+    ['Travel', travel ? travel : 1],
   ]
   return (
-    <Chart
-      width={'500px'}
-      height={'500px'}
-      chartType="PieChart"
-      data={pieData}
-      options={options}
-      rootProps={{ 'data-testid': '1' }}
-    />
+    <>
+      {food &&
+      entertainment &&
+      necessities &&
+      bills &&
+      productivity &&
+      travel ? (
+        <Chart
+          width={'500px'}
+          height={'500px'}
+          chartType="PieChart"
+          data={pieData}
+          options={options}
+          rootProps={{ 'data-testid': '1' }}
+        />
+      ) : (
+        <div style={{ height: '500px' }}>
+          <p>
+            Whoops, it looks like you don`t have any subscriptions coming up
+          </p>
+        </div>
+      )}
+    </>
   )
 }

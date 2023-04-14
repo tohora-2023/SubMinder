@@ -7,10 +7,8 @@ export function getEvents(db = connection): Promise<Subscription[]> {
     .select(
       'subscriptions.name as name',
       'subscriptions.category as category',
-      'subscriptions.endDate as endDate',
       'subscriptions.price as price',
-      'subscriptions.website as website',
-      'subscriptions.frequency as frequency'
+      'calendarEvents.*'
     )
 }
 interface Prop {

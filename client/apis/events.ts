@@ -22,3 +22,14 @@ export async function addNewCalanderDay(
     console.error(error)
   }
 }
+
+export async function getEvents(token: string) {
+  try {
+    const response = await request
+      .get(`/v1/events`)
+      .set('Authorization', `Bearer ${token}`)
+    return response.body.events
+  } catch (error) {
+    console.error(error)
+  }
+}
