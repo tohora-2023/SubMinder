@@ -31,22 +31,19 @@ function ManageSubscription() {
   }
 
   if (error) {
+    console.log(error)
     return <p>There was an error</p>
   }
 
   return (
     <>
-      <div
-        className="right flex py-2 main-page-heading-container"
-      >
+      <div className="right main-page-heading-container flex py-2">
         <button className="ml-auto border border-accent-yellow px-4 py-2 font-medium text-accent-yellow">
           Add a new subscription
         </button>
       </div>
       <div className="main-page-container">
-        <h1
-          className="py-2 text-2xl font-bold text-subminder-indigo align-left"
-        >
+        <h1 className="align-left py-2 text-2xl font-bold text-subminder-indigo">
           Manage Subscriptions
         </h1>
         <ul>

@@ -16,6 +16,7 @@ export function getSubsWithDate(db = connection): Promise<Subscription[]> {
       'calendarEvents.scheduleDate as scheduleDate',
       'subscriptions.price as price',
       'subscriptions.website as website',
-      'subscriptions.frequency as frequency'
+      'subscriptions.frequency as frequency',
+      'subscriptions.userAuthId as userAuthId'
     )
 }

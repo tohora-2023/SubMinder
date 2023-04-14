@@ -8,32 +8,62 @@ exports.seed = async function (knex) {
   await knex('calendarEvents').insert([
     {
       subscriptionId: 1,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: true,
     },
     {
       subscriptionId: 2,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: false,
     },
     {
       subscriptionId: 3,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: false,
     },
     {
       subscriptionId: 4,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: false,
     },
     {
       subscriptionId: 5,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: false,
     },
     {
       subscriptionId: 6,
-      scheduleDate: '2023-04-12T08:41:30.872Z',      
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: false,
+    },
+    {
+      subscriptionId: 7,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: true,
+    },
+    {
+      subscriptionId: 8,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: false,
+    },
+    {
+      subscriptionId: 9,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: false,
+    },
+    {
+      subscriptionId: 10,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: false,
+    },
+    {
+      subscriptionId: 11,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
+      isLastDate: false,
+    },
+    {
+      subscriptionId: 12,
+      scheduleDate: '2023-04-12T08:41:30.872Z',
       isLastDate: false,
     },
   ])
