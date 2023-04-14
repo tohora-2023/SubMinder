@@ -77,7 +77,7 @@ export default function AddSubs() {
         <br />
         <label htmlFor="startDate">Start Date </label>
         <input
-          type="text"
+          type="date"
           id="startDate"
           name="startDate"
           value={startDate}
@@ -88,7 +88,7 @@ export default function AddSubs() {
         <br />
         <label htmlFor="endDate">End Date </label>
         <input
-          type="text"
+          type="date"
           id="endDate"
           name="startDate"
           value={endDate}
