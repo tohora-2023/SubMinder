@@ -6,6 +6,7 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
+import AddSubs from './AddSubs'
 
 function App() {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
@@ -44,25 +45,15 @@ function App() {
   return (
     <>
       {isAuthenticated ? (
-        //please add stuff here
         <>
           <Nav />
           <div className="mt-8 flex flex-col items-center justify-center">
             <Routes>
               <Route path='/' element={<Home/>} />
               {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
-              <Route
-                path="/managesubscriptions"
-                element={<ManageSubscription />}
-              />
-              {/* <Route
-                path="/addsubscription"
-                element={<AddSubscription />} */}
-
-              {/* <Route
-                path="/profile"
-                // element={<Profile />}
-              /> */}
+              <Route path="/managesubscriptions" element={<ManageSubscription />} />
+              <Route path="/addsubscription" element={<AddSubs />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
             </Routes>
           </div>
         </>
@@ -70,7 +61,6 @@ function App() {
         <LogIn />
       )}
     </>
-  )
+  );
 }
-
 export default App
