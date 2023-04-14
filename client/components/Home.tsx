@@ -74,9 +74,9 @@ export default function Home({ isAuthComplete }: HomeProps) {
   ]
 
   const template = {
-    time(event: any) {
+    allday(event: any) {
       const { title, body } = event
-      return `<div> <span style="color: black;">${title}: <span style="font-weight: 400">$${body}</span></span></div>`
+      return `<div> <span style="color: white;">${title}: <span style="font-weight: 400">$${body}</span></span></div>`
     },
   }
 
@@ -92,7 +92,8 @@ export default function Home({ isAuthComplete }: HomeProps) {
             body: `${data.price}`,
             start: data.scheduleDate,
             end: data.scheduleDate,
-            category: 'time',
+            category: 'allday',
+            color: 'white',
             backgroundColor:
               data.category === 'Travel'
                 ? '#5DC6FF'
