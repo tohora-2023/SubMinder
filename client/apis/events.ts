@@ -1,7 +1,7 @@
 import request from 'superagent'
 
 interface Prop {
-  scheduleDate?: string
+  scheduleDate?: Date
   isLastDate?: boolean
 }
 

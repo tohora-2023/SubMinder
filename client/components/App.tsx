@@ -49,7 +49,7 @@ function App() {
           <Nav />
           <div className="mt-8 flex flex-col items-center justify-center">
             <Routes>
-              {/* <Route path='/' element={<Home/>} /> */}
+              <Route path='/' element={<Home/>} />
               {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
               <Route
                 path="/managesubscriptions"

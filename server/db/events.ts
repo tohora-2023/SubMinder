@@ -14,7 +14,7 @@ export function getEvents(db = connection): Promise<Subscription[]> {
     )
 }
 interface Prop {
-  scheduleDate?: string
+  scheduleDate?: Date
   isLastDate?: boolean
 }
 
