@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { fetchAddSubs } from '../actions/subscriptions'
 import { useAuth0 } from '@auth0/auth0-react'
-import {addNewSub,} from '../apis/addSubs'
-
+import { addNewSub } from '../apis/addSubs'
+import manageCalendarEvents from '../helper/CallenderEvents'
 
 export default function AddSubs() {
   const [name, setName] = useState('')
@@ -26,14 +26,11 @@ export default function AddSubs() {
     setWebsite('')
     setPrice(0)
   }
-  useEffect(()=>{
-    
-  },[])
-
-  
+  useEffect(() => {}, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    
     const newSub = {
       name,
       frequency,
@@ -45,10 +42,14 @@ export default function AddSubs() {
     }
     const token = await getAccessTokenSilently()
     dispatch(fetchAddSubs(newSub, token))
-    // const subsDetail = await getaddSubDetails(newSub.id, token)
-    // subId= subsDetail.
+    const { id} = await addNewSub(
+      newSub,
+      token
+    )
+    // const days= manageCalendarEvents(startDate,frequency,endDate, _)
+    console.log(id)
 
-    // console.log(subsDetail)
+    console.log()
     clearForm()
   }
 
