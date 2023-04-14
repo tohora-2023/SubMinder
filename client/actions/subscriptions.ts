@@ -53,8 +53,8 @@ interface Prop {
   name?: string
   image?: string
   frequency?: string
-  startDate?: string
-  endDate?: string
+  startDate?: Date
+  endDate?: Date
   category?: string
   website?: string
   price?: number

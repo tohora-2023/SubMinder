@@ -8,12 +8,11 @@ import manageCalendarEvents from '../helper/CallenderEvents'
 export default function AddSubs() {
   const [name, setName] = useState('')
   const [frequency, setFrequency] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [startDate, setStartDate] = useState<Date>(new Date())
+  const [endDate, setEndDate] = useState<Date>(new Date())
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
-  const [selected, setSelected] = useState('1')
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
   const { loading, error } = useAppSelector((state) => state.subscriptions)
@@ -21,8 +20,8 @@ export default function AddSubs() {
   function clearForm() {
     setName('')
     setFrequency('')
-    setStartDate('')
-    setEndDate('')
+    setStartDate(new Date())
+    setEndDate(new Date())
     setCategory('')
     setWebsite('')
     setPrice(0)
@@ -31,7 +30,7 @@ export default function AddSubs() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    
+
     const newSub = {
       name,
       frequency,
@@ -43,14 +42,11 @@ export default function AddSubs() {
     }
     const token = await getAccessTokenSilently()
     dispatch(fetchAddSubs(newSub, token))
-    const { id} = await addNewSub(
-      newSub,
-      token
-    )
-    // const days= manageCalendarEvents(startDate,frequency,endDate, _)
+    const { id } = await addNewSub(newSub, token)
+    // const days = manageCalendarEvents(startDate, frequency, endDate, _)
     console.log(id)
 
-    console.log()
+    // console.log()
     clearForm()
   }
 
@@ -80,15 +76,18 @@ export default function AddSubs() {
         <br />
         <label htmlFor="frequency">Frequency </label>
 
-        <select>
-          <option value="0"> Select Frequency</option>
-          <option value="1">Daily</option>
-          <option value="2">Weekly</option>
-          <option value="3">Fortnightly</option>
-          <option value="4">Monthly</option>
-          <option value="5">Quarterly</option>
-          <option value="6">Semianually</option>
-          <option value="7">Yearly</option>
+        <select
+          value={frequency}
+          onChange={(e) => setFrequency(e.target.value)}
+        >
+          <option value="">Select Frequency</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="fortnightly">Fortnightly</option>
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="semiannually">Semiannually</option>
+          <option value="yearly">Yearly</option>
         </select>
 
         <br />
@@ -97,8 +96,8 @@ export default function AddSubs() {
           type="date"
           id="startDate"
           name="startDate"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          value={startDate.toISOString().slice(0, 10)}
+          onChange={(e) => setStartDate(new Date(e.target.value))}
           className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
         />
 
@@ -108,8 +107,8 @@ export default function AddSubs() {
           type="date"
           id="endDate"
           name="startDate"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          value={endDate.toISOString().slice(0, 10)}
+          onChange={(e) => setEndDate(new Date(e.target.value))}
           className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
         />
         <br />
