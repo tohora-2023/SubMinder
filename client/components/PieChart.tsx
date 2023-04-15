@@ -35,27 +35,14 @@ export default function PieChart({
   ]
   return (
     <>
-      {food &&
-      entertainment &&
-      necessities &&
-      bills &&
-      productivity &&
-      travel ? (
-        <Chart
-          width={'500px'}
-          height={'500px'}
-          chartType="PieChart"
-          data={pieData}
-          options={options}
-          rootProps={{ 'data-testid': '1' }}
-        />
-      ) : (
-        <div style={{ height: '500px' }}>
-          <p>
-            Whoops, it looks like you don`t have any subscriptions coming up
-          </p>
-        </div>
-      )}
+      <Chart
+        width={'500px'}
+        height={'500px'}
+        chartType="PieChart"
+        data={pieData}
+        options={options}
+        rootProps={{ 'data-testid': '1' }}
+      />
     </>
   )
 }
