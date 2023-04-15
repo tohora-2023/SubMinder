@@ -47,7 +47,13 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
           ? date <= start
           : date <= start && date >= end
       })
-      setTableData(filteredData)
+      setTableData(
+        filteredData.sort(
+          (a, b) =>
+            new Date(b.scheduleDate).getTime() -
+            new Date(a.scheduleDate).getTime()
+        )
+      )
       setInitialEvents(
         filteredData.map((d) => {
           const date = new Date(d.scheduleDate)
