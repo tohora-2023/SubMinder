@@ -196,32 +196,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
             )}
           </div>
         </div>
-        <div>
-          {isAuthComplete ? (
-            <PieChart
-              food={categoryTotals[`Food & Drink`]}
-              entertainment={categoryTotals['Entertainment']}
-              necessities={categoryTotals['Necessities']}
-              bills={categoryTotals['Bills']}
-              productivity={categoryTotals['Productivity']}
-              travel={categoryTotals['Travel']}
-            />
-          ) : (
-            <p>loading</p>
-          )}
-
-          <div>
-            <SubChart
-              total={totalPrice | 0}
-              food={categoryTotals[`Food & Drink`] | 0}
-              entertainment={categoryTotals['Entertainment'] | 0}
-              necessities={categoryTotals['Necessities'] | 0}
-              bills={categoryTotals['Bills'] | 0}
-              productivity={categoryTotals['Productivity'] | 0}
-              travel={categoryTotals['Travel'] | 0}
-            />
-          </div>
-        </div>
+        <div></div>
       </div>
     </>
   )
