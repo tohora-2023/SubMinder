@@ -53,8 +53,12 @@ export default function AddSubs() {
 
     for (const day of paymentDates) {
       const scheduleDate = day.date
+      const isLastDate = day === paymentDates[paymentDates.length - 1]
       const subscriptionId = id
       const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      if (isLastDate) {
+        dayForCallender.isLastDate = true
+      }
 
       await addNewCalanderDay(subscriptionId, dayForCallender, token)
     }
