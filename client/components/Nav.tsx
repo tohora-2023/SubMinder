@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Nav() {
@@ -8,7 +9,7 @@ function Nav() {
   }
   return (
     <>
-      <nav className=" flex flex w-full items-center justify-center bg-purple-900 px-4 py-2 sm:flex-row sm:justify-between sm:text-left">
+      <nav className=" sm:flex-column flex w-full items-center justify-center bg-purple-900 px-4 py-2 sm:justify-between sm:text-left ">
         <div className="mb-2 sm:mb-0 ">
           <Link
             to={'/'}
@@ -21,7 +22,7 @@ function Nav() {
             ></img>
           </Link>
         </div>
-        <div>
+        <div className="flex flex-col lg:flex-row">
           <Link
             to="/paymenthistory"
             className="hover:text-blue-dark ml-10 mr-10 text-lg  text-white no-underline"
@@ -47,7 +48,7 @@ function Nav() {
             Profile
           </Link>
           <button
-            className="hover:text-blue-dark ml-10 mr-10 text-lg text-white no-underline"
+            className="hover:text-blue-dark ml-5 mr-10 text-lg text-white no-underline"
             type="button"
             onClick={handleSignOut}
           >

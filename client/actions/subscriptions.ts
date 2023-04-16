@@ -3,6 +3,8 @@ import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
 import { getSubscriptions, deleteSubscription } from '../apis/subscriptions'
 import { User } from '@auth0/auth0-react'
+import {addNewSub, } from '../apis/addSubs'
+
 export const SET_SUB_PENDING = 'SET_SUB_PENDING'
 export const SET_SUB_SUCCESS = 'SET_SUB_SUCCESS'
 export const SET_ERROR = 'SET_ERROR'
@@ -47,4 +49,29 @@ export function fetchSubscriptions(token: string): ThunkAction {
       })
   }
 }
+
+interface Prop {
+  name?: string
+  image?: string
+  frequency?: string
+  startDate?: Date
+  endDate?: Date
+  category?: string
+  website?: string
+  price?: number
+}
+
+export function fetchAddSubs(newSub: Prop, token: string): ThunkAction {
+  return (dispatch: Dispatch) => {
+    dispatch(setSubPending())
+    return addNewSub(newSub, token)
+      .then((sub) => {
+        dispatch(setSubsSuccess(sub))
+      })
+      .catch((error: Error) => {
+        dispatch(setError(error.message))
+      })
+  }
+}
+
 

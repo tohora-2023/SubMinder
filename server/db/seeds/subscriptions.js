@@ -140,7 +140,7 @@ exports.seed = async function (knex) {
     },
     {
       id: 12,
-      userId: 1,
+      userId: 7,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Contact Energy',
       image: '',

@@ -1,5 +1,4 @@
 import * as Models from '../../models/subscription'
-import SubItemMenu from './SubItemMenu'
 
 interface Props {
   subscription: Models.Subscription
@@ -8,7 +7,7 @@ interface Props {
 function SubItem(props: Props) {
   return (
     <div className="border border-2 border-black p-6">
-      <h1 className="pt-3">
+      <h1>
         <div className="p4 flex justify-between">
           <a
             href={props.subscription?.website}

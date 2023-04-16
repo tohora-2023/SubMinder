@@ -8,14 +8,19 @@
 }
 
 .main-page-container {
-  width: 30%;
+  width: 35%;
 }
 
 .main-page-heading-container {
-  width: 50%;
-
+  width: 60%;
+  
 }
 
-.align-left {
+.left-align {
   text-align: left;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 2px;
 }

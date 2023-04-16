@@ -6,6 +6,8 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
+import AddSubs from './AddSubs'
+import PaymentHistory from './PaymentHistory'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -45,7 +47,6 @@ function App() {
   return (
     <>
       {isAuthenticated ? (
-        //please add stuff here
         <>
           <Nav />
           <div className="mt-8 flex flex-col items-center justify-center">
@@ -54,7 +55,10 @@ function App() {
                 path="/"
                 element={<Home isAuthComplete={isAuthComplete} />}
               />
-              {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
+              <Route
+                path="/paymenthistory"
+                element={<PaymentHistory isAuthComplete={isAuthComplete} />}
+              />
               <Route
                 path="/managesubscriptions"
                 element={<ManageSubscription />}
@@ -74,7 +78,6 @@ function App() {
         <LogIn />
       )}
     </>
-  )
+  );
 }
-
 export default App

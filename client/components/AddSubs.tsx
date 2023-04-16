@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { fetchAddSubs } from '../actions/subscriptions'
 import { useAuth0 } from '@auth0/auth0-react'
+import { addNewSub } from '../apis/addSubs'
+import manageCalendarEvents from '../helper/CallenderEvents'
+import { addNewCalanderDay } from '../apis/events'
 
 export default function AddSubs() {
   const [name, setName] = useState('')
   const [frequency, setFrequency] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [startDate, setStartDate] = useState<Date>(new Date())
+  const [endDate, setEndDate] = useState<Date>(new Date())
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
@@ -18,15 +21,17 @@ export default function AddSubs() {
   function clearForm() {
     setName('')
     setFrequency('')
-    setStartDate('')
-    setEndDate('')
+    setStartDate(new Date())
+    setEndDate(new Date())
     setCategory('')
     setWebsite('')
     setPrice(0)
   }
+  useEffect(() => {}, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
     const newSub = {
       name,
       frequency,
@@ -37,7 +42,28 @@ export default function AddSubs() {
       price,
     }
     const token = await getAccessTokenSilently()
-    dispatch(fetchAddSubs(newSub, token))
+    // dispatch(fetchAddSubs(newSub, token))
+    const { id } = await addNewSub(newSub, token)
+    const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
+    console.log(id)
+    interface DayProp {
+      scheduleDate?: string
+      isLastDate?: boolean
+    }
+
+    for (const day of paymentDates) {
+      const scheduleDate = day.date
+      const isLastDate = day === paymentDates[paymentDates.length - 1]
+      const subscriptionId = id
+      const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      if (isLastDate) {
+        dayForCallender.isLastDate = true
+      }
+
+      await addNewCalanderDay(subscriptionId, dayForCallender, token)
+    }
+
+    console.log(paymentDates)
     clearForm()
   }
 
@@ -66,22 +92,30 @@ export default function AddSubs() {
         />
         <br />
         <label htmlFor="frequency">Frequency </label>
-        <input
-          type="text"
-          id="frequency"
-          name="frequency"
+
+        <select
+          className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
           value={frequency}
           onChange={(e) => setFrequency(e.target.value)}
-          className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
-        />
+        >
+          <option value="">Select Frequency</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="fortnightly">Fortnightly</option>
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="semiannually">Semiannually</option>
+          <option value="yearly">Yearly</option>
+        </select>
+
         <br />
         <label htmlFor="startDate">Start Date </label>
         <input
           type="date"
           id="startDate"
           name="startDate"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          value={startDate.toISOString().slice(0, 10)}
+          onChange={(e) => setStartDate(new Date(e.target.value))}
           className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
         />
 
@@ -91,20 +125,25 @@ export default function AddSubs() {
           type="date"
           id="endDate"
           name="startDate"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          value={endDate.toISOString().slice(0, 10)}
+          onChange={(e) => setEndDate(new Date(e.target.value))}
           className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
         />
         <br />
         <label htmlFor="category">Category: </label>
-        <input
-          type="text"
-          id="category"
-          name="category"
+        <select
+          className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
-        />
+        >
+          <option value="">Select Category</option>
+          <option value="Food & Drink">Food & Drink</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Necessities">Necessities</option>
+          <option value="Bills">Bills</option>
+          <option value="Productivity">Productivity</option>
+          <option value="Travel">Travel</option>
+        </select>
 
         <br />
         <label htmlFor="website">Website: </label>

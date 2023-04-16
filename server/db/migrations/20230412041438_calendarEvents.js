@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.date('scheduleDate')
     table.timestamps(true, true)
     table.boolean('isLastDate')
+    table.string('auth0Id')
   })
 }
 
