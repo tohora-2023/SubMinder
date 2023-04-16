@@ -17,21 +17,33 @@ export default function UpcomingPayments({ data }: MonthsPaymentsArray) {
   })
 
   return (
-    <div className="border-2 border-black p-6" style={{ width: '400px' }}>
-      <div className="flex justify-between" style={{ height: '20px' }}>
-        <p>{structuredDate}</p>
-        {data.isLastDate ? <h2>Last date</h2> : ''}
+    <div
+      className=" rounded-xl bg-gradient-to-br from-slate-200 via-white to-sky-100 p-6"
+      style={{ width: '400px' }}
+    >
+      <div
+        className="mb-3 flex justify-between text-xs"
+        style={{ height: '20px' }}
+      >
+        <p className="text-slate-600">{structuredDate}</p>
+        {data.isLastDate ? (
+          <div className="flex justify-center rounded-xl bg-pink-600 p-1">
+            <p className="text-pink-100">Last payment</p>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className="p4 flex justify-between">
         <a
           href={data?.website}
           target="_blank"
           rel="noreferrer"
-          className="font-bold text-subminder-purple hover:text-accent-yellow"
+          className="font-bold text-subminder-indigo"
         >
           {data.name}
         </a>
-        <h2>${data.price}</h2>
+        <h2 className="text-slate-600">${data.price}</h2>
       </div>
     </div>
   )
