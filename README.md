@@ -1,36 +1,34 @@
-# Boilerplate: Fullstack with Tailwind
+# Subminder
 
-## Setup
+## Get SubMinder, the ultimate subscription wingman! 
 
-### What's included
+Keep tabs on all your subscriptions and free trials, track renewal and cancellation dates with the built-in calendar, and set up payment and trial end reminders.
 
-This repo includes:
+## How to use
+ 1. Feel free to fork a copy
+ 2. Clone to your computer
+ 3. ``npm i``, migrate and seed the database, and you're away
 
-* a single, simple API endpoint (`/api/v1/fruits`)
-* a single React component (`<App />`)
-* an example database module (`server/db/fruits.ts`)
-* an API client module (`client/apis/fruits.ts`)
-* configuration for Jest and React Testing Library
-* configuration for TailwindCSS
-* a single client-side test (`client/components/App.test.tsx`)
+### Our stack
+#### Backend
+* Node.js
+* Express 
+* Knex
+* SQLite3 for development
+* PostgreSQL for production
 
-### Installation
+#### Frontend
+* React 
+* React-Redux for state management
+* HTML, CSS, and Tailwind for styling
 
-#### **From the Github UI**
+#### Other
+* TypeScript for type checking
+* Dokku for deployment
 
-See the instructions [here](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to use Github's feature to create a new repo from a template.
-
-#### **From the command line**
-
-```sh
-git clone https://github.com/tohora-2023/boilerplate-fullstack-tailwind [your-project-name]
-cd [your-project-name]
-npm install # to install dependencies
-npm run dev # to start the dev server
-npm run knex migrate:latest # to update the database
-npm run knex seed:run # to run the seeds
-npx tailwindcss -i ./client/styles/index.css -o ./server/public/styles.css # to build tailwind
-
-```
+### Extra Packages
+* toast-ui/react-calendar
+* tui-date-picker
+* tui-time-picker
 
 You can find the server running on [http://localhost:3000](http://localhost:3000).
