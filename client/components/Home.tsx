@@ -7,6 +7,7 @@ import '../../node_modules/tui-time-picker/dist/tui-time-picker'
 import SubChart from './SubChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
+import UpcomingPayments from './UpcomingPayments'
 
 export interface HomeProps {
   isAuthComplete: boolean
@@ -197,30 +198,14 @@ export default function Home({ isAuthComplete }: HomeProps) {
           </div>
         </div>
         <div>
-          {isAuthComplete ? (
-            <PieChart
-              food={categoryTotals[`Food & Drink`]}
-              entertainment={categoryTotals['Entertainment']}
-              necessities={categoryTotals['Necessities']}
-              bills={categoryTotals['Bills']}
-              productivity={categoryTotals['Productivity']}
-              travel={categoryTotals['Travel']}
-            />
-          ) : (
-            <p>loading</p>
-          )}
-
-          <div>
-            <SubChart
-              total={totalPrice | 0}
-              food={categoryTotals[`Food & Drink`] | 0}
-              entertainment={categoryTotals['Entertainment'] | 0}
-              necessities={categoryTotals['Necessities'] | 0}
-              bills={categoryTotals['Bills'] | 0}
-              productivity={categoryTotals['Productivity'] | 0}
-              travel={categoryTotals['Travel'] | 0}
-            />
-          </div>
+          <h3>Upcoming subscriptions this month</h3>
+          {thisMonths.map((item) => {
+            return (
+              <div key={item.id} className="mb-3">
+                <UpcomingPayments data={item} />
+              </div>
+            )
+          })}
         </div>
       </div>
     </>
