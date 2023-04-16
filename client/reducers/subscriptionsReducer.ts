@@ -1,6 +1,5 @@
 import {
   SET_SUB_PENDING,
-  SET_SUB_REMOVE,
   SET_SUB_SUCCESS,
   SET_ERROR,
 } from '../actions/subscriptions'
@@ -36,12 +35,6 @@ const subscriptionReducer = (
         loading: false,
         error: undefined,
         data: action.payload,
-      }
-    case SET_SUB_REMOVE:
-      return {
-        loading: false,
-        error: undefined,
-        data: [...state.filter((sub) => sub.id !== Number(action.payload))],
       }
     case SET_ERROR:
       return {
