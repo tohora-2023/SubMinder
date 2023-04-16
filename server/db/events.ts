@@ -1,15 +1,20 @@
 import { Subscription } from 'react-redux'
 import connection from './connection'
 
-export function getEvents(db = connection): Promise<Subscription[]> {
+export function getEvents(
+  authID: string,
+  db = connection
+): Promise<Subscription[]> {
   return db('calendarEvents')
     .join('subscriptions', 'calendarEvents.subscriptionId', 'subscriptions.id')
     .select(
       'subscriptions.name as name',
       'subscriptions.category as category',
       'subscriptions.price as price',
+      'subscriptions.userAuthId as userAuthId',
       'calendarEvents.*'
     )
+    .where('userAuthId', authID)
 }
 interface Prop {
   scheduleDate?: string
