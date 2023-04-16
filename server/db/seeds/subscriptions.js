@@ -7,7 +7,6 @@ exports.seed = async function (knex) {
   await knex('subscriptions').del()
   await knex('subscriptions').insert([
     {
-      id: 1,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Metlink',
@@ -19,7 +18,6 @@ exports.seed = async function (knex) {
       price: 5.0,
     },
     {
-      id: 2,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Netflix',
@@ -31,7 +29,6 @@ exports.seed = async function (knex) {
       price: 50.55,
     },
     {
-      id: 3,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Office Max',
@@ -43,7 +40,6 @@ exports.seed = async function (knex) {
       price: 10.0,
     },
     {
-      id: 4,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'My Food Bag',
@@ -55,7 +51,6 @@ exports.seed = async function (knex) {
       price: 150.0,
     },
     {
-      id: 5,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Countdown',
@@ -67,7 +62,6 @@ exports.seed = async function (knex) {
       price: 150.0,
     },
     {
-      id: 6,
       userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Contact Energy',
@@ -79,7 +73,6 @@ exports.seed = async function (knex) {
       price: 300.0,
     },
     {
-      id: 7,
       userId: 1,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Metlink',
@@ -91,7 +84,6 @@ exports.seed = async function (knex) {
       price: 5.0,
     },
     {
-      id: 8,
       userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Netflix',
@@ -103,7 +95,6 @@ exports.seed = async function (knex) {
       price: 50.55,
     },
     {
-      id: 9,
       userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Office Max',
@@ -115,7 +106,6 @@ exports.seed = async function (knex) {
       price: 10.0,
     },
     {
-      id: 10,
       userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'My Food Bag',
@@ -127,7 +117,6 @@ exports.seed = async function (knex) {
       price: 150.0,
     },
     {
-      id: 11,
       userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Countdown',
@@ -139,7 +128,6 @@ exports.seed = async function (knex) {
       price: 150.0,
     },
     {
-      id: 12,
       userId: 7,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Contact Energy',

@@ -63,10 +63,7 @@ function App() {
                 path="/managesubscriptions"
                 element={<ManageSubscription />}
               />
-              {/* <Route
-                path="/addsubscription"
-                element={<AddSubscription />} */}
-
+              <Route path="/addsubscription" element={<AddSubs />} />
               {/* <Route
                 path="/profile"
                 // element={<Profile />}
@@ -78,6 +75,6 @@ function App() {
         <LogIn />
       )}
     </>
-  );
+  )
 }
 export default App
