@@ -6,6 +6,7 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
+import AddSubs from './AddSubs'
 import PaymentHistory from './PaymentHistory'
 
 function App() {
@@ -46,7 +47,6 @@ function App() {
   return (
     <>
       {isAuthenticated ? (
-        //please add stuff here
         <>
           <Nav />
           <div className="mt-8 flex flex-col items-center justify-center">
@@ -78,7 +78,6 @@ function App() {
         <LogIn />
       )}
     </>
-  )
+  );
 }
-
 export default App
