@@ -17,7 +17,7 @@ function SubItem(props: Props) {
           >
             {props.subscription?.name}
           </a>
-          <h2>${props.subscription?.price}</h2>
+          <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
 

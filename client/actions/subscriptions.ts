@@ -2,8 +2,7 @@ import { Subscription } from '../../models/subscription'
 import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
 import { getSubscriptions } from '../apis/subscriptions'
-import { User } from '@auth0/auth0-react'
-import {addNewSub, } from '../apis/addSubs'
+import { addNewSub } from '../apis/addSubs'
 
 export const SET_SUB_PENDING = 'SET_SUB_PENDING'
 export const SET_SUB_SUCCESS = 'SET_SUB_SUCCESS'
@@ -49,6 +48,7 @@ export function fetchSubscriptions(token: string): ThunkAction {
       })
   }
 }
+
 interface Prop {
   name?: string
   image?: string
@@ -72,5 +72,3 @@ export function fetchAddSubs(newSub: Prop, token: string): ThunkAction {
       })
   }
 }
-
-

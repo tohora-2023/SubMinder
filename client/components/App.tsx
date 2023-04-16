@@ -65,7 +65,6 @@ function App() {
                 element={<ManageSubscription />}
               />
               <Route path="/addsubscription" element={<AddSubs />} />
-
               {/* <Route
                 path="/profile"
                 // element={<Profile />}
