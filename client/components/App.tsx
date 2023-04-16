@@ -56,7 +56,7 @@ function App() {
                 path="/"
                 element={<Home isAuthComplete={isAuthComplete} />}
               />
-             
+
               <Route
                 path="/paymenthistory"
                 element={<PaymentHistory isAuthComplete={isAuthComplete} />}
@@ -66,13 +66,7 @@ function App() {
                 element={<ManageSubscription />}
               />
               <Route path="/addsubscription" element={<AddSubs />} />
-              {/* <Route path="/profile" element={<Profile />} /> */}
-           
-
-              {/* <Route
-                path="/profile"
-                // element={<Profile />}
-              /> */}
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
         </>

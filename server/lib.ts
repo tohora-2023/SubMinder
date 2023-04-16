@@ -1,0 +1,24 @@
+import { MailService } from '@sendgrid/mail'
+require('dotenv').config()
+
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+export default function sendReminderEmail(to: string | undefined) {
+  const msg = {
+    to: to,
+    from: 'subminder0@gmail.com',
+    subject: 'Reminder: You have a payment due soon',
+    text: 'You have a payment due today. Please make sure you check Your subscription, and make sure you want to commit to the payment.',
+    html: '<p>You have a payment due soon. Please make sure you check Your subscription, and make sure you want to commit to the payment.</p>',
+  }
+
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error: MailService) => {
+      console.error(error)
+    })
+}

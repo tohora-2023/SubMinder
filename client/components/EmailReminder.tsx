@@ -3,35 +3,7 @@ import { useEffect, useState } from 'react'
 import { fetchEvents } from '../actions/events'
 import { Events } from '../../models/events'
 import { useAppDispatch, useAppSelector } from '../hooks'
-// import sendReminderEmail from '../helper/EmailHelper'
-
-//////////////////////////////////////////
-
-import { MailService } from '@sendgrid/mail'
-require('dotenv').config()
-
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-
-function sendReminderEmail(to: string | undefined) {
-  const msg = {
-    to: to,
-    from: 'subminder0@gmail.com',
-    subject: 'Reminder: You have a payment due soon',
-    text: 'You have a payment due today. Please make sure you check Your subscription, and make sure you want to commit to the payment.',
-    html: '<p>You have a payment due soon. Please make sure you check Your subscription, and make sure you want to commit to the payment.</p>',
-  }
-
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error: MailService) => {
-      console.error(error)
-    })
-}
-////////////////////////////////////////////
+import { sendEmailReminder } from '../apis/reminder'
 
 export default function Email() {
   const dispatch = useAppDispatch()
@@ -54,7 +26,8 @@ export default function Email() {
         const rminderTime = paymentDate - currentTime
 
         if (rminderTime < reminderThreshold) {
-          sendReminderEmail(user?.email)
+          const token = await getAccessTokenSilently()
+          await sendEmailReminder(user?.email, token)
         }
       }
     }
