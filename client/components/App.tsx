@@ -6,7 +6,6 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
-import AddSubs from './AddSubs'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
 

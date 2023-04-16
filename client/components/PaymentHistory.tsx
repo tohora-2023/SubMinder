@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../hooks'
 import { Chart } from 'react-google-charts'
 import PieChart from './PieChart'
 import SubChart from './SubChart'
-import ReactPDF, { PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 import PDF from './PDF'
 
 export interface TableData {}
@@ -74,7 +74,7 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
         })
       )
     }
-  }, [isAuthComplete, data, start, end])
+  }, [isAuthComplete, data, start, end, spread])
 
   //---------------------------------Defining table options---------------------------------
   const options = {
@@ -161,6 +161,13 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
     setSpread('start-end')
   }
 
+  if (loading) {
+    return <p>loading...</p>
+  }
+
+  if (error) {
+    return <p>There was an error</p>
+  }
   return (
     <div>
       <PDFDownloadLink
@@ -174,8 +181,12 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
         }
         fileName="subminder-payments.pdf"
       >
-        {({ blob, url, loading, error }) =>
-          loading ? 'Loading document...' : 'Download PDF'
+        {({ loading, error }) =>
+          loading
+            ? 'Loading document...'
+            : error
+            ? 'There was an error'
+            : 'Download PDF'
         }
       </PDFDownloadLink>
 
