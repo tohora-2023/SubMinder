@@ -12,6 +12,8 @@ export function getEvents(
       'subscriptions.category as category',
       'subscriptions.price as price',
       'subscriptions.userAuthId as userAuthId',
+      'subscriptions.id as SubId',
+      'subscriptions.reminder as reminder',
       'calendarEvents.*'
     )
     .where('userAuthId', authID)
