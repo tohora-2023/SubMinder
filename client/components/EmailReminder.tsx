@@ -1,28 +1,53 @@
 import { useAuth0 } from '@auth0/auth0-react'
-
-require('dotenv').config()
-import { MailService } from '@sendgrid/mail'
+import { useEffect, useState } from 'react'
+import { fetchEvents } from '../actions/events'
+import { Events } from '../../models/events'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import sendReminderEmail from '../helper/EmailHelper'
 
 export default function Email() {
-  const sgMail = require('@sendgrid/mail')
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  const dispatch = useAppDispatch()
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
+  const { loading, error, data } = useAppSelector((state) => state.events)
 
-  const msg = {
-    to: user?.email,
-    from: 'subminder0@gmail.com',
-    subject: 'Reminder: You have a payment due today',
-    text: 'You have a payment due today. pleae make sure you to check Your subscription, and make sure you want to commit to the payment.',
-    html: '<p>You have a payment due today. pleae make sure you to check Your subscription, and make sure you want to commit to the payment.</p>',
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await getAccessTokenSilently()
+        dispatch(fetchEvents(token))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [dispatch, getAccessTokenSilently])
+
+  const reminder = async (
+    data: Events[],
+    token: string,
+    reminderThreshold: number
+  ) => {
+    token = await getAccessTokenSilently()
+    const currentTime = new Date().getTime()
+
+    for (const dueDate of data) {
+      const paymentDate = new Date(dueDate.scheduleDate).getTime()
+      const rminderTime = paymentDate - currentTime
+
+      if (rminderTime < reminderThreshold) {
+        sendReminderEmail(user?.email)
+      }
+    }
   }
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error: MailService) => {
-      console.error(error)
-    })
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>There was an error</p>
+  }
 
   return (
     <>
