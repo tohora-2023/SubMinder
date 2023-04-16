@@ -19,27 +19,27 @@ export default function Email() {
         console.error(error)
       }
     }
+    const reminder = async (data: Events[], reminderThreshold: number) => {
+      const currentTime = new Date().getTime()
+      for (const dueDate of data) {
+        const paymentDate = new Date(dueDate.scheduleDate).getTime()
+        const rminderTime = paymentDate - currentTime
 
-    fetchData()
-  }, [dispatch, getAccessTokenSilently])
-
-  const reminder = async (
-    data: Events[],
-    token: string,
-    reminderThreshold: number
-  ) => {
-    token = await getAccessTokenSilently()
-    const currentTime = new Date().getTime()
-
-    for (const dueDate of data) {
-      const paymentDate = new Date(dueDate.scheduleDate).getTime()
-      const rminderTime = paymentDate - currentTime
-
-      if (rminderTime < reminderThreshold) {
-        sendReminderEmail(user?.email)
+        if (rminderTime < reminderThreshold) {
+          sendReminderEmail(user?.email)
+        }
       }
     }
-  }
+
+    fetchData()
+    if (data) {
+      for (const sub of data) {
+        if (sub.reminder) {
+          reminder(data, 2)
+        }
+      }
+    }
+  }, [dispatch, getAccessTokenSilently, data, user?.email])
 
   if (loading) {
     return <p>Loading...</p>
@@ -49,9 +49,5 @@ export default function Email() {
     return <p>There was an error</p>
   }
 
-  return (
-    <>
-      <div>SetUp Email Reminder</div>
-    </>
-  )
+  return <div>Enable email reminder</div>
 }

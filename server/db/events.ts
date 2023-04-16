@@ -8,6 +8,8 @@ export function getEvents(db = connection): Promise<Subscription[]> {
       'subscriptions.name as name',
       'subscriptions.category as category',
       'subscriptions.price as price',
+      'subscriptions.id as SubId',
+      'subscriptions.reminder as reminder',
       'calendarEvents.*'
     )
 }

@@ -45,6 +45,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    // fallback: {
+    //   fs: false,
+    //   path: require.resolve('path-browserify'),
+    //   os: require.resolve('os-browserify/browser'),
+    // },
   },
   devtool: 'source-map',
 }

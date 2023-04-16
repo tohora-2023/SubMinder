@@ -9,6 +9,7 @@ interface Prop {
   category?: string
   website?: string
   price?: number
+  reminder?: boolean
 }
 
 export async function addNewSub(data: Prop, token: string) {
