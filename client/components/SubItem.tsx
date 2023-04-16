@@ -6,7 +6,6 @@ interface Props {
 }
 
 function SubItem(props: Props) {
-  console.log(props.subscription)
   return (
     <div className="border border-2 border-black p-6">
       <SubItemMenu id={props.subscription.id} />
