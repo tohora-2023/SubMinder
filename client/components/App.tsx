@@ -8,6 +8,7 @@ import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
 import AddSubs from './AddSubs'
 import Profile from './Profile'
+import PaymentHistory from './PaymentHistory'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -55,13 +56,23 @@ function App() {
                 path="/"
                 element={<Home isAuthComplete={isAuthComplete} />}
               />
-              {/* <Route path='/paymenthistory' element={<PaymentHistory/>} /> */}
+             
+              <Route
+                path="/paymenthistory"
+                element={<PaymentHistory isAuthComplete={isAuthComplete} />}
+              />
               <Route
                 path="/managesubscriptions"
                 element={<ManageSubscription />}
               />
               <Route path="/addsubscription" element={<AddSubs />} />
               {/* <Route path="/profile" element={<Profile />} /> */}
+           
+
+              {/* <Route
+                path="/profile"
+                // element={<Profile />}
+              /> */}
             </Routes>
           </div>
         </>

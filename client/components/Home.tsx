@@ -8,7 +8,7 @@ import SubChart from './SubChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 
-interface HomeProps {
+export interface HomeProps {
   isAuthComplete: boolean
 }
 
@@ -118,65 +118,39 @@ export default function Home({ isAuthComplete }: HomeProps) {
     return endDate.getMonth() === currentMonth
   })
 
-  //getting food total
-  const food = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return (
-      item.category === 'Food & Drink' && endDate.getMonth() === currentMonth
-    )
-  })
-  const foodTotal = food.reduce((acc, cur) => acc + cur.price, 0)
+  //-----------Getting the totals-------------
+  const categories = [
+    'Food & Drink',
+    'Entertainment',
+    'Necessities',
+    'Bills',
+    'Productivity',
+    'Travel',
+  ]
 
-  //entertainment
-  const entertainment = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return (
-      item.category === 'Entertainment' && endDate.getMonth() === currentMonth
-    )
-  })
-  const entertainmentTotal = entertainment.reduce(
-    (acc, cur) => acc + cur.price,
-    0
-  )
+  const categoryTotals: Record<string, number> = {
+    'Food & Drink': 0,
+    Entertainment: 0,
+    Necessities: 0,
+    Bills: 0,
+    Productivity: 0,
+    Travel: 0,
+  }
 
-  //necessities
-  const necessities = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return (
-      item.category === 'Necessities' && endDate.getMonth() === currentMonth
-    )
-  })
-  const necessitiesTotal = necessities.reduce((acc, cur) => acc + cur.price, 0)
+  categories.forEach((category) => {
+    const filteredData = data.filter((item) => {
+      const endDate = new Date(item.scheduleDate)
+      return item.category === category && endDate.getMonth() === currentMonth
+    })
 
-  //bills
-  const bills = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return item.category === 'Bills' && endDate.getMonth() === currentMonth
-  })
-  const billsTotal = bills.reduce((acc, cur) => acc + cur.price, 0)
+    const total = filteredData.reduce((acc, cur) => acc + cur.price, 0)
 
-  //productivity
-  const productivity = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return (
-      item.category === 'Productivity' && endDate.getMonth() === currentMonth
-    )
+    categoryTotals[category] = total
   })
-  const productivityTotal = productivity.reduce(
-    (acc, cur) => acc + cur.price,
-    0
-  )
 
-  //travel
-  const travel = data.filter((item) => {
-    const endDate = new Date(item.scheduleDate)
-    return item.category === 'Travel' && endDate.getMonth() === currentMonth
-  })
-  const travelTotal = travel.reduce((acc, cur) => acc + cur.price, 0)
-
-  //total
   const totalPrice = thisMonths.reduce((acc, cur) => acc + cur.price, 0)
 
+  //-----------------------Changing the view----------------------------
   function handleClick(event: React.ChangeEvent<HTMLSelectElement>) {
     const value = event.target.value
     setView(value)
@@ -190,7 +164,6 @@ export default function Home({ isAuthComplete }: HomeProps) {
     return <p>There was an error</p>
   }
 
-  console.log(travelTotal)
   return (
     <>
       <h2 className="mb-10 text-center text-5xl text-subminder-purple">{`${months[currentMonth]} ${currentYear}`}</h2>
@@ -226,12 +199,12 @@ export default function Home({ isAuthComplete }: HomeProps) {
         <div>
           {isAuthComplete ? (
             <PieChart
-              food={300}
-              entertainment={50}
-              necessities={100}
-              bills={300}
-              productivity={10}
-              travel={10}
+              food={categoryTotals[`Food & Drink`]}
+              entertainment={categoryTotals['Entertainment']}
+              necessities={categoryTotals['Necessities']}
+              bills={categoryTotals['Bills']}
+              productivity={categoryTotals['Productivity']}
+              travel={categoryTotals['Travel']}
             />
           ) : (
             <p>loading</p>
@@ -240,12 +213,12 @@ export default function Home({ isAuthComplete }: HomeProps) {
           <div>
             <SubChart
               total={totalPrice | 0}
-              food={foodTotal | 0}
-              entertainment={entertainmentTotal | 0}
-              necessities={necessitiesTotal | 0}
-              bills={billsTotal | 0}
-              productivity={productivityTotal | 0}
-              travel={travelTotal | 0}
+              food={categoryTotals[`Food & Drink`] | 0}
+              entertainment={categoryTotals['Entertainment'] | 0}
+              necessities={categoryTotals['Necessities'] | 0}
+              bills={categoryTotals['Bills'] | 0}
+              productivity={categoryTotals['Productivity'] | 0}
+              travel={categoryTotals['Travel'] | 0}
             />
           </div>
         </div>
