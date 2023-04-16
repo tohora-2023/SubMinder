@@ -32,7 +32,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
   } catch (err) {
     console.log(err)
     res
-      .send(500)
+      .sendStatus(500)
       .json({ errorMessage: 'there was an error fetching your data' })
   }
 })
