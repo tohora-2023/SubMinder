@@ -3,12 +3,13 @@ import SubItemMenu from './SubItemMenu'
 
 interface Props {
   subscription: Models.Subscription
+  authKey: string
 }
 
 function SubItem(props: Props) {
   return (
     <div className="border-2 border-black p-6">
-      <SubItemMenu id={props.subscription.id} />
+      <SubItemMenu id={props.subscription.id} authKey={props.authKey} />
       <h1>
         <div className="p4 flex justify-between">
           <a
