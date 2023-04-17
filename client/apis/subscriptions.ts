@@ -1,3 +1,4 @@
+import { response } from 'express'
 import request from 'superagent'
 import { Subscription } from '../../models/subscription'
 
@@ -28,4 +29,18 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
       return subscriptions
     })
     .catch(() => 'There was an error getting subscriptions')
+}
+
+export async function deleteSubscription(
+  subId: string,
+  token: string
+): Promise<number> {
+  try {
+    const response = await request
+      .post('/delete/' + subId)
+      .set('Authorization', `Bearer ${token}`)
+    return response.statusCode
+  } catch {
+    return response.statusCode
+  }
 }
