@@ -50,12 +50,14 @@ function App() {
       {isAuthenticated ? (
         <>
           <Nav />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home isAuthComplete={isAuthComplete} />}
+            />
+          </Routes>
           <div className="mt-8 flex flex-col items-center justify-center">
             <Routes>
-              <Route
-                path="/"
-                element={<Home isAuthComplete={isAuthComplete} />}
-              />
               <Route
                 path="/paymenthistory"
                 element={<PaymentHistory isAuthComplete={isAuthComplete} />}
