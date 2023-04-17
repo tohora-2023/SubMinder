@@ -2,6 +2,7 @@ import { Dispatch } from 'redux'
 import { Events } from '../../models/events'
 import { ThunkAction } from '../store'
 import { UpdateEmail, getEvents } from '../apis/events'
+import { sendEmailReminder } from '../apis/reminder'
 
 export const SET_EVENTS_PENDING = 'SET_EVENTS_PENDING'
 export const SET_EVENTS_SUCESS = 'SET_EVENTS_SUCESS'
@@ -21,9 +22,9 @@ export type EventsAction =
       type: typeof SET_ERROR
       payload: string
     }
-    |{
-      type: typeof SET_EVENTS_UPDATE 
-      payload:Events[]
+  | {
+      type: typeof SET_EVENTS_UPDATE
+      payload: Events[]
     }
 
 export function setEventsPending(): EventsAction {
@@ -40,8 +41,8 @@ export function setEventsSuccess(events: Events[]): EventsAction {
   }
 }
 
-export function setEventUpdate(events: Events[]):EventsAction{
-  return{
+export function setEventUpdate(events: Events[]): EventsAction {
+  return {
     type: SET_EVENTS_UPDATE,
     payload: events,
   }
@@ -67,10 +68,6 @@ export function fetchEvents(token: string): ThunkAction {
   }
 }
 
-// function thunkUpdateEmail (dueDate.id, true, token)
-// calls api function UpdateEmail(dueDate.id, true, token)
-// dispatches simple action to change state.events.data[?].emailSend == true
-
 export function fetchEmailStatus(
   id: number,
   isEmailSent: boolean,
@@ -79,6 +76,24 @@ export function fetchEmailStatus(
   return (dispatch: Dispatch) => {
     dispatch(setEventsPending())
     return UpdateEmail(id, isEmailSent, token)
+      .then((events) => {
+        dispatch(setEventsSuccess(events))
+      })
+      .catch((error: Error) => {
+        dispatch(setError(error.message))
+      })
+  }
+}
+
+export function fetchSendRequest(
+  email: string,
+  sub: string,
+  date: string,
+  token: string
+): ThunkAction {
+  return (dispatch: Dispatch) => {
+    dispatch(setEventsPending())
+    return sendEmailReminder(email, sub, date, token)
       .then((events) => {
         dispatch(setEventsSuccess(events))
       })

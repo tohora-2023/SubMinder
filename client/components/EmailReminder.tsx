@@ -1,6 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react'
-import { fetchEmailStatus, fetchEvents } from '../actions/events'
+import {
+  fetchEmailStatus,
+  fetchEvents,
+  fetchSendRequest,
+} from '../actions/events'
 import { Events } from '../../models/events'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { sendEmailReminder } from '../apis/reminder'
@@ -41,12 +45,15 @@ export default function Email() {
           if (dueDate.isEmailSent) {
             return
           }
-          await sendEmailReminder(
-            user.email,
-            dueDate.name,
-            dueDate.scheduleDate,
-            token
+          dispatch(
+            fetchSendRequest(
+              user.email,
+              dueDate.name,
+              dueDate.scheduleDate,
+              token
+            )
           )
+
           dueDate.isEmailSent = true
           dispatch(fetchEmailStatus(dueDate.id, true, token))
         }
@@ -63,7 +70,7 @@ export default function Email() {
         }
       }
     }
-  }, [getAccessTokenSilently, user?.email])
+  }, [getAccessTokenSilently, user?.email, user?.sub])
 
   if (loading) {
     return <p>Loading...</p>
