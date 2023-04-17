@@ -1,20 +1,4 @@
-import {
-  Document,
-  Page,
-  Text,
-  StyleSheet,
-  View,
-  Image,
-} from '@react-pdf/renderer'
-
-interface totalObject {
-  'Food & Drink': number
-  Entertainment: number
-  Necessities: number
-  Bills: number
-  Productivity: number
-  Travel: number
-}
+import { Document, Page, Text, View, Image } from '@react-pdf/renderer'
 
 interface PDFProp {
   start: Date

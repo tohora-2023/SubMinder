@@ -16,7 +16,7 @@ export default function AddSubs() {
   const [price, setPrice] = useState(0)
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const { loading, error } = useAppSelector((state) => state.subscriptions)
+  const { data, loading, error } = useAppSelector((state) => state.subscriptions)
 
   function clearForm() {
     setName('')
@@ -43,6 +43,7 @@ export default function AddSubs() {
     }
     const token = await getAccessTokenSilently()
     // dispatch(fetchAddSubs(newSub, token))
+    // const id = data[0].id
     const { id } = await addNewSub(newSub, token)
     const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
     console.log(id)
@@ -120,7 +121,6 @@ export default function AddSubs() {
         />
 
         <br />
-
         <label htmlFor="endDate">End Date </label>
         <input
           type="date"
