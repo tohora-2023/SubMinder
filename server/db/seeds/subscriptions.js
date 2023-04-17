@@ -81,7 +81,7 @@ exports.seed = async function (knex) {
     {
       id: 7,
       userId: 1,
-      userAuthId: 'google-oauth2|115715665912062151987',
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Metlink',
       image: '',
       frequency: 'weekly',
@@ -93,7 +93,7 @@ exports.seed = async function (knex) {
     {
       id: 8,
       userId: 1,
-      userAuthId: '',
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Netflix',
       image: '',
       frequency: 'fortnightly',
@@ -105,7 +105,7 @@ exports.seed = async function (knex) {
     {
       id: 9,
       userId: 1,
-      userAuthId: '',
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Office Max',
       image: '',
       frequency: 'weekly',
@@ -117,7 +117,7 @@ exports.seed = async function (knex) {
     {
       id: 10,
       userId: 1,
-      userAuthId: '',
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'My Food Bag',
       image: '',
       frequency: 'monthly',
@@ -129,7 +129,7 @@ exports.seed = async function (knex) {
     {
       id: 11,
       userId: 1,
-      userAuthId: '',
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Countdown',
       image: '',
       frequency: 'weekly',
@@ -140,8 +140,8 @@ exports.seed = async function (knex) {
     },
     {
       id: 12,
-      userId: 1,
-      userAuthId: '',
+      userId: 7,
+      userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Contact Energy',
       image: '',
       frequency: 'fortnightly',

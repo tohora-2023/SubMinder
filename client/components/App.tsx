@@ -6,9 +6,10 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
-import AddSubs from './AddSubs'
 import Profile from './Profile'
 import PaymentHistory from './PaymentHistory'
+import Footer from './Footer'
+import AddSubs from './AddSubs'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -56,7 +57,6 @@ function App() {
                 path="/"
                 element={<Home isAuthComplete={isAuthComplete} />}
               />
-
               <Route
                 path="/paymenthistory"
                 element={<PaymentHistory isAuthComplete={isAuthComplete} />}
@@ -69,6 +69,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
+          <Footer />
         </>
       ) : (
         <LogIn />
