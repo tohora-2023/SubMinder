@@ -13,6 +13,7 @@ export interface Subscription {
 }
 
 export interface SubscriptionUpdate {
+  id: number
   name: string
   category: string
   website: string
