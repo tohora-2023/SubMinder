@@ -8,6 +8,7 @@ import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
+import AddSubs from './AddSubs'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)

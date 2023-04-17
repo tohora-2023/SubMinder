@@ -48,7 +48,7 @@ function ManageSubscription() {
           {data && data.length > 0 ? (
             data.map((sub) => {
               return (
-                <li className="py-2" key={sub.id}>
+                <li className="py-2" key={sub.id+ sub.scheduleDate}>
                   <SubItem subscription={sub} />
                 </li>
               )
