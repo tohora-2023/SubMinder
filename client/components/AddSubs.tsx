@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { addNewSub } from '../apis/addSubs'
 import manageCalendarEvents from '../helper/CallenderEvents'
 import { addNewCalanderDay } from '../apis/events'
+import { useNavigate } from 'react-router-dom'
 
 export default function AddSubs() {
   const [name, setName] = useState('')
@@ -16,7 +17,10 @@ export default function AddSubs() {
   const [price, setPrice] = useState(0)
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const { data, loading, error } = useAppSelector((state) => state.subscriptions)
+  const { data, loading, error } = useAppSelector(
+    (state) => state.subscriptions
+  )
+  const navigate = useNavigate()
 
   function clearForm() {
     setName('')
@@ -65,7 +69,7 @@ export default function AddSubs() {
     }
 
     console.log(paymentDates)
-    clearForm()
+    navigate('/managesubscriptions')
   }
 
   if (loading) {

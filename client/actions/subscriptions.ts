@@ -73,9 +73,6 @@ export function fetchAddSubs(newSub: Prop, token: string): ThunkAction {
   return (dispatch: Dispatch) => {
     return deleteSubscription(subId, token)
       .then((subScriptions) => {
-        console.log('Testing')
-        console.log(subId)
-        console.log(subscription)
         dispatch(setSubsRemove(subId))
       })
       .catch((error: Error) => {
