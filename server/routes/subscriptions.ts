@@ -1,5 +1,9 @@
 import express from 'express'
-import { getSubsList, getSubsWithDate, deleteSub } from '../db/subscriptions'
+import {
+  getSubsList,
+  getSubsWithDate,
+  deleteSubsAndCalendarEvents,
+} from '../db/subscriptions'
 import checkJwt, { JwtRequest } from '../auth0'
 import { Response } from 'express'
 
@@ -48,7 +52,7 @@ router.delete(
       const auth0Id = req.auth?.sub
       console.log(auth0Id)
       if (auth0Id) {
-        await deleteSub(Number(req.params.id))
+        await deleteSubsAndCalendarEvents(Number(req.params.id))
         res.send('Subscription deleted')
       }
     } catch (error) {
