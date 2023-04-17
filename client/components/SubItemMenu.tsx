@@ -8,6 +8,7 @@ interface Props {
 }
 
 function SubItemMenu(props: Props) {
+  console.log(`props id`, props.id)
   const { getAccessTokenSilently } = useAuth0()
   const dispatch = useAppDispatch()
   const [isOpen, setIsOpen] = useState(false)
@@ -19,9 +20,9 @@ function SubItemMenu(props: Props) {
   async function handleDeleteClick(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
-    const getToken = await getAccessTokenSilently().then((token) => {
+    await getAccessTokenSilently().then((token) => {
       event.preventDefault()
-      const id = event.currentTarget.id
+      const id = (event.target as HTMLButtonElement).id
       dispatch(removeSub(id, token))
     })
   }
