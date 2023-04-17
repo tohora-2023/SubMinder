@@ -1,9 +1,14 @@
-import { Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList, Button } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { styles } from '../App'
 import Item from './Item'
+import { Ionicons } from '@expo/vector-icons'
+import { IconButton } from 'react-native-paper'
+import { useState } from 'react'
 
 const Upcoming = () => {
+  const [view, setView] = useState('month')
+
   const data = [
     {
       id: 1,
@@ -79,6 +84,41 @@ const Upcoming = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <IconButton
+          icon={() => (
+            <Ionicons
+              name="arrow-back-circle-sharp"
+              size={24}
+              color="#3023AE"
+            />
+          )}
+        />
+        <Button
+          title="month"
+          color={view === 'month' ? '#3023AE' : 'grey'}
+          onPress={() => setView('month')}
+        />
+        <Button
+          title="week"
+          color={view === 'week' ? '#3023AE' : 'grey'}
+          onPress={() => setView('week')}
+        />
+        <Button
+          title="day"
+          color={view === 'day' ? '#3023AE' : 'grey'}
+          onPress={() => setView('day')}
+        />
+        <IconButton
+          icon={() => (
+            <Ionicons
+              name="arrow-forward-circle-sharp"
+              size={24}
+              color="#3023AE"
+            />
+          )}
+        />
+      </View>
       <Text style={{ marginTop: 20 }}>Your upcoming payments: </Text>
       <FlatList
         data={data}
