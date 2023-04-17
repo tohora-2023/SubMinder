@@ -30,3 +30,20 @@ export function failureUser(errorMessage: string): UserInfoAction{
     payload: errorMessage
   }
 }
+
+export function fetchUserInfo(username: string): ThunkAction {
+  return (dispatch) => {
+    dispatch(requestUser())
+    return getUserInfo(username)
+      .then((user) => {
+        dispatch(receiveUser(user))
+      })
+      .catch((err) => {
+        if (err instanceof Error) {
+          dispatch(failureUser(`fetchUser error:  ${err.message}`))
+        } else {
+          dispatch(failureUser('An unknown error occurred'))
+        }
+      })
+  }
+}
