@@ -39,3 +39,7 @@ export function getSubsList(
       'subscriptions.userAuthId as userAuthId'
     )
 }
+
+export function deleteSub(id: string, db = connection) {
+  return db('subscriptions').where('subscriptions.id', id).delete()
+}

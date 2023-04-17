@@ -38,3 +38,20 @@ router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
     console.log(error)
   }
 })
+
+router.delete(
+  '/delete/:id',
+  checkJwt,
+  async (req: JwtRequest, res: Response) => {
+    try {
+      const auth0Id = req.auth?.sub
+      console.log(auth0Id)
+      if (auth0Id) {
+        await deleteSub(req.params.id)
+        res.send('Subscription deleted')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)

@@ -32,16 +32,12 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
     .catch(() => 'There was an error getting subscriptions')
 }
 
-// export async function deleteSubscription(
-//   subId: string,
-//   token: string
-// ): Promise<number> {
-//   try {
-//     const response = await request
-//       .post('/delete/' + subId)
-//       .set('Authorization', `Bearer ${token}`)
-//     return response.statusCode
-//   } catch {
-//     return response.statusCode
-//   }
-// }
+export async function deleteSubscription(
+  subId: string,
+  token: string
+): Promise<number> {
+  const response = await request
+    .post('/v1/subscriptions/delete/' + subId)
+    .set('Authorization', `Bearer ${token}`)
+  return response.statusCode
+}
