@@ -21,3 +21,21 @@ export function getSubsWithDate(db = connection): Promise<Subscription[]> {
       'subscriptions.userAuthId as userAuthId'
     )
 }
+
+export function getSubsList(
+  user: string,
+  db = connection
+): Promise<Subscription[]> {
+  return db('subscriptions')
+    .where('subscriptions.userAuthId', '=', user)
+    .select(
+      'subscriptions.id as id',
+      'subscriptions.name as name',
+      'subscriptions.category as category',
+      'subscriptions.endDate as endDate',
+      'subscriptions.price as price',
+      'subscriptions.website as website',
+      'subscriptions.frequency as frequency',
+      'subscriptions.userAuthId as userAuthId'
+    )
+}
