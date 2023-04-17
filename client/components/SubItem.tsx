@@ -22,19 +22,6 @@ function SubItem(props: Props) {
           <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
-
-      {props.subscription?.isLastDate ? (
-        <div className="flex justify-between">
-          <h2>last payment date:</h2>
-          <h2>{props.subscription?.scheduleDate}</h2>
-        </div>
-      ) : (
-        <div className="flex justify-between">
-          <h2>next payment date:</h2>
-          <h2>{props.subscription?.scheduleDate}</h2>
-        </div>
-      )}
-
       <h2>
         {props.subscription?.category} - {props.subscription?.frequency}
       </h2>
