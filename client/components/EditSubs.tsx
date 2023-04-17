@@ -50,7 +50,7 @@ export default function EditSubs() {
 
     editSub(Number(subId), editedSub, token)
 
-    navigate('/managesubscription')
+    navigate('/managesubscriptions')
   }
 
   if (loading) {
@@ -83,43 +83,19 @@ export default function EditSubs() {
           id="category"
           name="category"
           className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-          value={category}
+          defaultValue={category}
           onChange={(e) => setCategory(e.target.value)}
           required
         >
           <option value="" disabled>
             Select Category
           </option>
-          <option
-            value="food & drink"
-            selected={category.toLowerCase() === 'food & drink'}
-          >
-            Food & Drink
-          </option>
-          <option
-            value="entertainment"
-            selected={category.toLowerCase() === 'entertainment'}
-          >
-            Entertainment
-          </option>
-          <option
-            value="necessities"
-            selected={category.toLowerCase() === 'necessities'}
-          >
-            Necessities
-          </option>
-          <option value="bills" selected={category.toLowerCase() === 'bills'}>
-            Bills
-          </option>
-          <option
-            value="productivity"
-            selected={category.toLowerCase() === 'productivity'}
-          >
-            Productivity
-          </option>
-          <option value="travel" selected={category.toLowerCase() === 'travel'}>
-            Travel
-          </option>
+          <option value="food & drink">Food & Drink</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="necessities">Necessities</option>
+          <option value="bills">Bills</option>
+          <option value="productivity">Productivity</option>
+          <option value="travel">Travel</option>
         </select>
         <br />
         <label htmlFor="website">Website: </label>
