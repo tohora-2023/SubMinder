@@ -1,5 +1,9 @@
 import subscriptionReducer, { SubscriptionState } from '../subscriptionsReducer'
-import { setSubsSuccess, setSubsRemove } from '../../actions/subscriptions'
+import {
+  setSubsSuccess,
+  setSubsRemove,
+  setSubEdit,
+} from '../../actions/subscriptions'
 import { Subscription } from '../../../models/subscription'
 
 const initialState: SubscriptionState = {
@@ -98,5 +102,49 @@ describe('taskReducer tests', () => {
         price: 15.0,
       },
     ])
+  })
+
+  it('should update a subscription', () => {
+    //Arrange
+    const initialSubState: SubscriptionState = {
+      loading: false,
+      error: undefined,
+      data: [
+        {
+          id: 2,
+          userAuthId: 'google|123',
+          name: 'Netflix Update',
+          image: 'image.jpb',
+          frequency: 'Monthly',
+          endDate: '2023-04-14T08:41:30.872Z',
+          isLastDate: false,
+          scheduleDate: '2023-04-14T08:41:30.872Z',
+          category: 'Entertainment Update',
+          website: 'www.netflix.com',
+          price: 20.0,
+        },
+      ],
+    }
+
+    const updateSubScription: Subscription = {
+      id: 2,
+      userAuthId: 'google|123',
+      name: 'Netflix Update',
+      image: 'image.jpb',
+      frequency: 'Monthly',
+      endDate: '2023-04-14T08:41:30.872Z',
+      isLastDate: false,
+      scheduleDate: '2023-04-14T08:41:30.872Z',
+      category: 'Entertainment Update',
+      website: 'www.netflix.com',
+      price: 20.0,
+    }
+    const updateTaskAction = setSubEdit(updateSubScription)
+
+    //Act
+    const newState = subscriptionReducer(initialSubState, updateTaskAction)
+
+    //Assert
+    expect(newState.data).toEqual([updateSubScription])
   })
 })
