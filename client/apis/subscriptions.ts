@@ -1,4 +1,3 @@
-import { response } from 'express'
 import request from 'superagent'
 import { Subscription } from '../../models/subscription'
 
@@ -8,7 +7,6 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
     .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       const response = res.body
-      console.log(res.body)
       if (!response) return []
 
       const subscriptions = response.map((subscription: Subscription) => {

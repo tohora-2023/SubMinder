@@ -8,7 +8,6 @@ interface Props {
 }
 
 function SubItemMenu(props: Props) {
-  console.log(`props id`, props.id)
   const { getAccessTokenSilently } = useAuth0()
   const dispatch = useAppDispatch()
   const [isOpen, setIsOpen] = useState(false)

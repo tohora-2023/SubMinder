@@ -69,18 +69,6 @@ interface Prop {
   price?: number
 }
 
-export function fetchAddSubs(newSub: Prop, token: string): ThunkAction {
-  return (dispatch: Dispatch) => {
-    return deleteSubscription(subId, token)
-      .then((subScriptions) => {
-        dispatch(setSubsRemove(subId))
-      })
-      .catch((error: Error) => {
-        dispatch(setError(error.message))
-      })
-  }
-}
-
 export function removeSub(subId: string, token: string): ThunkAction {
   return (dispatch: Dispatch) => {
     return deleteSubscription(subId, token)
