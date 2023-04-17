@@ -1,19 +1,25 @@
-import { Subscription } from '../../models/subscription'
+import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
-import { getSubscriptions, deleteSubscription } from '../apis/subscriptions'
+import {
+  getSubscriptions,
+  deleteSubscription,
+  editSubscription,
+} from '../apis/subscriptions'
 import { addNewSub } from '../apis/addSubs'
 
 export const SET_SUB_PENDING = 'SET_SUB_PENDING'
 export const SET_SUB_SUCCESS = 'SET_SUB_SUCCESS'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_SUB_REMOVE = 'SET_SUB_REMOVE'
+export const SUB_SUB_EDIT = 'SET_SUB_EDIT'
 
 export type SubscriptionAction =
   | { type: typeof SET_SUB_PENDING; payload: null }
   | { type: typeof SET_SUB_SUCCESS; payload: Subscription[] }
   | { type: typeof SET_ERROR; payload: string }
   | { type: typeof SET_SUB_REMOVE; payload: string }
+  | { type: typeof SET_SUB_EDIT; payload: Subscription[] }
 
 export function setSubPending(): SubscriptionAction {
   return {
@@ -42,6 +48,13 @@ export function setError(errorMessage: string): SubscriptionAction {
   return {
     type: SET_ERROR,
     payload: errorMessage,
+  }
+}
+
+export function setSubEdit(errorMessage: string): SubscriptionAction {
+  return {
+    type: SET_SUB_EDIT,
+    payload: subscriptions,
   }
 }
 
@@ -91,5 +104,17 @@ export function removeSub(subId: string, token: string): ThunkAction {
         console.log(err)
         dispatch(setError(err.message))
       })
+  }
+}
+
+export function editSub(
+  id: number,
+  update: SubscriptionUpdate,
+  token: string
+): ThunkAction {
+  return (dispatch: Dispatch) => {
+    return editSubscription(id, update, token).then(() => {
+      dispatch
+    })
   }
 }

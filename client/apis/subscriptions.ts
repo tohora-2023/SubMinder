@@ -1,6 +1,5 @@
-import { response } from 'express'
 import request from 'superagent'
-import { Subscription } from '../../models/subscription'
+import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 
 export function getSubscriptions(token: string): Promise<Subscription[]> {
   return request
@@ -40,5 +39,17 @@ export async function deleteSubscription(
     .delete('/v1/subscriptions/delete/' + subId)
     .set('Authorization', `Bearer ${token}`)
   console.log(`Our token:`, token)
+  return response.statusCode
+}
+
+export async function editSubscription(
+  id: number,
+  update: SubscriptionUpdate,
+  token: string
+) {
+  const response = await request
+    .patch(`v1/subscriptions/update/${id}`)
+    .set('Authorization', `Bearer ${token}`)
+    .send(update)
   return response.statusCode
 }

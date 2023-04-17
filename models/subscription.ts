@@ -12,3 +12,10 @@ export interface Subscription {
   website: string
   price: number
 }
+
+export interface SubscriptionUpdate {
+  name: string
+  category: string
+  website: string
+  price: number
+}

@@ -1,5 +1,5 @@
 import connection from './connection'
-import { Subscription } from '../../models/subscription'
+import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 
 export function getAllSubs(db = connection) {
   return db('subscriptions').select()
@@ -47,4 +47,12 @@ export function deleteSubsAndCalendarEvents(subId: number, db = connection) {
     .then(() => {
       return db('subscriptions').where('subscriptions.id', subId).delete()
     })
+}
+
+export function editSub(
+  id: number,
+  update: SubscriptionUpdate,
+  db = connection
+) {
+  return db('subscriptions').where('id', id).update(update)
 }
