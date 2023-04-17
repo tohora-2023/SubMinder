@@ -14,6 +14,8 @@ function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
 
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
+
+
   interface UserLogInProp {
     firstName?: string
     lastName?: string

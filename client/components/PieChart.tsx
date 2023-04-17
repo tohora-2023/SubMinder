@@ -18,7 +18,7 @@ export default function PieChart({
   travel,
 }: pieData) {
   const options = {
-    title: 'Monthly subsriptions in NZD',
+    title: 'Monthly subscriptions in NZD',
     pieHole: 0.4,
     colors: ['#0011FF', '#06B300', '#FFC400', '#FF0000', '#C269D6', '#5DC6FF'],
   }

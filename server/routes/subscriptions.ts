@@ -12,7 +12,6 @@ const router = express.Router()
 export default router
 
 //localhost:3000/v1/subscriptions
-
 router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
   try {
     const auth0Id = req.auth?.sub
@@ -31,6 +30,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
   }
 })
 
+//localhost:3000/v1/subscriptions/list
 router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
   try {
     const auth0Id = req.auth?.sub
@@ -44,6 +44,7 @@ router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
   }
 })
 
+//localhost:3000/v1/subscriptions/delete/:id
 router.delete(
   '/delete/:id',
   checkJwt,

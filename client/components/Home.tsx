@@ -1,10 +1,8 @@
 import Calendar from '@toast-ui/react-calendar'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import PieChart from './PieChart'
 import '../../node_modules/tui-date-picker/dist/tui-date-picker'
 import '../../node_modules/tui-time-picker/dist/tui-time-picker'
-import SubChart from './SubChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 import UpcomingPayments from './UpcomingPayments'
@@ -47,6 +45,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
   const [currentView, setView] = useState('month')
   const [currentDate, setCurrentDate] = useState(new Date())
 
+  //TODO Current date is being set as a variable not in the state
   //CALENDER SET UP
   const calendars = [
     {
@@ -149,8 +148,6 @@ export default function Home({ isAuthComplete }: HomeProps) {
 
     categoryTotals[category] = total
   })
-
-  const totalPrice = thisMonths.reduce((acc, cur) => acc + cur.price, 0)
 
   //-----------------------Changing the view----------------------------
   function handleClick(event: React.ChangeEvent<HTMLSelectElement>) {

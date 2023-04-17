@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { fetchAddSubs } from '../actions/subscriptions'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addNewSub } from '../apis/addSubs'
-import manageCalendarEvents from '../helper/CallenderEvents'
+import manageCalendarEvents from '../helper/CalendarEvents'
 import { addNewCalanderDay } from '../apis/events'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../hooks'
 
 export default function AddSubs() {
   const [name, setName] = useState('')
@@ -15,22 +14,11 @@ export default function AddSubs() {
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
-  const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const { data, loading, error } = useAppSelector(
-    (state) => state.subscriptions
-  )
+  const {loading, error } = useAppSelector((state) => state.subscriptions)
+
   const navigate = useNavigate()
 
-  function clearForm() {
-    setName('')
-    setFrequency('')
-    setStartDate(new Date())
-    setEndDate(new Date())
-    setCategory('')
-    setWebsite('')
-    setPrice(0)
-  }
   useEffect(() => {}, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -50,8 +38,6 @@ export default function AddSubs() {
       price,
     }
     const token = await getAccessTokenSilently()
-    // dispatch(fetchAddSubs(newSub, token))
-    // const id = data[0].id
     const { id } = await addNewSub(newSub, token)
     const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
     console.log(id)
@@ -64,12 +50,12 @@ export default function AddSubs() {
       const scheduleDate = day.date
       const isLastDate = day === paymentDates[paymentDates.length - 1]
       const subscriptionId = id
-      const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      const dayForCalendar: DayProp = { scheduleDate, isLastDate: false }
       if (isLastDate) {
-        dayForCallender.isLastDate = true
+        dayForCalendar.isLastDate = true
       }
 
-      await addNewCalanderDay(subscriptionId, dayForCallender, token)
+      await addNewCalanderDay(subscriptionId, dayForCalendar, token)
     }
 
     console.log(paymentDates)
