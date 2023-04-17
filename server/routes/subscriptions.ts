@@ -1,5 +1,5 @@
 import express from 'express'
-import { getSubsList, getSubsWithDate } from '../db/subscriptions'
+import { getSubsList, getSubsWithDate, deleteSub } from '../db/subscriptions'
 import checkJwt, { JwtRequest } from '../auth0'
 import { Response } from 'express'
 
