@@ -20,7 +20,7 @@ export default function sendReminderEmail(to: string, sub: string) {
   sgMail
     .send(msg)
     .then(() => {
-      console.log('Email sent')
+      console.log(`'Email sent' ${sub}`)
     })
     .catch((error: MailService) => {
       console.error(error)

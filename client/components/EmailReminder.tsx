@@ -27,26 +27,33 @@ export default function Email() {
       if (user?.email == undefined) {
         return
       }
+
       const currentTime = new Date().getTime()
       for (const dueDate of data) {
         const paymentDate = new Date(dueDate.scheduleDate).getTime()
-        const rminderTime = paymentDate - currentTime
+        if (dueDate.reminder && dueDate.auth0Id === user.sub) {
+          console.log(`i got called when i checked for ${dueDate.name}`)
+          const rminderTime = paymentDate - currentTime
 
-        if (rminderTime < reminderThreshold) {
-          const token = await getAccessTokenSilently()
-          await sendEmailReminder(user.email, dueDate.name, token)
+          if (rminderTime < reminderThreshold) {
+            const token = await getAccessTokenSilently()
+            await sendEmailReminder(user.email, dueDate.name, token)
+          }
         }
       }
     }
 
     if (data) {
+      if (user?.email == undefined) {
+        return
+      }
       for (const sub of data) {
-        if (sub.reminder == true) {
-          reminder(data, 2)
+        if (sub.reminder && sub.auth0Id === user.sub) {
+          reminder(data, 1)
         }
       }
     }
-  }, [data, getAccessTokenSilently, user?.email])
+  }, [getAccessTokenSilently, user?.email])
 
   if (loading) {
     return <p>Loading...</p>

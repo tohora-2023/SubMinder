@@ -3,6 +3,7 @@ export interface Events {
   created_at?: string
   id: number
   SubId?: number
+  auth0Id?:string
   reminder?: boolean | number
   isLastDate?: boolean | number
   name: string
