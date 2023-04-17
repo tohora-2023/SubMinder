@@ -21,7 +21,6 @@ function ManageSubscription() {
         console.error(error)
       }
     }
-
     fetchData()
   }, [dispatch, getAccessTokenSilently])
 
