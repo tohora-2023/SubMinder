@@ -1,6 +1,11 @@
 import connection from './connection'
 import { Subscription } from '../../models/subscription'
 
+// in modern coding environments, there's seldom need to abbreviate variable names (autocomplete is your friend here)
+// it's better to use descriptive names, even if they're longer
+// like addSubscription, getSubscriptionById
+// gets my mind off subway and onto subscriptions
+// also, this should be singular, we're only adding one subscription
 export function getAllSubs(db = connection) {
   return db('subscriptions').select()
 }

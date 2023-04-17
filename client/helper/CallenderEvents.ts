@@ -40,6 +40,10 @@ export default function manageCalendarEvents(
     } else if (frequency === 'yearly') {
       interval = 365
     }
+    // i like annotating the 86400000 with a comment
+    // you can also assign it to a variable
+    // const ONE_DAY_IN_MILLISECONDS = 86400000
+    // currentDate = new Date(currentDate.getTime() + interval * ONE_DAY_IN_MILLISECONDS)
     currentDate = new Date(currentDate.getTime() + interval * 86400000) // 86400000 = 1 day in milliseconds
 
     occurrenceCount++

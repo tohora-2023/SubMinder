@@ -19,6 +19,8 @@ router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
         },
         auth0Id
       )
+      // Ah, I see how this is being used now, but it's not clear from the function name that it should return null if the user exists
+      // addUserOrReturnNull() would indicate this behaviour
       if (newUser) {
         return res.json(newUser)
       } else {

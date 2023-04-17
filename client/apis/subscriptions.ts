@@ -7,6 +7,7 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
     .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       const response = res.body
+      // kill the consoles
       console.log(res.body)
       if (!response) return []
 
@@ -29,4 +30,5 @@ export function getSubscriptions(token: string): Promise<Subscription[]> {
       return subscriptions
     })
     .catch(() => 'There was an error getting subscriptions')
+  // handle the error in the action creator that calls this function
 }

@@ -1,5 +1,6 @@
 import { Chart } from 'react-google-charts'
 
+// types should begin with a capital letter
 interface pieData {
   food: number | null
   entertainment: number | null
@@ -25,6 +26,7 @@ export default function PieChart({
 
   const pieData = [
     ['Category', 'Total price'],
+    // these can be represented by: food ?? 1 (nullish coalescing operator)
     ['Food & Drink', food ? food : 1],
     ['Entertainment', entertainment ? entertainment : 1],
     ['Necessities', necessities ? necessities : 1],

@@ -16,6 +16,9 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
       const subscriptions = await getSubsWithDate()
       console.log(auth0Id)
       console.log(subscriptions)
+      // you may want to filter this at the database level
+      // imagine there are 1,000,000,000 subscriptions in the database and you only want to return 15
+      // something like getUserSubscriptions(auth0Id)
       const userSubscriptions = subscriptions.filter((subscription) => {
         return subscription.userAuthId == auth0Id
       })
@@ -23,6 +26,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
       res.json(userSubscriptions)
     }
   } catch (error) {
+    // this won't send anything back to the client, resulting in a timeout
     console.log(error)
   }
 })
@@ -35,6 +39,7 @@ router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
       res.json(subscriptions)
     }
   } catch (error) {
+    // timeout here too
     console.log(error)
   }
 })

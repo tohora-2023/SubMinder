@@ -14,9 +14,12 @@ export default function AddSubs() {
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
+  // unused dispatch
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const { data, loading, error } = useAppSelector((state) => state.subscriptions)
+  const { data, loading, error } = useAppSelector(
+    (state) => state.subscriptions
+  )
 
   function clearForm() {
     setName('')
@@ -27,6 +30,7 @@ export default function AddSubs() {
     setWebsite('')
     setPrice(0)
   }
+  // purge me, I am empty
   useEffect(() => {}, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -42,6 +46,9 @@ export default function AddSubs() {
       price,
     }
     const token = await getAccessTokenSilently()
+    // when I see commented out code, I think "should I care about this?"
+    // if the answer is no, delete it
+    // if the answer is yes, uncomment it or give a reason as to why it's commented
     // dispatch(fetchAddSubs(newSub, token))
     // const id = data[0].id
     const { id } = await addNewSub(newSub, token)
@@ -64,6 +71,7 @@ export default function AddSubs() {
       await addNewCalanderDay(subscriptionId, dayForCallender, token)
     }
 
+    // console.delete(this)
     console.log(paymentDates)
     clearForm()
   }

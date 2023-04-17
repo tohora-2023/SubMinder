@@ -53,5 +53,8 @@ export function fetchEvents(token: string): ThunkAction {
       .catch((error: Error) => {
         dispatch(setError(error.message))
       })
+    // based on my comments in apis/events
+    // this code will never run because the api function will "catch" the error, log it, and return undefined
+    // instead of throwing
   }
 }

@@ -1,6 +1,8 @@
 import Calendar from '@toast-ui/react-calendar'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
+// remove unused imports
+// you can always reimport them if you plan to use them in the future
 import PieChart from './PieChart'
 import '../../node_modules/tui-date-picker/dist/tui-date-picker'
 import '../../node_modules/tui-time-picker/dist/tui-time-picker'
