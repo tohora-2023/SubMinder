@@ -24,7 +24,6 @@ export default function Email() {
   }, [dispatch, getAccessTokenSilently])
 
   useEffect(() => {
-
     const reminder = async (dueDate: Events, reminderThreshold: number) => {
       if (user?.email == undefined) {
         return
@@ -39,31 +38,9 @@ export default function Email() {
 
         if (rminderTime < reminderThreshold) {
           const token = await getAccessTokenSilently()
-
-          // await UpdateEmail(dueDate.id, true, token)
-
-          // setTimeout(async () => {
-          //   if (!dueDate.isEmailSent) {
-          //     if (user?.email == undefined) {
-          //       return
-          //     }
-          //     await sendEmailReminder(
-          //       user.email,
-          //       dueDate.name,
-          //       dueDate.scheduleDate,
-          //       token
-          //     )
-
-          //     await UpdateEmail(dueDate.id, true, token)
-          //   }
-          // }, 10000)
-          console.log('here')
-
           if (dueDate.isEmailSent) {
             return
           }
-          console.log('dueDate', dueDate)
-
           await sendEmailReminder(
             user.email,
             dueDate.name,
@@ -71,9 +48,7 @@ export default function Email() {
             token
           )
           dueDate.isEmailSent = true
-          // dispatch(thunkUpdateEmail(dueDate.id, true, token))
           dispatch(fetchEmailStatus(dueDate.id, true, token))
-          // await UpdateEmail(dueDate.id, true, token)
         }
       }
     }
@@ -84,11 +59,6 @@ export default function Email() {
       }
       for (const sub of data) {
         if (sub.reminder && sub.auth0Id === user.sub) {
-          // if (sub.isEmailSent) {
-          //   console.log('sub.isEmailSent', sub.isEmailSent)
-          //   return
-          // }
-          console.log(sub)
           reminder(sub, 1)
         }
       }
