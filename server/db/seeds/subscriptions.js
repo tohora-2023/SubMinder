@@ -8,7 +8,6 @@ exports.seed = async function (knex) {
   await knex('subscriptions').insert([
     {
       id: 1,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Metlink',
       image: '',
@@ -20,7 +19,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 2,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Netflix',
       image: '',
@@ -32,7 +30,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 3,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Office Max',
       image: '',
@@ -44,7 +41,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 4,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'My Food Bag',
       image: '',
@@ -56,7 +52,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 5,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Countdown',
       image: '',
@@ -68,7 +63,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 6,
-      userId: 2,
       userAuthId: 'google-oauth2|115715665912062151987',
       name: 'Contact Energy',
       image: '',
@@ -80,7 +74,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 7,
-      userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Metlink',
       image: '',
@@ -92,7 +85,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 8,
-      userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Netflix',
       image: '',
@@ -104,7 +96,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 9,
-      userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Office Max',
       image: '',
@@ -116,7 +107,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 10,
-      userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'My Food Bag',
       image: '',
@@ -128,7 +118,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 11,
-      userId: 1,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Countdown',
       image: '',
@@ -140,7 +129,6 @@ exports.seed = async function (knex) {
     },
     {
       id: 12,
-      userId: 7,
       userAuthId: 'auth0|6438c27d2afb85e88121d126',
       name: 'Contact Energy',
       image: '',
