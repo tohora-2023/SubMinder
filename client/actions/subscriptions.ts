@@ -107,14 +107,14 @@ export function removeSub(subId: string, token: string): ThunkAction {
   }
 }
 
-export function editSub(
-  id: number,
-  update: SubscriptionUpdate,
-  token: string
-): ThunkAction {
-  return (dispatch: Dispatch) => {
-    return editSubscription(id, update, token).then(() => {
-      dispatch
-    })
-  }
-}
+// export function editSub(
+//   id: number,
+//   update: SubscriptionUpdate,
+//   token: string
+// ): ThunkAction {
+//   return (dispatch: Dispatch) => {
+//     return editSubscription(id, update, token).then(() => {
+//       dispatch
+//     })
+//   }
+// }

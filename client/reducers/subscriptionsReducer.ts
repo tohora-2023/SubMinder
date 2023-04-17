@@ -51,12 +51,12 @@ const subscriptionReducer = (
           ...state.data.filter((sub) => sub.id !== Number(action.payload)),
         ],
       }
-    case SET_SUB_EDIT:
-      return {
-        loading: false,
-        error: undefined,
-        data: [],
-      }
+    // case SET_SUB_EDIT:
+    //   return {
+    //     loading: false,
+    //     error: undefined,
+    //     data: [],
+    //   }
     default:
       return state
   }

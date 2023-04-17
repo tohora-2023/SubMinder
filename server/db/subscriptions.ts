@@ -1,4 +1,5 @@
 import connection from './connection'
+
 import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 
 export function getAllSubs(db = connection) {
@@ -26,8 +27,14 @@ export function getSubsList(
   user: string,
   db = connection
 ): Promise<Subscription[]> {
-  return db('subscriptions')
-    .where('subscriptions.userAuthId', '=', user)
+  return db('calendarEvents')
+    .where('calendarEvents.auth0Id', '=', user)
+    .leftJoin(
+      'subscriptions',
+      'calendarEvents.subscriptionId',
+      '=',
+      'subscriptions.id'
+    )
     .select(
       'subscriptions.id as id',
       'subscriptions.name as name',
@@ -36,7 +43,33 @@ export function getSubsList(
       'subscriptions.price as price',
       'subscriptions.website as website',
       'subscriptions.frequency as frequency',
-      'subscriptions.userAuthId as userAuthId'
+      'subscriptions.userAuthId as userAuthId',
+      db.raw('MAX(calendarEvents.scheduleDate) as scheduleDate'),
+      db.raw('MAX(calendarEvents.isLastDate) as isLastDate')
+    )
+    .groupBy(
+      'subscriptions.id',
+      'subscriptions.name',
+      'subscriptions.category',
+      'subscriptions.endDate',
+      'subscriptions.price',
+      'subscriptions.website',
+      'subscriptions.frequency',
+      'subscriptions.userAuthId'
+    )
+    .then((rows) =>
+      rows.map((row) => ({
+        id: row.id,
+        name: row.name,
+        category: row.category,
+        endDate: row.endDate,
+        price: row.price,
+        website: row.website,
+        frequency: row.frequency,
+        userAuthId: row.userAuthId,
+        isLastDate: row.LastDate,
+        scheduleDate: row.scheduleDate,
+      }))
     )
 }
 
