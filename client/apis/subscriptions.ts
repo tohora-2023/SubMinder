@@ -8,10 +8,6 @@ export async function getSubscriptions(token: string): Promise<Subscription[]> {
       .set('Authorization', `Bearer ${token}`)
 
     const subscriptions = response.body.map((subscription: Subscription) => {
-      // Format fields for display
-      subscription.name = subscription.name?.toUpperCase() ?? ''
-      subscription.frequency = subscription.frequency?.toLowerCase() ?? ''
-
       // Format the date to 1 May
       const date = new Date(subscription.scheduleDate)
       subscription.scheduleDate = date.toLocaleDateString('en-GB', {

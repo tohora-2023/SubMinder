@@ -19,7 +19,7 @@ function SubItem(props: Props) {
             rel="noreferrer"
             className="font-bold text-subminder-purple hover:text-accent-yellow"
           >
-            {props.subscription?.name}
+            {props.subscription?.name.toLocaleUpperCase()}
           </a>
           <h2 role="text">${props.subscription.price.toFixed(2)}</h2>
         </div>
@@ -36,7 +36,7 @@ function SubItem(props: Props) {
         )}
       </h1>
       <h2 role="text">
-        {props.subscription?.category} - {props.subscription?.frequency}
+        {props.subscription?.category.toLowerCase()} - {props.subscription?.frequency.toLowerCase()}
       </h2>
     </div>
   )
