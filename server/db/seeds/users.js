@@ -11,7 +11,7 @@ exports.seed = async function (knex) {
       firstName: 'Joe',
       lastName: 'SubMinder',
       userName: 'joe',
-      authId: '1',
+      authId: 'auth0|6438c27d2afb85e88121d126',
       image: '',
     },
     {

@@ -6,7 +6,7 @@ interface Props {
 
 function SubItem(props: Props) {
   return (
-    <div className="border border-2 border-black p-6">
+    <div className="border-2 border-black p-6">
       <h1>
         <div className="p4 flex justify-between">
           <a
@@ -17,7 +17,7 @@ function SubItem(props: Props) {
           >
             {props.subscription?.name}
           </a>
-          <h2>${props.subscription?.price}</h2>
+          <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
       </h1>
 

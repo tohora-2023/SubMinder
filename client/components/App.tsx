@@ -6,8 +6,8 @@ import addLogInInfo from '../apis/login'
 import Home from './Home'
 import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
-import AddSubs from './AddSubs'
 import PaymentHistory from './PaymentHistory'
+import Footer from './Footer'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -63,21 +63,19 @@ function App() {
                 path="/managesubscriptions"
                 element={<ManageSubscription />}
               />
-              {/* <Route
-                path="/addsubscription"
-                element={<AddSubscription />} */}
-
+              <Route path="/addsubscription" element={<AddSubs />} />
               {/* <Route
                 path="/profile"
                 // element={<Profile />}
               /> */}
             </Routes>
           </div>
+          <Footer />
         </>
       ) : (
         <LogIn />
       )}
     </>
-  );
+  )
 }
 export default App

@@ -120,7 +120,6 @@ export default function AddSubs() {
         />
 
         <br />
-
         <label htmlFor="endDate">End Date </label>
         <input
           type="date"
