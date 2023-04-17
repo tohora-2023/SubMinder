@@ -1,6 +1,6 @@
 import { fetchSubscriptions } from '../actions/subscriptions'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import SubItem from './SubItem'
@@ -11,21 +11,18 @@ function ManageSubscription() {
   const { loading, error, data } = useAppSelector(
     (state) => state.subscriptions
   )
-  const [token, setToken] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getToken = await getAccessTokenSilently()
-        setToken(getToken)
+        const token = await getAccessTokenSilently()
         dispatch(fetchSubscriptions(token))
       } catch (error) {
         console.error(error)
       }
     }
-
     fetchData()
-  }, [dispatch, getAccessTokenSilently, token])
+  }, [dispatch, getAccessTokenSilently])
 
   if (loading) {
     return <p>Loading...</p>
@@ -51,7 +48,7 @@ function ManageSubscription() {
             data.map((sub) => {
               return (
                 <li className="py-2" key={sub.id}>
-                  <SubItem subscription={sub} authKey={token} />
+                  <SubItem subscription={sub} />
                 </li>
               )
             })

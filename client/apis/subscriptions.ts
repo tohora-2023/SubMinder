@@ -37,7 +37,7 @@ export async function deleteSubscription(
   token: string
 ): Promise<number> {
   const response = await request
-    .post('/v1/subscriptions/delete/' + subId)
+    .delete('/v1/subscriptions/delete/' + subId)
     .set('Authorization', `Bearer ${token}`)
   console.log(`Our token:`, token)
   return response.statusCode

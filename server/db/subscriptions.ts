@@ -40,6 +40,6 @@ export function getSubsList(
     )
 }
 
-export function deleteSub(id: string, db = connection) {
+export function deleteSub(id: number, db = connection) {
   return db('subscriptions').where('subscriptions.id', id).delete()
 }

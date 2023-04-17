@@ -5,7 +5,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 interface Props {
   id: number
-  authKey: string
 }
 
 function SubItemMenu(props: Props) {
@@ -24,7 +23,7 @@ function SubItemMenu(props: Props) {
     await getAccessTokenSilently().then((token) => {
       event.preventDefault()
       const id = (event.target as HTMLButtonElement).id
-      dispatch(removeSub(id, props.authKey))
+      dispatch(removeSub(id, token))
     })
   }
 

@@ -48,7 +48,7 @@ router.delete(
       const auth0Id = req.auth?.sub
       console.log(auth0Id)
       if (auth0Id) {
-        await deleteSub(req.params.id)
+        await deleteSub(Number(req.params.id))
         res.send('Subscription deleted')
       }
     } catch (error) {
