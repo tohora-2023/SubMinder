@@ -50,9 +50,14 @@ export async function editSubscription(
   update: SubscriptionUpdate,
   token: string
 ) {
-  const response = await request
-    .patch(`v1/subscriptions/update/${id}`)
-    .set('Authorization', `Bearer ${token}`)
-    .send(update)
-  return response.statusCode
+  try {
+    const response = await request
+      .patch(`v1/subscriptions/update/${id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send(update)
+    return response.statusCode
+  } catch (error) {
+    console.log(error)
+    return error.message
+  }
 }
