@@ -5,7 +5,11 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 import reducers from './reducers'
 import type { Action } from './actions'
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+export function initaliseStore() {
+  return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+}
+
+const store = initaliseStore()
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<RootState, never, Action>

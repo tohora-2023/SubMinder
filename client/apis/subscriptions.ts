@@ -49,7 +49,7 @@ export async function editSubscription(
   id: number,
   update: SubscriptionUpdate,
   token: string
-) {
+): Promise<number> {
   try {
     const response = await request
       .patch(`v1/subscriptions/update/${id}`)
