@@ -1,5 +1,5 @@
 import {REQUEST_USER, RECEIVE_USER, FAILURE_USER} from '../actions/profiles'
-import {UserInfoaction} from '../actions/profiles'
+import {UserInfoAction} from '../actions/profiles'
 import * as Models from '../../models/userProfile'
 import {User} from '../../models/userProfile'
 
@@ -17,19 +17,19 @@ type UserState = {
 
 const userProfileReducer = (
   state = initialState,
-  action: UserInfoaction
+  action: UserInfoAction
 ): UserState => {
   switch (action.type){
     case RECEIVE_USER:
       return{
-        error: null
+        error: null,
         data: action.payload,
         isLoading: false
       }
       case REQUEST_USER:
         return{
-          error: null
-          data: null
+          error: null,
+          data: null,
           isLoading: true
           }
       case FAILURE_USER:
