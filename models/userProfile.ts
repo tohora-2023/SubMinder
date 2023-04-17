@@ -2,6 +2,6 @@ export interface User {
   id?: number
   firstName: string
   lastName: string
-  username: string
+  userName: string
   image: string
 }
