@@ -4,6 +4,7 @@ import { fetchEvents } from '../actions/events'
 import { Events } from '../../models/events'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { sendEmailReminder } from '../apis/reminder'
+import { UpdateEmail } from '../apis/events'
 
 export default function Email() {
   const dispatch = useAppDispatch()
@@ -29,8 +30,9 @@ export default function Email() {
       }
 
       const currentTime = new Date().getTime()
-      
+
       const paymentDate = new Date(dueDate.scheduleDate).getTime()
+
       if (dueDate.reminder && dueDate.auth0Id === user.sub) {
         // console.log(`i got called when i checked for ${dueDate.name}`)
         // console.log(`i got called when i checked for ${dueDate.scheduleDate}`)
@@ -38,12 +40,35 @@ export default function Email() {
 
         if (rminderTime < reminderThreshold) {
           const token = await getAccessTokenSilently()
-          await sendEmailReminder(
-            user.email,
-            dueDate.name,
-            dueDate.scheduleDate,
-            token
-          )
+
+          await UpdateEmail(dueDate.id, true, token)
+
+          setTimeout(async () => {
+            if (!dueDate.isEmailSent) {
+              if (user?.email == undefined) {
+                return
+              }
+              await sendEmailReminder(
+                user.email,
+                dueDate.name,
+                dueDate.scheduleDate,
+                token
+              )
+
+              await UpdateEmail(dueDate.id, true, token)
+            }
+          }, 50000)
+          // if (dueDate.isEmailSent) {
+          //   return
+          // }
+          // await sendEmailReminder(
+          //   user.email,
+          //   dueDate.name,
+          //   dueDate.scheduleDate,
+          //   token
+          // )
+          // dueDate.isEmailSent = true
+          // await UpdateEmail(dueDate.id, true, token)
         }
       }
     }
@@ -54,6 +79,10 @@ export default function Email() {
       }
       for (const sub of data) {
         if (sub.reminder && sub.auth0Id === user.sub) {
+          // if (sub.isEmailSent) {
+          //   return
+          // }
+
           // console.log(sub)
           reminder(sub, 1)
         }

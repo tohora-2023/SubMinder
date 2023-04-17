@@ -3,6 +3,35 @@ import request from 'superagent'
 interface Prop {
   scheduleDate?: string
   isLastDate?: boolean
+  isEmailSent?: boolean
+}
+
+export async function UpdateEmail(
+  id: number,
+  isEmailSent: boolean,
+  token: string
+) {
+  try {
+    await request
+      .post(`/v1/events/update/${id}`)
+      .send({ id, isEmailSent })
+      .set('Authorization', `Bearer ${token}`)
+
+    return request
+      .get(`/v1/events/update/${id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .then((res) => {
+        const sub = res.body
+        console.log(sub)
+        return sub
+      })
+      .catch((err) => {
+        console.error(err)
+        
+      })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export async function addNewCalanderDay(

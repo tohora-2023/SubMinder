@@ -16,15 +16,31 @@ export function getEvents(db = connection): Promise<Subscription[]> {
 interface Prop {
   scheduleDate?: string
   isLastDate?: boolean
+  isEmailSent?: boolean
 }
 
 export async function addEvent(
   subscriptionId: number,
-  { scheduleDate, isLastDate }: Prop,
+  { scheduleDate, isLastDate, isEmailSent }: Prop,
   auth0Id: string,
   db = connection
 ) {
   return db('calendarEvents')
-    .insert({ subscriptionId, scheduleDate, isLastDate, auth0Id })
+    .insert({ subscriptionId, scheduleDate, isLastDate, auth0Id, isEmailSent })
     .returning('*')
+}
+
+export function updateEmailStatus(
+  id: number,
+  isEmailSent: boolean,
+  db = connection
+) {
+  return db('calendarEvents')
+    .where('id', id)
+    .update({ isEmailSent })
+    .select('*')
+}
+
+export function getEmailStatusById(id: number, db = connection) {
+  return db('calendarEvents').where('id', id).select('*')
 }

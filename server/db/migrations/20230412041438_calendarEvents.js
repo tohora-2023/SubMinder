@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.timestamps(true, true)
     table.boolean('isLastDate')
     table.string('auth0Id')
+    table.boolean('isEmailSent')
   })
 }
 

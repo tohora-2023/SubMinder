@@ -4,6 +4,7 @@ export interface Events {
   id: number
   SubId?: number
   auth0Id?:string
+  isEmailSent?:boolean
   reminder?: boolean | number
   isLastDate?: boolean | number
   name: string

@@ -5,6 +5,7 @@ export interface Subscription {
   name: string
   image: string
   auth0Id?: string
+  isEmailSent?: boolean
   reminder?: boolean
   frequency: string
   endDate: string

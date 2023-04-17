@@ -42,6 +42,7 @@ export default function AddSubs() {
       website,
       price,
       reminder,
+    
     }
     const token = await getAccessTokenSilently()
     // dispatch(fetchAddSubs(newSub, token))
@@ -52,13 +53,16 @@ export default function AddSubs() {
     interface DayProp {
       scheduleDate?: string
       isLastDate?: boolean
+      isEmailSent?:boolean
+      
+
     }
 
     for (const day of paymentDates) {
       const scheduleDate = day.date
       const isLastDate = day === paymentDates[paymentDates.length - 1]
       const subscriptionId = id
-      const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      const dayForCallender: DayProp = { scheduleDate, isLastDate: false , isEmailSent: false}
       if (isLastDate) {
         dayForCallender.isLastDate = true
       }
