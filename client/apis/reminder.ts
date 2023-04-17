@@ -1,12 +1,13 @@
 import request from 'superagent'
 
-export async function sendEmailReminder(email: string| undefined, token: string) {
+export async function sendEmailReminder(email: string, sub:string, token: string) {
   try {
     const response = await request
-      .get('/v1/reminder')
+      .post('/v1/reminder')
+      .send({ email, sub })
       .set('Authorization', `Bearer ${token}`)
     return response.body
   } catch (error) {
-    console.error(error)
+    console.error('Error sending reminder email:', error)
   }
 }

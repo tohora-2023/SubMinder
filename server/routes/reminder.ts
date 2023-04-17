@@ -5,12 +5,12 @@ import sendReminderEmail from '../lib'
 
 const router = express.Router()
 
-router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
+router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
   const auth0Id = req.auth?.sub
   if (auth0Id) {
-    const email = req.body.email
-    sendReminderEmail(email)
-    res.json()
+    const { email, sub } = req.body
+    sendReminderEmail(email, sub)
+    res.sendStatus(200)
   }
 })
 

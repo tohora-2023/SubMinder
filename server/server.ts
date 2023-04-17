@@ -13,9 +13,10 @@ server.use(express.json())
 server.use(express.static(join(__dirname, 'public')))
 
 server.use('/v1/subscriptions', subscriptionRoutes)
+server.use('/v1/reminder',reminderRouter)
 server.use('/v1/events', eventRoutes)
 server.use('/v1/addsub', addSubsRouter)
-server.use('/v1/reminder',reminderRouter)
+
 server.use('/', logIn)
 
 
