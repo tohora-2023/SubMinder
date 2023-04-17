@@ -8,6 +8,7 @@ import SubChart from './SubChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 import UpcomingPayments from './UpcomingPayments'
+import { Link } from 'react-router-dom'
 
 export interface HomeProps {
   isAuthComplete: boolean
@@ -26,7 +27,7 @@ interface CalendarData {
 }
 
 export default function Home({ isAuthComplete }: HomeProps) {
-  const { getAccessTokenSilently } = useAuth0()
+  const { getAccessTokenSilently, user } = useAuth0()
   const dispatch = useAppDispatch()
   const { loading, error, data } = useAppSelector((state) => state.events)
 
@@ -165,24 +166,44 @@ export default function Home({ isAuthComplete }: HomeProps) {
     return <p>There was an error</p>
   }
 
+  let prevDate = ''
+
   return (
     <>
-      <h2 className="mb-10 text-center text-5xl text-subminder-purple">{`${months[currentMonth]} ${currentYear}`}</h2>
+      <div
+        className="mb-20 flex justify-around bg-gradient-to-b from-purple-900 to-subminder-indigo"
+        style={{ width: '100%' }}
+      >
+        <div style={{ width: '15%' }}></div>
+        <div>
+          <p className="mb-3 text-center text-subminder-nude opacity-80">
+            Hi there {user?.nickname}, here are your subscription payments for
+          </p>
+          <h2 className="mb-10 text-center text-5xl font-bold text-subminder-nude">
+            {months[currentMonth]} {currentYear}
+          </h2>
+        </div>
+        <div className="mb-10 self-end">
+          <select
+            className=" mx-3 appearance-none rounded-xl border border-accent-yellow bg-transparent px-4 py-2 text-center text-accent-yellow focus:outline-none"
+            onChange={handleClick}
+          >
+            <option value="month">Month</option>
+            <option value="week">Week</option>
+            <option value="day">Day</option>
+          </select>
+          <Link to="/addsubscription">
+            <button className="ml-auto rounded-xl border border-accent-yellow px-4 py-2 font-medium text-accent-yellow">
+              Add a new subscription
+            </button>
+          </Link>
+        </div>
+      </div>
       <div
         className="ml-auto mr-auto flex justify-center"
         style={{ width: '80%' }}
       >
         <div className="ml-auto mr-auto w-1/2">
-          <div>
-            <select
-              className="appearance-none rounded border border-accent-yellow bg-white px-4 py-2 pr-8 text-center leading-tight focus:outline-none"
-              onChange={handleClick}
-            >
-              <option value="month">Month</option>
-              <option value="week">Week</option>
-              <option value="day">Day</option>
-            </select>
-          </div>
           <div className="p-100px">
             {isAuthComplete ? (
               <Calendar
@@ -198,12 +219,34 @@ export default function Home({ isAuthComplete }: HomeProps) {
           </div>
         </div>
         <div>
-          <h3>Upcoming subscriptions this month</h3>
+          <h3 className="text-center text-2xl font-bold text-subminder-indigo">
+            Upcoming subscriptions this month
+          </h3>
           {thisMonths.map((item) => {
+            const currentDate = item.scheduleDate
+            const isDifferent = currentDate !== prevDate
+            prevDate = currentDate
+
+            const date = new Date(item.scheduleDate)
+            const structuredDate = date.toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })
+
             return (
-              <div key={item.id} className="mb-3">
-                <UpcomingPayments data={item} />
-              </div>
+              <>
+                {isDifferent ? (
+                  <h2 className="mt-6 text-center font-bold">
+                    {structuredDate}
+                  </h2>
+                ) : (
+                  ''
+                )}
+                <div key={item.id} className="mb-3">
+                  <UpcomingPayments data={item} />
+                </div>
+              </>
             )
           })}
         </div>
