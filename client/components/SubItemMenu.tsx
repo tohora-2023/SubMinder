@@ -8,7 +8,7 @@ interface Props {
 }
 
 function SubItemMenu(props: Props) {
-  console.log(`propsid`, props.id)
+  console.log(`props id`, props.id)
   const { getAccessTokenSilently } = useAuth0()
   const dispatch = useAppDispatch()
   const [isOpen, setIsOpen] = useState(false)
@@ -20,11 +20,11 @@ function SubItemMenu(props: Props) {
   async function handleDeleteClick(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
-    const getToken = await getAccessTokenSilently()
-    event.preventDefault()
-    const id = event.currentTarget.id
-    console.log(`delete id`, id)
-    dispatch(removeSub(id, getToken))
+    await getAccessTokenSilently().then((token) => {
+      event.preventDefault()
+      const id = (event.target as HTMLButtonElement).id
+      dispatch(removeSub(id, token))
+    })
   }
 
   return (
@@ -42,7 +42,7 @@ function SubItemMenu(props: Props) {
             id={String(props.id) + '-list'}
             className="hover:bg-blue-gray-50 focus:bg-blue-gray-50 focus:text-blue-gray-900 active:bg-blue-gray-50 active:text-blue-gray-900 block w-full cursor-pointer select-none rounded-md px-3 py-2 text-end leading-tight transition-all hover:bg-opacity-80 hover:font-bold hover:text-subminder-purple focus:bg-opacity-80 active:bg-opacity-80"
           >
-            <button id={props.id} onClick={handleDeleteClick}>
+            <button id={String(props.id)} onClick={handleDeleteClick}>
               delete
             </button>
           </li>
