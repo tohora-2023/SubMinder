@@ -1,6 +1,5 @@
 export interface Subscription {
   id: number
-  userId: number
   userAuthId: string
   name: string
   image: string

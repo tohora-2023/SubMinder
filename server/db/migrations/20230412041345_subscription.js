@@ -5,7 +5,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('subscriptions', (table) => {
     table.increments('id')
-    table.integer('userId')
     table.string('userAuthId')
     table.string('name')
     table.string('image')
