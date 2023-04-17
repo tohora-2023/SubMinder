@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 
 import Login from './components/Login'
-import Home from './components/Home'
 import Profile from './components/Profile'
 import Logout from './components/Logout'
 import Upcoming from './components/Upcoming'
@@ -30,19 +29,10 @@ const TabNavigation = () => {
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Upcoming"
         component={Upcoming}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="th-list" size={size} color={color} />
+            <FontAwesome name="home" size={size} color={color} />
           ),
         }}
       />
