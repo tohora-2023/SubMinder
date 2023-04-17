@@ -11,15 +11,15 @@ import PDF from './PDF'
 
 export interface TableData {}
 
-export default function PaymentHistory({ isAuthComplete }: HomeProps) {
+export default function PaymentHistory() {
   const [spread, setSpread] = useState('All Time')
   const [start, setStart] = useState(new Date())
   const [end, setEnd] = useState(new Date())
   const [tableData, setTableData] = useState([] as TableData[])
+  const [authComplete, setAuthComplete] = useState(false)
 
   //--------------------------------Auth0 setup & data fetching------------------------
   const { getAccessTokenSilently, user } = useAuth0()
-  console.log(user)
   const dispatch = useAppDispatch()
   const { loading, error, data } = useAppSelector((state) => state.events)
 
@@ -32,14 +32,14 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
         console.error(error)
       }
     }
-
     fetchData()
+    setAuthComplete(true)
   }, [dispatch, getAccessTokenSilently])
   //----------------------------------defining data-------------------------------------
   const [initialEvents, setInitialEvents] = useState([] as TableData[])
 
   useEffect(() => {
-    if (isAuthComplete && data) {
+    if (authComplete && data) {
       let prevDate = ''
       const filteredData = data.filter((d) => {
         const date = new Date(d.scheduleDate)
@@ -74,7 +74,7 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
         })
       )
     }
-  }, [isAuthComplete, data, start, end, spread])
+  }, [authComplete, data, start, end, spread])
 
   //---------------------------------Defining table options---------------------------------
   const options = {
@@ -170,175 +170,181 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
   }
   return (
     <div>
-      <PDFDownloadLink
-        document={
-          <PDF
-            start={start}
-            end={end}
-            initialEvents={tableData}
-            user={user?.nickname}
-          />
-        }
-        fileName="subminder-payments.pdf"
-      >
-        {({ loading, error }) =>
-          loading
-            ? 'Loading document...'
-            : error
-            ? 'There was an error'
-            : 'Download PDF'
-        }
-      </PDFDownloadLink>
-
-      <h2 className="mb-10 text-center text-5xl text-subminder-purple">
-        Payment History
-      </h2>
-      {Object.keys(initialEvents).length !== 0 ? (
-        <div></div>
-      ) : (
-        <>
-          <p className="text-center text-red-600">
-            Sorry, you don`t have any payments for these dates
-          </p>
-          <p className="text-center">Please choose a different date range</p>
-        </>
-      )}
-      {isAuthComplete ? (
+      {authComplete ? (
         <div>
+          <PDFDownloadLink
+            document={
+              <PDF
+                start={start}
+                end={end}
+                initialEvents={tableData}
+                user={user?.nickname}
+              />
+            }
+            fileName="subminder-payments.pdf"
+          >
+            {({ loading, error }) =>
+              loading
+                ? 'Loading document...'
+                : error
+                ? 'There was an error'
+                : 'Download PDF'
+            }
+          </PDFDownloadLink>
+
+          <h2 className="mb-10 text-center text-5xl text-subminder-purple">
+            Payment History
+          </h2>
+          {Object.keys(initialEvents).length !== 0 && authComplete ? (
+            <div></div>
+          ) : (
+            <>
+              <p className="text-center text-red-600">
+                Sorry, you don`t have any payments for these dates
+              </p>
+              <p className="text-center">
+                Please choose a different date range
+              </p>
+            </>
+          )}
           <div>
-            {spread === 'specific' || spread === 'start-end' ? (
-              <div>
-                <div className="m-10 flex justify-center">
-                  <div className="ml-5 rounded-xl border-2 border-subminder-purple px-5 py-3 text-subminder-purple">
-                    <label htmlFor="end">From: </label>
-                    <input
-                      type="date"
-                      id="end"
-                      className="text-subminder-indigo"
-                      onChange={handleEnd}
-                    />
-                  </div>
-                  <div className="ml-5 rounded-xl border-2 border-subminder-purple px-5 py-3 text-subminder-purple">
-                    <label htmlFor="start">To: </label>
-                    <input
-                      type="date"
-                      id="start"
-                      className="text-subminder-indigo"
-                      onChange={handleStart}
-                    />
-                  </div>
-                </div>
-                <label htmlFor="general-date">Choose a date spread</label>
-                <input
-                  type="radio"
-                  name="specific-date"
-                  id="general-date"
-                  value="All Time"
-                  onClick={handleClick}
-                />
-              </div>
-            ) : (
-              <>
-                <div className="m-10 flex justify-center">
-                  <button
-                    onClick={handleClick}
-                    value="All Time"
-                    className={
-                      spread === 'All Time'
-                        ? 'mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
-                        : 'mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
-                    }
-                  >
-                    All Time
-                  </button>
-                  <button
-                    onClick={handleClick}
-                    value="Year"
-                    className={
-                      spread === 'Year'
-                        ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
-                        : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
-                    }
-                  >
-                    Year
-                  </button>
-                  <button
-                    onClick={handleClick}
-                    value="6 months"
-                    className={
-                      spread === '6 months'
-                        ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
-                        : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
-                    }
-                  >
-                    6 months
-                  </button>
-                  <button
-                    onClick={handleClick}
-                    value="3 months"
-                    className={
-                      spread === '3 months'
-                        ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
-                        : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
-                    }
-                  >
-                    3 months
-                  </button>
-                  <button
-                    onClick={handleClick}
-                    value="1 month"
-                    className={
-                      spread === '1 month'
-                        ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
-                        : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
-                    }
-                  >
-                    1 month
-                  </button>
-                </div>
+            <div>
+              {spread === 'specific' || spread === 'start-end' ? (
                 <div>
-                  <label htmlFor="specific-date">Choose a specific date</label>
+                  <div className="m-10 flex justify-center">
+                    <div className="ml-5 rounded-xl border-2 border-subminder-purple px-5 py-3 text-subminder-purple">
+                      <label htmlFor="end">From: </label>
+                      <input
+                        type="date"
+                        id="end"
+                        className="text-subminder-indigo"
+                        onChange={handleEnd}
+                      />
+                    </div>
+                    <div className="ml-5 rounded-xl border-2 border-subminder-purple px-5 py-3 text-subminder-purple">
+                      <label htmlFor="start">To: </label>
+                      <input
+                        type="date"
+                        id="start"
+                        className="text-subminder-indigo"
+                        onChange={handleStart}
+                      />
+                    </div>
+                  </div>
+                  <label htmlFor="general-date">Choose a date spread</label>
                   <input
                     type="radio"
                     name="specific-date"
-                    id="specific-date"
+                    id="general-date"
+                    value="All Time"
                     onClick={handleClick}
-                    value="specific"
                   />
                 </div>
-              </>
-            )}
-          </div>
-          <div className="flex">
-            <Chart
-              chartType="Table"
-              options={options}
-              data={[
-                ['Date', 'Name', 'Category', 'Price', 'Last payment?'],
-                ...initialEvents,
-              ]}
-              height="100%"
-            />
-
-            <div>
-              <PieChart
-                food={categoryTotals[`Food & Drink`]}
-                entertainment={categoryTotals['Entertainment']}
-                necessities={categoryTotals['Necessities']}
-                bills={categoryTotals['Bills']}
-                productivity={categoryTotals['Productivity']}
-                travel={categoryTotals['Travel']}
+              ) : (
+                <>
+                  <div className="m-10 flex justify-center">
+                    <button
+                      onClick={handleClick}
+                      value="All Time"
+                      className={
+                        spread === 'All Time'
+                          ? 'mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
+                          : 'mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
+                      }
+                    >
+                      All Time
+                    </button>
+                    <button
+                      onClick={handleClick}
+                      value="Year"
+                      className={
+                        spread === 'Year'
+                          ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
+                          : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
+                      }
+                    >
+                      Year
+                    </button>
+                    <button
+                      onClick={handleClick}
+                      value="6 months"
+                      className={
+                        spread === '6 months'
+                          ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
+                          : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
+                      }
+                    >
+                      6 months
+                    </button>
+                    <button
+                      onClick={handleClick}
+                      value="3 months"
+                      className={
+                        spread === '3 months'
+                          ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
+                          : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
+                      }
+                    >
+                      3 months
+                    </button>
+                    <button
+                      onClick={handleClick}
+                      value="1 month"
+                      className={
+                        spread === '1 month'
+                          ? ' mr-5 rounded-xl border-2 border-subminder-purple bg-subminder-purple px-5 py-3 text-white'
+                          : ' mr-5 rounded-xl border-2 border-subminder-purple bg-white px-5 py-3 text-subminder-purple'
+                      }
+                    >
+                      1 month
+                    </button>
+                  </div>
+                  <div>
+                    <label htmlFor="specific-date">
+                      Choose a specific date
+                    </label>
+                    <input
+                      type="radio"
+                      name="specific-date"
+                      id="specific-date"
+                      onClick={handleClick}
+                      value="specific"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="flex">
+              <Chart
+                chartType="Table"
+                options={options}
+                data={[
+                  ['Date', 'Name', 'Category', 'Price', 'Last payment?'],
+                  ...initialEvents,
+                ]}
+                height="100%"
               />
-              <div className="ml-10">
-                <SubChart
-                  total={totalPrice | 0}
-                  food={categoryTotals[`Food & Drink`] | 0}
-                  entertainment={categoryTotals['Entertainment'] | 0}
-                  necessities={categoryTotals['Necessities'] | 0}
-                  bills={categoryTotals['Bills'] | 0}
-                  productivity={categoryTotals['Productivity'] | 0}
-                  travel={categoryTotals['Travel'] | 0}
+
+              <div>
+                <PieChart
+                  food={categoryTotals[`Food & Drink`]}
+                  entertainment={categoryTotals['Entertainment']}
+                  necessities={categoryTotals['Necessities']}
+                  bills={categoryTotals['Bills']}
+                  productivity={categoryTotals['Productivity']}
+                  travel={categoryTotals['Travel']}
                 />
+                <div className="ml-10">
+                  <SubChart
+                    total={totalPrice | 0}
+                    food={categoryTotals[`Food & Drink`] | 0}
+                    entertainment={categoryTotals['Entertainment'] | 0}
+                    necessities={categoryTotals['Necessities'] | 0}
+                    bills={categoryTotals['Bills'] | 0}
+                    productivity={categoryTotals['Productivity'] | 0}
+                    travel={categoryTotals['Travel'] | 0}
+                  />
+                </div>
               </div>
             </div>
           </div>
