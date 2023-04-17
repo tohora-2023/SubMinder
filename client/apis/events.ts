@@ -22,7 +22,6 @@ export async function UpdateEmail(
       .set('Authorization', `Bearer ${token}`)
       .then((res) => {
         const sub = res.body
-        console.log(sub)
         return sub
       })
       .catch((err) => {
