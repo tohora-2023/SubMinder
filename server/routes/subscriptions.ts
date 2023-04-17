@@ -1,5 +1,5 @@
 import express from 'express'
-import { getSubsWithDate } from '../db/subscriptions'
+import { getSubsList, getSubsWithDate } from '../db/subscriptions'
 import checkJwt, { JwtRequest } from '../auth0'
 import { Response } from 'express'
 
@@ -21,6 +21,18 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
       })
       console.log(userSubscriptions)
       res.json(userSubscriptions)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
+  try {
+    const auth0Id = req.auth?.sub
+    if (auth0Id) {
+      const subscriptions = await getSubsList(auth0Id)
+      res.json(subscriptions)
     }
   } catch (error) {
     console.log(error)
