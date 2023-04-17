@@ -53,7 +53,7 @@ function ManageSubscription() {
               )
             })
           ) : (
-            <p>You have no subscriptions, please add one</p>
+            <p role="text">You have no subscriptions, please add one</p>
           )}
         </ul>
       </div>
