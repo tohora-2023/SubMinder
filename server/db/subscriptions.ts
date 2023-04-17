@@ -40,10 +40,6 @@ export function getSubsList(
     )
 }
 
-export function deleteSub(id: number, db = connection) {
-  return db('subscriptions').where('subscriptions.id', id).delete()
-}
-
 export function deleteSubsAndCalendarEvents(subId: number, db = connection) {
   return db('calendarEvents')
     .where('subscriptionId', subId)
