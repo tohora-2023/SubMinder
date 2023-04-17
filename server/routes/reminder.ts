@@ -8,8 +8,8 @@ const router = express.Router()
 router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
   const auth0Id = req.auth?.sub
   if (auth0Id) {
-    const { email, sub } = req.body
-    sendReminderEmail(email, sub)
+    const { email, sub, date } = req.body
+    sendReminderEmail(email, sub, date)
     res.sendStatus(200)
   }
 })

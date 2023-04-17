@@ -4,7 +4,7 @@ require('dotenv').config()
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-export default function sendReminderEmail(to: string, sub: string) {
+export default function sendReminderEmail(to: string, sub: string, date: string) {
   if (!to) {
     console.error('Recipient email is required')
     return
@@ -20,7 +20,7 @@ export default function sendReminderEmail(to: string, sub: string) {
   sgMail
     .send(msg)
     .then(() => {
-      console.log(`'Email sent' ${sub}`)
+      console.log(`'Email sent' ${sub}, this is for ${date}`)
     })
     .catch((error: MailService) => {
       console.error(error)

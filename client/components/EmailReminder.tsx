@@ -23,22 +23,27 @@ export default function Email() {
   }, [dispatch, getAccessTokenSilently])
 
   useEffect(() => {
-    const reminder = async (data: Events[], reminderThreshold: number) => {
+    const reminder = async (dueDate: Events, reminderThreshold: number) => {
       if (user?.email == undefined) {
         return
       }
 
       const currentTime = new Date().getTime()
-      for (const dueDate of data) {
-        const paymentDate = new Date(dueDate.scheduleDate).getTime()
-        if (dueDate.reminder && dueDate.auth0Id === user.sub) {
-          console.log(`i got called when i checked for ${dueDate.name}`)
-          const rminderTime = paymentDate - currentTime
+      
+      const paymentDate = new Date(dueDate.scheduleDate).getTime()
+      if (dueDate.reminder && dueDate.auth0Id === user.sub) {
+        // console.log(`i got called when i checked for ${dueDate.name}`)
+        // console.log(`i got called when i checked for ${dueDate.scheduleDate}`)
+        const rminderTime = paymentDate - currentTime
 
-          if (rminderTime < reminderThreshold) {
-            const token = await getAccessTokenSilently()
-            await sendEmailReminder(user.email, dueDate.name, token)
-          }
+        if (rminderTime < reminderThreshold) {
+          const token = await getAccessTokenSilently()
+          await sendEmailReminder(
+            user.email,
+            dueDate.name,
+            dueDate.scheduleDate,
+            token
+          )
         }
       }
     }
@@ -49,7 +54,8 @@ export default function Email() {
       }
       for (const sub of data) {
         if (sub.reminder && sub.auth0Id === user.sub) {
-          reminder(data, 1)
+          // console.log(sub)
+          reminder(sub, 1)
         }
       }
     }
