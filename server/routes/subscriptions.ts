@@ -32,6 +32,7 @@ router.get('/list', checkJwt, async (req: JwtRequest, res: Response) => {
     const auth0Id = req.auth?.sub
     if (auth0Id) {
       const subscriptions = await getSubsList(auth0Id)
+      console.log(subscriptions)
       res.json(subscriptions)
     }
   } catch (error) {

@@ -8,6 +8,7 @@ interface Props {
 }
 
 function SubItemMenu(props: Props) {
+  console.log(`propsid`, props.id)
   const { getAccessTokenSilently } = useAuth0()
   const dispatch = useAppDispatch()
   const [isOpen, setIsOpen] = useState(false)
@@ -38,7 +39,7 @@ function SubItemMenu(props: Props) {
         <ul className="text-blue-gray-500 pt absolute right-0 border-black bg-white p-3 font-sans text-sm font-normal shadow-lg focus:outline-none">
           <li
             key={props.id}
-            id={props.id}
+            id={String(props.id) + '-list'}
             className="hover:bg-blue-gray-50 focus:bg-blue-gray-50 focus:text-blue-gray-900 active:bg-blue-gray-50 active:text-blue-gray-900 block w-full cursor-pointer select-none rounded-md px-3 py-2 text-end leading-tight transition-all hover:bg-opacity-80 hover:font-bold hover:text-subminder-purple focus:bg-opacity-80 active:bg-opacity-80"
           >
             <button id={props.id} onClick={handleDeleteClick}>
