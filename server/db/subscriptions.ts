@@ -1,5 +1,4 @@
 import connection from './connection'
-
 import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 
 export function getAllSubs(db = connection) {
