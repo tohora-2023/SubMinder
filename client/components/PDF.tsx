@@ -62,6 +62,7 @@ export default function PDF({ start, end, initialEvents, user }: PDFProp) {
           <View
             style={{ fontSize: 12, marginBottom: '50px', marginLeft: '10px' }}
           >
+            {/* Wait a minute, I know this one */}
             <Text>Address:</Text>
             <Text>Level 5/12</Text>
             <Text>Morgan Street</Text>

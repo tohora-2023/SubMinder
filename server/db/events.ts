@@ -11,6 +11,10 @@ export function getEvents(db = connection): Promise<Subscription[]> {
       'calendarEvents.*'
     )
 }
+
+// Prop isn't very descriptive
+// we use Props in react because that's the convention given to the input for a component
+// here, we should provide more context with a descriptive name
 interface Prop {
   scheduleDate?: string
   isLastDate?: boolean

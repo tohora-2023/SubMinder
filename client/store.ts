@@ -3,6 +3,7 @@ import type { ThunkDispatch, ThunkAction as BaseThunkAction } from 'redux-thunk'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import reducers from './reducers'
+// broken import
 import type { Action } from './actions'
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))

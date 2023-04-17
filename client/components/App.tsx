@@ -43,6 +43,7 @@ function App() {
     if (isAuthenticated) {
       handleLogIn()
     }
+    // event handlers (handleAddLogInInfo) are recreated each render -> have a new reference -> need to be included in the dependency array
   }, [getAccessTokenSilently, isAuthenticated])
 
   return (

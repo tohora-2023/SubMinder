@@ -18,6 +18,23 @@ export default function UpcomingPayments({ data }: MonthsPaymentsArray) {
         className="mb-3 flex justify-between text-xs"
         style={{ height: '20px' }}
       >
+        {/* You can use an object as a lookup table:
+          const subcsriptionOptions = {
+            'Food & Drink': {
+              class: 'text-food',
+              label: 'restaurant'
+            },
+            Entertainment: {
+              class: 'text-entertainment',
+              label: 'live_tv'
+            },
+            ...
+          }
+
+          const options = subscriptionOptions[data.category]
+
+          {options && <span className={`material-symbols-outlined ${options.class}`}>{options.label}</span>}
+        */}
         {data.category === 'Food & Drink' ? (
           <span className="material-symbols-outlined text-food">
             restaurant

@@ -1,5 +1,6 @@
 import request from 'superagent'
 
+// you and your Prop
 interface Prop {
   name?: string
   image?: string
@@ -21,6 +22,7 @@ export async function addNewSub(data: Prop, token: string) {
     // console.log(response.body)
 
     const subId = response.body.id
+    // purge the commented out console.logs
     // console.log(subId)
 
     return request

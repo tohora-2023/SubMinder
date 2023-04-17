@@ -11,6 +11,7 @@ interface Prop {
   price?: number
 }
 
+// these functions can probably live in subscriptions.ts
 export async function addSubs(
   {
     name,

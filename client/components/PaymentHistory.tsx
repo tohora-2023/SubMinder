@@ -3,6 +3,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
+// typecript complains about this and @react-pdf/renderer
+// do they have @types/ packages?
 import { Chart } from 'react-google-charts'
 import PieChart from './PieChart'
 import SubChart from './SubChart'
@@ -18,7 +20,11 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
   const [tableData, setTableData] = useState([] as TableData[])
 
   //--------------------------------Auth0 setup & data fetching------------------------
+  // if you feel hook logic is getting complex and you have the urge to segregate it like this (with the ----)
+  // perhaps you might like to think about extracting custom hooks
+  // this could be useUser() for example or useUserEvents()
   const { getAccessTokenSilently, user } = useAuth0()
+  // console.log go brrr
   console.log(user)
   const dispatch = useAppDispatch()
   const { loading, error, data } = useAppSelector((state) => state.events)
@@ -181,6 +187,7 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
         }
         fileName="subminder-payments.pdf"
       >
+        {/* Add a type annotation to this: { loading, error }: { loading: boolean, error: boolean } to make TS happy */}
         {({ loading, error }) =>
           loading
             ? 'Loading document...'
@@ -203,6 +210,7 @@ export default function PaymentHistory({ isAuthComplete }: HomeProps) {
           <p className="text-center">Please choose a different date range</p>
         </>
       )}
+      {/* Big ternary operators can be difficult to follow, you might like to extract these two pieces of UI into their own components (in this file is fine) for legibility */}
       {isAuthComplete ? (
         <div>
           <div>
