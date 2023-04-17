@@ -1,4 +1,5 @@
 import * as Models from '../../models/subscription'
+import SubItemMenu from './SubItemMenu'
 
 interface Props {
   subscription: Models.Subscription
@@ -7,6 +8,7 @@ interface Props {
 function SubItem(props: Props) {
   return (
     <div className="border-2 border-black p-6">
+      <SubItemMenu id={props.subscription.id} />
       <h1>
         <div className="p4 flex justify-between">
           <a
@@ -19,20 +21,18 @@ function SubItem(props: Props) {
           </a>
           <h2>${props.subscription.price.toFixed(2)}</h2>
         </div>
+        {props.subscription?.isLastDate ? (
+          <div className="flex justify-between">
+            <h2>last payment date:</h2>
+            <h2>{props.subscription?.scheduleDate}</h2>
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <h2>next payment date:</h2>
+            <h2>{props.subscription?.scheduleDate}</h2>
+          </div>
+        )}
       </h1>
-
-      {props.subscription?.isLastDate ? (
-        <div className="flex justify-between">
-          <h2>last payment date:</h2>
-          <h2>{props.subscription?.scheduleDate}</h2>
-        </div>
-      ) : (
-        <div className="flex justify-between">
-          <h2>next payment date:</h2>
-          <h2>{props.subscription?.scheduleDate}</h2>
-        </div>
-      )}
-
       <h2>
         {props.subscription?.category} - {props.subscription?.frequency}
       </h2>
