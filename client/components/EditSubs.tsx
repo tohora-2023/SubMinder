@@ -20,6 +20,7 @@ export default function EditSubs() {
   const [category, setCategory] = useState(
     subscription ? subscription.category : ''
   )
+
   const [website, setWebsite] = useState(
     subscription ? subscription.website : ''
   )
@@ -92,12 +93,12 @@ export default function EditSubs() {
           <option value="" disabled>
             Select Category
           </option>
-          <option value="food & drink">Food & Drink</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="necessities">Necessities</option>
-          <option value="bills">Bills</option>
-          <option value="productivity">Productivity</option>
-          <option value="travel">Travel</option>
+          <option value="Food & Drink">Food & Drink</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Necessities">Necessities</option>
+          <option value="Bills">Bills</option>
+          <option value="Productivity">Productivity</option>
+          <option value="Travel">Travel</option>
         </select>
         <br />
         <label htmlFor="website">Website: </label>

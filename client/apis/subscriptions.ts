@@ -10,7 +10,6 @@ export async function getSubscriptions(token: string): Promise<Subscription[]> {
     const subscriptions = response.body.map((subscription: Subscription) => {
       // Format fields for display
       subscription.name = subscription.name?.toUpperCase() ?? ''
-      subscription.category = subscription.category?.toLowerCase() ?? ''
       subscription.frequency = subscription.frequency?.toLowerCase() ?? ''
 
       // Format the date to 1 May
