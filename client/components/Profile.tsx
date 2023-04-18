@@ -24,11 +24,15 @@ export default function Profile() {
 
   return (
     <>
-      <div className="flex-col justify-center text-center">
-        <img className="" src="" alt="profile image"/>
-        <p className="mb-5">Username: {user.userName}</p>
-        <p className="mb-5">First Name: {user.firstName}</p>
-        <p className="mb-5">Last Name: {user.lastName}</p>
+      <div className="flex-col justify-center rounded-md border-8 border-gray-300 bg-purple-900 p-8 text-center">
+        <img
+          className="mx-auto mb-5 block h-36 w-36"
+          src="./images/profile-image.png"
+          alt="profileImage"
+        />
+        <p className="mb-5 text-white ">Username: {user.userName}</p>
+        <p className="mb-5 text-white">First Name: {user.firstName}</p>
+        <p className="mb-5 text-white">Last Name: {user.lastName}</p>
       </div>
     </>
   )
