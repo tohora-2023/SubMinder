@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 import * as Models from '../../models/subscription'
 import SubItemMenu from './SubItemMenu'
 
@@ -12,29 +13,30 @@ function SubItem(props: Props) {
       <h1>
         <div className="p4 flex justify-between">
           <a
+            role="text"
             href={props.subscription?.website}
             target="_blank"
             rel="noreferrer"
             className="font-bold text-subminder-purple hover:text-accent-yellow"
           >
-            {props.subscription?.name}
+            {props.subscription?.name.toLocaleUpperCase()}
           </a>
-          <h2>${props.subscription.price.toFixed(2)}</h2>
+          <h2 role="text">${props.subscription.price.toFixed(2)}</h2>
         </div>
         {props.subscription?.isLastDate ? (
           <div className="flex justify-between">
-            <h2>last payment date:</h2>
-            <h2>{props.subscription?.scheduleDate}</h2>
+            <h2 role="text">last payment date:</h2>
+            <h2 role="text">{props.subscription?.scheduleDate}</h2>
           </div>
         ) : (
           <div className="flex justify-between">
-            <h2>next payment date:</h2>
-            <h2>{props.subscription?.scheduleDate}</h2>
+            <h2 role="text">next payment date:</h2>
+            <h2 role="text">{props.subscription?.scheduleDate}</h2>
           </div>
         )}
       </h1>
-      <h2>
-        {props.subscription?.category} - {props.subscription?.frequency}
+      <h2 role="text">
+        {props.subscription?.category.toLowerCase()} - {props.subscription?.frequency.toLowerCase()}
       </h2>
     </div>
   )
