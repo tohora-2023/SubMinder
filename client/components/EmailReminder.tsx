@@ -57,7 +57,6 @@ export default function Email() {
         }
       }
     }
-    console.log('data', data)
     if (data) {
       if (user?.email == undefined) {
         return
