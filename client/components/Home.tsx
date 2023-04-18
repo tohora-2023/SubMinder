@@ -10,7 +10,6 @@ import { fetchEvents } from '../actions/events'
 import UpcomingPayments from './UpcomingPayments'
 import { Link } from 'react-router-dom'
 
-
 export interface HomeProps {
   isAuthComplete: boolean
 }

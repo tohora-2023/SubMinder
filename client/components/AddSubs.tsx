@@ -15,11 +15,8 @@ export default function AddSubs() {
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
   const [reminder, setReminder] = useState(false)
-  const dispatch = useAppDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const { data, loading, error } = useAppSelector(
-    (state) => state.subscriptions
-  )
+  const { loading, error } = useAppSelector((state) => state.subscriptions)
   const navigate = useNavigate()
 
   useEffect(() => {}, [])

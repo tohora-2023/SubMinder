@@ -10,6 +10,7 @@ import Profile from './Profile'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
 import AddSubs from './AddSubs'
+import { useNavigate } from 'react-router-dom'
 import EditSubs from './EditSubs'
 
 function App() {
