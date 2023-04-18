@@ -1,7 +1,10 @@
 import { Subscription } from 'react-redux'
 import connection from './connection'
 
-export function getEvents(db = connection): Promise<Subscription[]> {
+export function getEvents(
+  id: string,
+  db = connection
+): Promise<Subscription[]> {
   return db('calendarEvents')
     .join('subscriptions', 'calendarEvents.subscriptionId', 'subscriptions.id')
     .select(
@@ -10,8 +13,10 @@ export function getEvents(db = connection): Promise<Subscription[]> {
       'subscriptions.price as price',
       'subscriptions.id as SubId',
       'subscriptions.reminder as reminder',
+      'subscriptions.userAuthId as auth0Id',
       'calendarEvents.*'
     )
+    .where('auth0Id', id)
 }
 interface Prop {
   scheduleDate?: string
