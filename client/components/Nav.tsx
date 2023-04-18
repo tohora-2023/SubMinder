@@ -47,7 +47,7 @@ function Nav() {
             Profile
           </Link>
           <button
-            className="hover:text-blue-dark ml-5 mr-10 text-lg text-white no-underline"
+            className="hover:text-blue-dark ml-10 mr-10 text-lg text-white no-underline"
             type="button"
             onClick={handleSignOut}
           >

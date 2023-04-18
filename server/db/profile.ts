@@ -1,8 +1,8 @@
-import connection from "./connection";
-import { User } from "../../models/userProfile";
+import connection from './connection'
+import { User } from '../../models/userProfile'
 
-export function getUser(userName: string, db = connection): Promise<User> {
+export function getUser(auth0Id: string, db = connection): Promise<User> {
   return db<User>('users')
-  .where({userName})
-  .select('id', 'firstName', 'lastName','userName', 'image')
+    .where('authId', auth0Id)
+    .select('id', 'firstName', 'lastName', 'userName', 'image')
 }

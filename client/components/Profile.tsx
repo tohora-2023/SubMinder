@@ -1,18 +1,22 @@
 import { fetchUserInfo } from '../actions/profiles'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Profile() {
   const { data: user, error, isLoading } = useAppSelector((state) => state.user)
   const dispatch = useAppDispatch()
-  const { userName } = useParams()
+  const { getAccessTokenSilently } = useAuth0()
 
   useEffect(() => {
-    if (userName) {
-      dispatch(fetchUserInfo(userName))
-    }
-  }, [dispatch, userName])
+    getAccessTokenSilently()
+      .then((token) => {
+        dispatch(fetchUserInfo(token))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [dispatch, getAccessTokenSilently])
 
   if (isLoading) return <>Loading...</>
   if (error) return <>An error occurred</>
@@ -21,9 +25,10 @@ export default function Profile() {
   return (
     <>
       <div className="flex-col justify-center text-center">
-        <p className="mb-5">{user.userName}</p>
-        <p className="mb-5">{user.firstName}</p>
-        <p className="mb-5">{user.lastName}</p>
+        <img className="" src="" alt="profile image"/>
+        <p className="mb-5">Username: {user.userName}</p>
+        <p className="mb-5">First Name: {user.firstName}</p>
+        <p className="mb-5">Last Name: {user.lastName}</p>
       </div>
     </>
   )

@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
 import AddSubs from './AddSubs'
+import Profile from './Profile'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -67,10 +68,7 @@ function App() {
                 element={<ManageSubscription />}
               />
               <Route path="/addsubscription" element={<AddSubs />} />
-              {/* <Route
-                path="/profile"
-                // element={<Profile />}
-              /> */}
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
           <Footer />
