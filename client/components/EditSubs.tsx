@@ -4,12 +4,14 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Subscription } from '../../models/subscription'
 import { editSub } from '../actions/subscriptions'
+import { useAppDispatch } from '../hooks'
 
 export default function EditSubs() {
   const { data, loading, error } = useAppSelector(
     (state) => state.subscriptions
   )
 
+  const dispatch = useAppDispatch()
   const { subId } = useParams()
 
   const subscription = data.find((sub) => sub.id === Number(subId))
@@ -29,7 +31,7 @@ export default function EditSubs() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
+    console.log('Submitted')
     if (price === 0) {
       return alert('Price must be greater than 0')
     }
@@ -48,7 +50,7 @@ export default function EditSubs() {
     }
     const token = await getAccessTokenSilently()
 
-    editSub(Number(subId), editedSub, token)
+    dispatch(editSub(Number(subId), editedSub, token))
 
     navigate('/managesubscriptions')
   }
