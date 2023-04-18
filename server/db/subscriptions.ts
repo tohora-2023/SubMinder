@@ -1,5 +1,5 @@
 import connection from './connection'
-import { Subscription } from '../../models/subscriptions'
+import { Subscription, SubscriptionUpdate } from '../../models/subscription'
 
 export function getAllSubs(db = connection) {
   return db('subscriptions').select()
@@ -44,7 +44,7 @@ export function getSubsList(
       'subscriptions.frequency as frequency',
       'subscriptions.userAuthId as userAuthId',
       db.raw('MAX(calendarEvents.scheduleDate) as scheduleDate'),
-      db.raw('MAX(calendarEvents.isLastDate) as IsLastDate')
+      db.raw('MAX(calendarEvents.isLastDate) as isLastDate')
     )
     .groupBy(
       'subscriptions.id',
@@ -66,7 +66,7 @@ export function getSubsList(
         website: row.website,
         frequency: row.frequency,
         userAuthId: row.userAuthId,
-        IsLastDate: row.LastDate,
+        isLastDate: row.LastDate,
         scheduleDate: row.scheduleDate,
       }))
     )
@@ -79,4 +79,20 @@ export function deleteSubsAndCalendarEvents(subId: number, db = connection) {
     .then(() => {
       return db('subscriptions').where('subscriptions.id', subId).delete()
     })
+}
+
+export function editSub(
+  id: number,
+  update: SubscriptionUpdate,
+  db = connection
+) {
+  return db('subscriptions')
+    .update({
+      name: update.name,
+      category: update.category,
+      website: update.website,
+      price: update.price,
+    })
+    .where('id', update.id)
+    .returning('id')
 }

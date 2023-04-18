@@ -2,11 +2,19 @@ export interface Subscription {
   id: number
   userAuthId: string
   name: string
-  image: string
+  image?: string
   frequency: string
   endDate: string
   isLastDate: boolean
   scheduleDate: string
+  category: string
+  website: string
+  price: number
+}
+
+export interface SubscriptionUpdate {
+  id: number
+  name: string
   category: string
   website: string
   price: number
