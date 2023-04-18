@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { editSub } from '../../server/db/subscriptions'
+import { Subscription } from '../../models/subscription'
+import { editSubscription } from '../apis/subscriptions'
 
 export default function EditSubs() {
   const { data, loading, error } = useAppSelector(
@@ -32,7 +35,21 @@ export default function EditSubs() {
       return alert('Price must be greater than 0')
     }
 
-    //Add submit edit code here
+    const editedSub: Subscription = {
+      id: Number(subId),
+      name: name,
+      category: category,
+      price: price,
+      userAuthId: subscription?.userAuthId || '',
+      frequency: subscription?.frequency || '',
+      scheduleDate: subscription?.scheduleDate || '',
+      endDate: subscription?.endDate || '',
+      isLastDate: subscription?.isLastDate || false,
+      website: subscription?.website || '',
+    }
+    const token = await getAccessTokenSilently()
+
+    await editSubscription(Number(subId), editedSub, token)
 
     navigate('/managesubscription')
   }

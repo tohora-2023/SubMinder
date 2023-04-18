@@ -57,15 +57,19 @@ router.delete(
   }
 )
 
-router.patch('/edit/:id', checkJwt, async (req: JwtRequest, res: Response) => {
-  try {
-    const auth0Id = req.auth?.sub
-    if (auth0Id) {
-      await editSub(Number(req.params.id), req.body)
-      res.send('Subscription edited')
+router.patch(
+  '/update/:id',
+  checkJwt,
+  async (req: JwtRequest, res: Response) => {
+    try {
+      const auth0Id = req.auth?.sub
+      if (auth0Id) {
+        await editSub(Number(req.params.id), req.body)
+        res.send('Subscription edited')
+      }
+    } catch (error) {
+      console.log(error)
+      res.send('There was an error editing the subscription')
     }
-  } catch (error) {
-    console.log(error)
-    res.send('There was an error editing the subscription')
   }
-})
+)

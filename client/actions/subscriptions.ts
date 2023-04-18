@@ -1,4 +1,4 @@
-import { Subscription, SubscriptionUpdate } from '../../models/subscription'
+import { Subscription } from '../../models/subscription'
 import { Dispatch } from 'redux'
 import { ThunkAction } from '../store'
 import {
@@ -85,7 +85,7 @@ export function removeSub(subId: string, token: string): ThunkAction {
 
 export function editSub(
   id: number,
-  update: SubscriptionUpdate,
+  update: Subscription,
   token: string
 ): ThunkAction {
   return (dispatch: Dispatch) => {
@@ -97,12 +97,12 @@ export function editSub(
             name: update.name,
             category: update.category,
             price: update.price,
-            userAuthId: '',
-            frequency: '',
-            endDate: '',
-            isLastDate: false,
-            scheduleDate: '',
-            website: '',
+            userAuthId: update.userAuthId,
+            frequency: update.frequency,
+            endDate: update.endDate,
+            isLastDate: update.isLastDate,
+            scheduleDate: update.scheduleDate,
+            website: update.website,
           })
         )
       })
