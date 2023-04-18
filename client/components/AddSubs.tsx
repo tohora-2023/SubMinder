@@ -41,7 +41,6 @@ export default function AddSubs() {
     const token = await getAccessTokenSilently()
     const { id } = await addNewSub(newSub, token)
     const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
-    console.log(id)
     interface DayProp {
       scheduleDate?: string
       isLastDate?: boolean
@@ -59,7 +58,6 @@ export default function AddSubs() {
       await addNewCalanderDay(subscriptionId, dayForCallender, token)
     }
 
-    console.log(paymentDates)
     navigate('/managesubscriptions')
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { useState } from 'react'
 import { useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -32,7 +33,6 @@ export default function EditSubs() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log('Submitted')
     if (price === 0) {
       return alert('Price must be greater than 0')
     }
@@ -123,6 +123,9 @@ export default function EditSubs() {
         />
         <br />
         <button
+          aria-label="Submit subscription"
+          name="Submit"
+          id="Submit"
           type="submit"
           className="hover:accent-yellow focus:ring-primary ml-auto border border-subminder-purple px-4 py-2 font-medium text-subminder-purple"
         >
