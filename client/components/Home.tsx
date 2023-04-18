@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 import UpcomingPayments from './UpcomingPayments'
 import { Link } from 'react-router-dom'
+import PastPayments from './PastPayments'
 
 export interface HomeProps {
   isAuthComplete: boolean
@@ -144,13 +145,9 @@ export default function Home({ isAuthComplete }: HomeProps) {
       const endDate = new Date(item.scheduleDate)
       return item.category === category && endDate.getMonth() === currentMonth
     })
-
     const total = filteredData.reduce((acc, cur) => acc + cur.price, 0)
-
     categoryTotals[category] = total
   })
-
-  const totalPrice = thisMonths.reduce((acc, cur) => acc + cur.price, 0)
 
   //-----------------------Changing the view----------------------------
   function handleClick(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -219,36 +216,78 @@ export default function Home({ isAuthComplete }: HomeProps) {
           </div>
         </div>
         <div>
-          <h3 className="text-center text-2xl font-bold text-subminder-indigo">
-            Upcoming subscriptions this month
-          </h3>
-          {thisMonths.map((item) => {
-            const currentDate = item.scheduleDate
-            const isDifferent = currentDate !== prevDate
-            prevDate = currentDate
+          <div>
+            <h3 className="text-center text-2xl font-bold text-subminder-indigo">
+              Upcoming payments this month
+            </h3>
+            {thisMonths.map((item) => {
+              if (
+                new Date(item.scheduleDate).getTime() / 1000 >=
+                currentDate.getTime() / 1000
+              ) {
+                const thisDate = item.scheduleDate
+                const isDifferent = thisDate !== prevDate
+                prevDate = thisDate
 
-            const date = new Date(item.scheduleDate)
-            const structuredDate = date.toLocaleDateString('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })
+                const date = new Date(item.scheduleDate)
+                const structuredDate = date.toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })
+                return (
+                  <>
+                    {isDifferent ? (
+                      <h2 className="mt-6 text-center font-bold">
+                        {structuredDate}
+                      </h2>
+                    ) : (
+                      ''
+                    )}
+                    <div key={item.id} className="mb-3">
+                      <UpcomingPayments data={item} />
+                    </div>
+                  </>
+                )
+              }
+            })}
+          </div>
+          <div>
+            <h3 className="mt-10 text-center text-2xl font-bold text-subminder-indigo">
+              Past payments
+            </h3>
+            {thisMonths.map((item) => {
+              if (
+                new Date(item.scheduleDate).getTime() / 1000 <=
+                currentDate.getTime() / 1000
+              ) {
+                const thisDate = item.scheduleDate
+                const isDifferent = thisDate !== prevDate
+                prevDate = thisDate
 
-            return (
-              <>
-                {isDifferent ? (
-                  <h2 className="mt-6 text-center font-bold">
-                    {structuredDate}
-                  </h2>
-                ) : (
-                  ''
-                )}
-                <div key={item.id} className="mb-3">
-                  <UpcomingPayments data={item} />
-                </div>
-              </>
-            )
-          })}
+                const date = new Date(item.scheduleDate)
+                const structuredDate = date.toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })
+                return (
+                  <>
+                    {isDifferent ? (
+                      <h2 className="mt-6 text-center font-bold">
+                        {structuredDate}
+                      </h2>
+                    ) : (
+                      ''
+                    )}
+                    <div key={item.id} className="mb-3">
+                      <PastPayments data={item} />
+                    </div>
+                  </>
+                )
+              }
+            })}
+          </div>
         </div>
       </div>
     </>
