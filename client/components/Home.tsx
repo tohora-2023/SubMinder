@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import PastPayments from './PastPayments'
 import { fetchTrials } from '../actions/trials'
 
+
 export interface HomeProps {
   isAuthComplete: boolean
 }

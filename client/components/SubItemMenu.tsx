@@ -42,7 +42,7 @@ function SubItemMenu(props: Props) {
   return (
     <div className="relative">
       <button
-        className="absolute right-0 top-[-25px] mt-auto h-min self-end pt-0 text-2xl font-bold text-subminder-indigo hover:text-subminder-purple"
+        className="absolute bottom-0.5 right-0 top-[-25px] mt-auto h-min self-end pt-0 text-2xl font-bold text-subminder-indigo hover:text-subminder-purple"
         onClick={toggleMenu}
       >
         ...
@@ -50,7 +50,7 @@ function SubItemMenu(props: Props) {
       {isOpen && (
         <ul className="text-blue-gray-500 pt absolute right-0 border-black bg-white p-3 font-sans text-sm font-normal shadow-lg focus:outline-none">
           <li
-            key={props.id  + '-edit'}
+            key={props.id + '-edit'}
             id={String(props.id) + '-edit'}
             className="hover:bg-blue-gray-50 focus:bg-blue-gray-50 focus:text-blue-gray-900 active:bg-blue-gray-50 active:text-blue-gray-900 block w-full cursor-pointer select-none rounded-md px-3 py-2 text-end leading-tight transition-all hover:bg-opacity-80 hover:font-bold hover:text-subminder-purple focus:bg-opacity-80 active:bg-opacity-80"
           >
@@ -60,7 +60,7 @@ function SubItemMenu(props: Props) {
           </li>
 
           <li
-            key={props.id  + '-delete'}
+            key={props.id + '-delete'}
             id={String(props.id) + '-delete'}
             className="hover:bg-blue-gray-50 focus:bg-blue-gray-50 focus:text-blue-gray-900 active:bg-blue-gray-50 active:text-blue-gray-900 block w-full cursor-pointer select-none rounded-md px-3 py-2 text-end leading-tight transition-all hover:bg-opacity-80 hover:font-bold hover:text-subminder-purple focus:bg-opacity-80 active:bg-opacity-80"
           >
