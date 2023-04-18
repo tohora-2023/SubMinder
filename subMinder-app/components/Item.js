@@ -70,12 +70,12 @@ const Item = ({
           {isFreeTrial ? (
             <View
               style={{
-                backgroundColor: '#FFC400',
+                backgroundColor: '#17b3a1',
                 padding: 2,
                 borderRadius: 5,
               }}
             >
-              <Text style={{ color: 'white' }}>Free trial ends</Text>
+              <Text style={{ color: 'white' }}>Free trial</Text>
             </View>
           ) : (
             <Text style={{ textAlign: 'right' }}>${price}</Text>
