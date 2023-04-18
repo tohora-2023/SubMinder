@@ -10,6 +10,7 @@ import Profile from './Profile'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
 import AddSubs from './AddSubs'
+import EditSubs from './EditSubs'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -66,6 +67,8 @@ function App() {
                 element={<ManageSubscription />}
               />
               <Route path="/addsubscription" element={<AddSubs />} />
+
+              <Route path="/editsubscription/:subId" element={<EditSubs />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>

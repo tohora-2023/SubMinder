@@ -3,6 +3,7 @@ import {
   SET_SUB_SUCCESS,
   SET_ERROR,
   SET_SUB_REMOVE,
+  SET_SUB_EDIT,
 } from '../actions/subscriptions'
 import { SubscriptionAction } from '../actions/subscriptions'
 import * as Models from '../../models/subscription'
@@ -49,6 +50,24 @@ const subscriptionReducer = (
         error: undefined,
         data: [
           ...state.data.filter((sub) => sub.id !== Number(action.payload)),
+        ],
+      }
+    case SET_SUB_EDIT:
+      return {
+        loading: false,
+        error: undefined,
+        data: [
+          ...state.data.map((sub) =>
+            sub.id === action.payload.id
+              ? {
+                  ...sub,
+                  name: action.payload.name,
+                  frequency: action.payload.frequency,
+                  website: action.payload.website,
+                  price: action.payload.price,
+                }
+              : sub
+          ),
         ],
       }
     default:

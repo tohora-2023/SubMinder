@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { fetchAddSubs } from '../actions/subscriptions'
+import { useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addNewSub } from '../apis/addSubs'
 import manageCalendarEvents from '../helper/CallenderEvents'
@@ -23,15 +22,6 @@ export default function AddSubs() {
   )
   const navigate = useNavigate()
 
-  function clearForm() {
-    setName('')
-    setFrequency('')
-    setStartDate(new Date())
-    setEndDate(new Date())
-    setCategory('')
-    setWebsite('')
-    setPrice(0)
-  }
   useEffect(() => {}, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -52,11 +42,8 @@ export default function AddSubs() {
       reminder,
     }
     const token = await getAccessTokenSilently()
-    // dispatch(fetchAddSubs(newSub, token))
-    // const id = data[0].id
     const { id } = await addNewSub(newSub, token)
     const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
-    console.log(id)
     interface DayProp {
       scheduleDate?: string
       isLastDate?: boolean
@@ -79,7 +66,6 @@ export default function AddSubs() {
       await addNewCalanderDay(subscriptionId, dayForCallender, token)
     }
 
-    console.log(paymentDates)
     navigate('/managesubscriptions')
   }
 

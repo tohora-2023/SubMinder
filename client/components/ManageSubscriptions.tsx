@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 import { fetchSubscriptions } from '../actions/subscriptions'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -55,7 +56,7 @@ function ManageSubscription() {
               )
             })
           ) : (
-            <p>You have no subscriptions, please add one</p>
+            <p role="text">You have no subscriptions, please add one</p>
           )}
         </ul>
       </div>
