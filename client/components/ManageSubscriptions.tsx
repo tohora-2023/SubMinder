@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import SubItem from './SubItem'
+import Email from './EmailReminder'
 
 function ManageSubscription() {
   const { getAccessTokenSilently } = useAuth0()

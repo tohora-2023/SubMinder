@@ -53,8 +53,6 @@ export default function Email() {
               token
             )
           )
-
-          dueDate.isEmailSent = true
           dispatch(fetchEmailStatus(dueDate.id, true, token))
         }
       }
