@@ -1,18 +1,26 @@
 import Calendar from '@toast-ui/react-calendar'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import PieChart from './PieChart'
 import '../../node_modules/tui-date-picker/dist/tui-date-picker'
 import '../../node_modules/tui-time-picker/dist/tui-time-picker'
-import SubChart from './SubChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { fetchEvents } from '../actions/events'
 import UpcomingPayments from './UpcomingPayments'
 import { Link } from 'react-router-dom'
 import PastPayments from './PastPayments'
+import { fetchTrials } from '../actions/trials'
 
 export interface HomeProps {
   isAuthComplete: boolean
+}
+
+export interface allEvents {
+  id: number
+  name: string
+  scheduleDate: string
+  category: string
+  price?: number
+  isLastDate?: number | boolean | undefined
 }
 
 interface CalendarData {
@@ -31,17 +39,18 @@ export default function Home({ isAuthComplete }: HomeProps) {
   const { getAccessTokenSilently, user } = useAuth0()
   const dispatch = useAppDispatch()
   const { loading, error, data } = useAppSelector((state) => state.events)
+  const { data: trialData } = useAppSelector((state) => state.trials)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = await getAccessTokenSilently()
         dispatch(fetchEvents(token))
+        dispatch(fetchTrials(token))
       } catch (error) {
         console.error(error)
       }
     }
-
     fetchData()
   }, [dispatch, getAccessTokenSilently])
 
@@ -79,11 +88,13 @@ export default function Home({ isAuthComplete }: HomeProps) {
   const template = {
     allday(event: any) {
       const { title, body } = event
-      return `<div> <span style="color: white;">${title}: <span style="font-weight: 400">$${body}</span></span></div>`
+      return `<div><span style="color: white;">${title}: <span style="font-weight: 400">${body}</span></span></div>`
     },
   }
 
   const [initialEvents, setInitialEvents] = useState([] as CalendarData[])
+  const [trialEvents, setTrialEvents] = useState([] as CalendarData[])
+
   useEffect(() => {
     if (isAuthComplete) {
       setInitialEvents(
@@ -92,7 +103,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
             id: data.id,
             calendarId: 1,
             title: data.name,
-            body: `${data.price}`,
+            body: `$${data.price}`,
             start: data.scheduleDate,
             end: data.scheduleDate,
             category: 'allday',
@@ -113,13 +124,47 @@ export default function Home({ isAuthComplete }: HomeProps) {
           }
         })
       )
+
+      setTrialEvents(
+        trialData.map((data) => {
+          return {
+            id: data.id,
+            calendarId: 1,
+            title: data.name,
+            body: 'Free trial',
+            start: data.scheduleDate,
+            end: data.scheduleDate,
+            category: 'allday',
+            color: 'white',
+            backgroundColor: '#17b3a1',
+            isAllDay: true,
+          }
+        })
+      )
     }
-  }, [isAuthComplete, data])
+  }, [isAuthComplete, data, trialData])
 
   const thisMonths = data.filter((item) => {
     const endDate = new Date(item.scheduleDate)
     return endDate.getMonth() === currentMonth
   })
+
+  const thisMonthsFree = trialData.filter((item) => {
+    const schedule = new Date(item.scheduleDate)
+    return schedule.getMonth() === currentMonth
+  })
+
+  const [payments, setPayments] = useState([] as allEvents[])
+
+  useEffect(() => {
+    const newArray = [...thisMonths, ...thisMonthsFree]
+    const sortedArray = newArray.sort((a, b) => {
+      return (
+        new Date(a.scheduleDate).getTime() - new Date(b.scheduleDate).getTime()
+      )
+    })
+    return setPayments(sortedArray)
+  }, [trialData, data])
 
   //-----------Getting the totals-------------
   const categories = [
@@ -163,7 +208,9 @@ export default function Home({ isAuthComplete }: HomeProps) {
     return <p>There was an error</p>
   }
 
-  let prevDate = ''
+  console.log(payments)
+
+  let prevDate = 0
 
   return (
     <>
@@ -206,7 +253,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
               <Calendar
                 height="800px"
                 view={currentView}
-                events={initialEvents}
+                events={[...initialEvents, ...trialEvents]}
                 calendars={calendars}
                 template={template}
               />
@@ -220,12 +267,12 @@ export default function Home({ isAuthComplete }: HomeProps) {
             <h3 className="text-center text-2xl font-bold text-subminder-indigo">
               Upcoming payments this month
             </h3>
-            {thisMonths.map((item) => {
+            {payments.map((item) => {
               if (
                 new Date(item.scheduleDate).getTime() / 1000 >=
                 currentDate.getTime() / 1000
               ) {
-                const thisDate = item.scheduleDate
+                const thisDate = new Date(item.scheduleDate).getDate()
                 const isDifferent = thisDate !== prevDate
                 prevDate = thisDate
 
@@ -256,7 +303,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
             <h3 className="mt-10 text-center text-2xl font-bold text-subminder-indigo">
               Past payments
             </h3>
-            {thisMonths.map((item) => {
+            {payments.map((item) => {
               if (
                 new Date(item.scheduleDate).getTime() / 1000 <=
                 currentDate.getTime() / 1000

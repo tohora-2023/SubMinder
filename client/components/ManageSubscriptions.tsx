@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import SubItem from './SubItem'
+import Trials from './Trials'
 
 function ManageSubscription() {
   const { getAccessTokenSilently } = useAuth0()
@@ -56,6 +57,12 @@ function ManageSubscription() {
             <p>You have no subscriptions, please add one</p>
           )}
         </ul>
+      </div>
+      <div>
+        <h3 className="align-left mt-10 py-2 text-2xl font-bold text-subminder-indigo">
+          Free Trials
+        </h3>
+        <Trials />
       </div>
     </>
   )
