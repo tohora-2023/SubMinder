@@ -86,5 +86,13 @@ export function editSub(
   update: SubscriptionUpdate,
   db = connection
 ) {
-  return db('subscriptions').where('id', id).update(update)
+  return db('subscriptions')
+    .update({
+      name: update.name,
+      category: update.category,
+      website: update.website,
+      price: update.price,
+    })
+    .where('id', update.id)
+    .returning('id')
 }
