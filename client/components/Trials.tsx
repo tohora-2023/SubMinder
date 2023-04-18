@@ -48,7 +48,7 @@ export default function Trials() {
                   rel="noreferrer"
                   className="font-bold text-subminder-purple hover:text-accent-yellow"
                 >
-                  {item.name}
+                  {item.name.toUpperCase()}
                 </a>
                 <p>{formattedDate}</p>
               </div>
