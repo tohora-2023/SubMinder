@@ -3,7 +3,7 @@ import { UserInfoAction } from '../actions/profiles'
 import { User } from '../../models/userProfile'
 
 const initialState: UserState = {
-  data: {} as User, //[]user
+  data: {} as User,
   error: null,
   isLoading: false,
 }
