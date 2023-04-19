@@ -20,7 +20,10 @@ export default function Add() {
           Add free trial
         </button>
       </div>
-      <div className="flex justify-center" style={{ width: '100%' }}>
+      <div
+        className="flex justify-center"
+        style={{ width: '100%', marginBottom: '100px' }}
+      >
         {form === 'paid' ? <AddSubs /> : <AddFree />}
       </div>
     </>
