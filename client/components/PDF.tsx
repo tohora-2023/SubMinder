@@ -30,13 +30,13 @@ export default function PDF({ start, end, initialEvents, user }: PDFProp) {
             <Text>
               {' '}
               Payments from the period{' '}
-              {start.toLocaleDateString('en-GB', {
+              {end.toLocaleDateString('en-GB', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric',
               })}{' '}
               -{' '}
-              {end.toLocaleDateString('en-GB', {
+              {start.toLocaleDateString('en-GB', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric',

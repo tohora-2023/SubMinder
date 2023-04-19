@@ -43,7 +43,7 @@ function ManageSubscription() {
           <Link to="/addsubscription">Add a new subscription</Link>
         </button>
       </div>
-      <div className="main-page-container">
+      <div>
         <h1 className="align-left py-2 text-2xl font-bold text-subminder-indigo">
           Manage Subscriptions
         </h1>
@@ -57,15 +57,17 @@ function ManageSubscription() {
               )
             })
           ) : (
-            <p role="text">You have no subscriptions, please add one</p>
+            <p role="text" className="border-2 border-black p-6">
+              You have no paid subscriptions, please add one
+            </p>
           )}
         </ul>
-      </div>
-      <div>
-        <h3 className="align-left mt-10 py-2 text-2xl font-bold text-subminder-indigo">
-          Free Trials
-        </h3>
-        <Trials />
+        <div>
+          <h3 className="align-left mt-10 py-2 text-2xl font-bold text-subminder-indigo">
+            Free Trials
+          </h3>
+          <Trials />
+        </div>
       </div>
     </>
   )

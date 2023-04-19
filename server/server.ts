@@ -1,6 +1,7 @@
 import express from 'express'
 import { join } from 'node:path'
 
+import profileRouter from './routes/profile'
 import subscriptionRoutes from './routes/subscriptions'
 import eventRoutes from './routes/events'
 import logIn from './routes/logIn'
@@ -17,6 +18,7 @@ server.use('/v1/subscriptions', subscriptionRoutes)
 server.use('/v1/reminder',reminderRouter)
 server.use('/v1/events', eventRoutes)
 server.use('/v1/addsub', addSubsRouter)
+server.use('/v1/profile', profileRouter)
 server.use('/v1/trials', trialsRouter)
 server.use('/', logIn)
 
