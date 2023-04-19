@@ -40,7 +40,7 @@ function SubItemMenu(props: Props) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative pt-2">
       <button
         className="absolute bottom-0.5 right-0 top-[-25px] mt-auto h-min self-end pt-0 text-2xl font-bold text-subminder-indigo hover:text-subminder-purple"
         onClick={toggleMenu}
