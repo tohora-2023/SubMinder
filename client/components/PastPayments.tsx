@@ -1,7 +1,7 @@
 interface MonthsPaymentsArray {
   data: {
     name: string
-    price: number
+    price?: number
     isLastDate?: number | boolean | undefined
     scheduleDate: string
     category?: string
@@ -50,7 +50,13 @@ export default function PastPayments({ data }: MonthsPaymentsArray) {
       </div>
       <div className="p4 flex justify-between">
         <h3 className="font-bold text-slate-400">{data.name}</h3>
-        <p className="text-slate-400">${data.price}</p>
+        {data.price ? (
+          <p className="text-slate-400">${data.price}</p>
+        ) : (
+          <div className="flex items-center justify-center rounded-xl bg-slate-400 px-2">
+            <p className="text-xs text-slate-100">Free trial</p>
+          </div>
+        )}
       </div>
     </div>
   )
