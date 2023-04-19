@@ -10,8 +10,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res: Response) => {
   const auth0Id = req.auth?.sub
   if (auth0Id) {
     const trials = await getAllTrials()
-    console.log(trials)
-    res.json({ trials })
+       res.json({ trials })
   }
 })
 
