@@ -17,6 +17,7 @@ module.exports = {
         bills: '#FF0000',
         productivity: '#C269D6',
         travel: '#5DC6FF',
+        'free-trial': '#17b3a1',
       },
     },
   },
