@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom'
 import PastPayments from './PastPayments'
 import { fetchTrials } from '../actions/trials'
 
-
 export interface HomeProps {
   isAuthComplete: boolean
 }
@@ -309,7 +308,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
                 new Date(item.scheduleDate).getTime() / 1000 <=
                 currentDate.getTime() / 1000
               ) {
-                const thisDate = item.scheduleDate
+                const thisDate = new Date(item.scheduleDate).getDate()
                 const isDifferent = thisDate !== prevDate
                 prevDate = thisDate
 
