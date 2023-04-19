@@ -45,19 +45,24 @@ export async function addSubs(
 }
 
 interface Subscription {
-  id: number
+  id?: number
+  name?: string
+  image?: string
   frequency: string
   startDate: Date
   endDate: Date
+  category?: string
+  website?: string
+  price?: number
+  userAuthId?: string
+  reminder?: boolean
 }
 
 export async function getSubById(
   id: number,
   db = connection
 ): Promise<Subscription> {
-  const [subById] = await db('subscriptions')
-    .where('id', id)
-    .select('id', 'frequency', 'startDate', 'endDate')
+  const [subById] = await db('subscriptions').where('id', id).select('*')
 
   return subById
 }
