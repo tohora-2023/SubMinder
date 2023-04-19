@@ -1,5 +1,5 @@
 import checkJwt, { JwtRequest } from '../auth0'
-import { addUserLogIn } from '../db/logIn'
+import { addUserOrReturnNull } from '../db/logIn'
 import { Response } from 'express'
 
 const express = require('express')
@@ -10,7 +10,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
     const auth0Id = req.auth?.sub
     if (auth0Id) {
       const { firstName, lastName, userName, image } = req.body
-      const newUser = await addUserLogIn(
+      const newUser = await addUserOrReturnNull(
         {
           firstName,
           lastName,

@@ -24,11 +24,11 @@ export default function LogIn() {
           backgroundImage: 'url(./img/hero2.jpg)',
         }}
       >
-        <div className="h-300 ml-auto mr-auto mt-auto mb-auto w-2/3">
+        <div className="h-300 mb-auto ml-auto mr-auto mt-auto w-2/3">
           <h3 className="text-3xl font-bold ">
             Get SubMinder, the ultimate subscription wingman!
           </h3>
-          <p className="mt-5 mb-5 text-xl">
+          <p className="mb-5 mt-5 text-xl">
             Keep tabs on all your subscriptions and free trials, track renewal
             and cancellation dates with the built-in calendar, and set up
             payment and trial end reminders.
@@ -41,7 +41,7 @@ export default function LogIn() {
             onClick={handleSignIn}
             onKeyDown={handleKeyDownLogin}
             tabIndex={0}
-            className="rounded-lg border-2 border-accent-yellow bg-accent-yellow pt-2 pb-2 pl-5 pr-5 font-sans text-xl hover:border-2 hover:border-accent-yellow hover:bg-transparent hover:text-accent-yellow"
+            className="rounded-lg border-2 border-accent-yellow bg-accent-yellow pb-2 pl-5 pr-5 pt-2 font-sans text-xl hover:border-2 hover:border-accent-yellow hover:bg-transparent hover:text-accent-yellow"
           >
             log in
           </button>

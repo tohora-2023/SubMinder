@@ -18,7 +18,7 @@ export function getEvents(
     )
     .where('auth0Id', id)
 }
-interface Prop {
+interface EventProp {
   scheduleDate?: string
   isLastDate?: boolean
   isEmailSent?: boolean
@@ -26,7 +26,7 @@ interface Prop {
 
 export async function addEvent(
   subscriptionId: number,
-  { scheduleDate, isLastDate, isEmailSent }: Prop,
+  { scheduleDate, isLastDate, isEmailSent }: EventProp,
   auth0Id: string,
   db = connection
 ) {

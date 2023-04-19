@@ -19,9 +19,7 @@ export default function AddSubs() {
   const { loading, error } = useAppSelector((state) => state.subscriptions)
   const navigate = useNavigate()
 
-  useEffect(() => {}, [])
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     if (price === 0) {
