@@ -22,7 +22,7 @@ export default function Trials() {
   }, [dispatch, getAccessTokenSilently])
 
   return (
-    <div>
+    <div style={{ marginBottom: '200px' }}>
       {data.map((item) => {
         const date = new Date(item.scheduleDate)
         const formattedDate = date.toLocaleDateString('en-GB', {
@@ -33,7 +33,7 @@ export default function Trials() {
           <div
             className="mb-4 border-2 border-black px-6 pb-6"
             key={item.id}
-            style={{ width: '668px', marginBottom: '200px' }}
+            style={{ width: '668px' }}
           >
             <div className="p4 flex flex-col">
               <div className=" mt-auto flex h-min justify-end self-end pt-0">
