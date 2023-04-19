@@ -1,9 +1,5 @@
-import Email from "./EmailReminder";
+import Email from './EmailReminder'
 
 export default function Profile() {
-  return (
-    <>
-      <div><Email/></div>
-    </>
-  )
+  return <></>
 }

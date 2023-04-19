@@ -7,8 +7,6 @@ import {
 } from '../actions/events'
 import { Events } from '../../models/events'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { sendEmailReminder } from '../apis/reminder'
-import { UpdateEmail } from '../apis/events'
 
 export default function Email() {
   const dispatch = useAppDispatch()
@@ -77,5 +75,5 @@ export default function Email() {
     return <p>There was an error</p>
   }
 
-  return <div>Enable email reminder</div>
+  return <div></div>
 }
