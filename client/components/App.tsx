@@ -8,7 +8,8 @@ import ManageSubscription from './ManageSubscriptions'
 import { Routes, Route } from 'react-router-dom'
 import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
-import AddSubs from './AddSubs'
+import Add from './Add'
+import EditSubs from './EditSubs'
 import Profile from './Profile'
 
 function App() {
@@ -59,15 +60,13 @@ function App() {
           </Routes>
           <div className="mt-8 flex flex-col items-center justify-center">
             <Routes>
-              <Route
-                path="/paymenthistory"
-                element={<PaymentHistory isAuthComplete={isAuthComplete} />}
-              />
+              <Route path="/paymenthistory" element={<PaymentHistory />} />
               <Route
                 path="/managesubscriptions"
                 element={<ManageSubscription />}
               />
-              <Route path="/addsubscription" element={<AddSubs />} />
+              <Route path="/addsubscription" element={<Add />} />
+              <Route path="/editsubscription/:subId" element={<EditSubs />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>

@@ -1,13 +1,8 @@
-interface MonthsPaymentsArray {
-  data: {
-    name: string
-    price: number
-    isLastDate?: number | boolean | undefined
-    scheduleDate: string
-    category?: string
-  }
-}
+import { allEvents } from './Home'
 
+interface MonthsPaymentsArray {
+  data: allEvents
+}
 export default function UpcomingPayments({ data }: MonthsPaymentsArray) {
   return (
     <div
@@ -49,13 +44,17 @@ export default function UpcomingPayments({ data }: MonthsPaymentsArray) {
           <div className="flex items-center justify-center rounded-xl bg-orange-600 px-2 py-1">
             <p className="text-pink-100">Last payment</p>
           </div>
-        ) : (
+        ) : data.price ? (
           ''
+        ) : (
+          <div className="flex items-center justify-center rounded-xl bg-free-trial px-2 py-1">
+            <p className="text-green-100">Free Trial</p>
+          </div>
         )}
       </div>
       <div className="p4 flex justify-between">
         <h3 className="font-bold text-subminder-indigo">{data.name}</h3>
-        <p className="text-slate-600">${data.price}</p>
+        {data.price ? <p className="text-slate-600">${data.price}</p> : ''}
       </div>
     </div>
   )
