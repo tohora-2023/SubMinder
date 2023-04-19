@@ -169,7 +169,7 @@ export default function PaymentHistory() {
     return <p>There was an error</p>
   }
   return (
-    <div>
+    <div style={{ marginBottom: '200px' }}>
       {authComplete ? (
         <div>
           <PDFDownloadLink

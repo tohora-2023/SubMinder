@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
     <div>
-      <footer
-        className="bg-gradient-to-br from-subminder-nude  to-subminder-purple p-10 text-subminder-indigo"
-        style={{ marginTop: '300px' }}
-      >
+      <footer className="bg-gradient-to-br from-subminder-nude  to-subminder-purple p-10 text-subminder-indigo">
         <div className="flex justify-around">
           <div style={{ maxWidth: '300px' }}>
             <div className="align-center flex ">

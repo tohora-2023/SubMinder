@@ -215,8 +215,8 @@ export default function Home({ isAuthComplete }: HomeProps) {
   return (
     <>
       <div
-        className="mb-20 flex justify-around bg-gradient-to-b from-purple-900 to-subminder-indigo"
-        style={{ width: '100%' }}
+        className=" flex justify-around bg-gradient-to-b from-purple-900 to-subminder-indigo"
+        style={{ width: '100%', marginBottom: '50px' }}
       >
         <div style={{ width: '15%' }}></div>
         <div>
@@ -245,7 +245,7 @@ export default function Home({ isAuthComplete }: HomeProps) {
       </div>
       <div
         className="ml-auto mr-auto flex justify-center"
-        style={{ width: '80%' }}
+        style={{ width: '80%', marginBottom: '200px' }}
       >
         <div className="ml-auto mr-auto w-1/2">
           <div className="p-100px">
