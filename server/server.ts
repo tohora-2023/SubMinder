@@ -6,6 +6,7 @@ import eventRoutes from './routes/events'
 import logIn from './routes/logIn'
 import addSubsRouter from './routes/addSubs'
 import reminderRouter from './routes/reminder'
+import trialsRouter from './routes/freeTrials'
 
 const server = express()
 
@@ -16,7 +17,7 @@ server.use('/v1/subscriptions', subscriptionRoutes)
 server.use('/v1/reminder',reminderRouter)
 server.use('/v1/events', eventRoutes)
 server.use('/v1/addsub', addSubsRouter)
-
+server.use('/v1/trials', trialsRouter)
 server.use('/', logIn)
 
 
