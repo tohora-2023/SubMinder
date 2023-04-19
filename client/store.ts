@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, Action } from 'redux'
 import type { ThunkDispatch, ThunkAction as BaseThunkAction } from 'redux-thunk'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import reducers from './reducers'
-import type { Action } from './actions'
+//import type { Action } from './actions'
 
 export function initaliseStore() {
   return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))

@@ -50,7 +50,7 @@ describe('<ManageSubscription/>', () => {
     await waitFor(() => {
       const text = screen.getAllByRole('text')
       expect(text).toMatchObject([
-        { textContent: 'You have no subscriptions, please add one' },
+        { textContent: 'You have no paid subscriptions, please add one' },
       ])
       expect(scope.isDone()).toBeTruthy()
     })

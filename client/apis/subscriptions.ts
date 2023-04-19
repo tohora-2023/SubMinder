@@ -1,5 +1,6 @@
 import request from 'superagent'
 import { Subscription, SubscriptionUpdate } from '../../models/subscription'
+import { response } from 'express'
 
 export async function getSubscriptions(token: string): Promise<Subscription[]> {
   try {
@@ -21,7 +22,7 @@ export async function getSubscriptions(token: string): Promise<Subscription[]> {
     return subscriptions
   } catch (error) {
     console.log(error)
-    return error.message
+    return []
   }
 }
 
@@ -36,7 +37,7 @@ export async function deleteSubscription(
     return response.statusCode
   } catch (error) {
     console.log(error)
-    return error.message
+    return response.statusCode
   }
 }
 
@@ -53,6 +54,6 @@ export async function editSubscription(
     return response.statusCode
   } catch (error) {
     console.log(error)
-    return error.message
+    return response.statusCode
   }
 }
