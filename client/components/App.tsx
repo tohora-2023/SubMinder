@@ -10,6 +10,7 @@ import PaymentHistory from './PaymentHistory'
 import Footer from './Footer'
 import Add from './Add'
 import EditSubs from './EditSubs'
+import Profile from './Profile'
 
 function App() {
   const [isAuthComplete, setIsAuthComplete] = useState(false)
@@ -52,25 +53,20 @@ function App() {
         <>
           <div className="min-page-height">
             <Nav />
-            <Routes>
-              <Route
-                path="/"
-                element={<Home isAuthComplete={isAuthComplete} />}
-              />
-            </Routes>
             <div className="mt-8 flex flex-col items-center justify-center">
               <Routes>
+                <Route
+                  path="/"
+                  element={<Home isAuthComplete={isAuthComplete} />}
+                />
                 <Route path="/paymenthistory" element={<PaymentHistory />} />
+                <Route path="/addsubscription" element={<Add />} />
                 <Route
                   path="/managesubscriptions"
                   element={<ManageSubscription />}
                 />
-                <Route path="/addsubscription" element={<Add />} />
                 <Route path="/editsubscription/:subId" element={<EditSubs />} />
-                {/* <Route
-                path="/profile"
-                // element={<Profile />}
-              /> */}
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </div>
           </div>
