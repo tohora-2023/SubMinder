@@ -244,10 +244,10 @@ export default function Home({ isAuthComplete }: HomeProps) {
         </div>
       </div>
       <div
-        className="ml-auto mr-auto flex justify-center"
+        className="ml-auto mr-auto justify-center md:flex"
         style={{ width: '80%', marginBottom: '200px' }}
       >
-        <div className="ml-auto mr-auto w-1/2">
+        <div className="ml-auto mr-auto md:w-1/2">
           <div className="p-100px">
             {isAuthComplete ? (
               <Calendar

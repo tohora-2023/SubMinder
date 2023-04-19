@@ -24,7 +24,7 @@ export default function LogIn() {
           backgroundImage: 'url(./img/hero2.jpg)',
         }}
       >
-        <div className="h-300 mb-auto ml-auto mr-auto mt-auto w-2/3">
+        <div className="h-300 mb-auto ml-auto mr-auto mt-auto sm:w-2/3">
           <h3 className="text-3xl font-bold ">
             Get SubMinder, the ultimate subscription wingman!
           </h3>
