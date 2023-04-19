@@ -14,6 +14,7 @@ exports.up = function (knex) {
     table.string('category')
     table.string('website')
     table.float('price')
+    table.boolean('reminder')
   })
 }
 

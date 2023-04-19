@@ -67,7 +67,6 @@ export function fetchTrials(token: string): ThunkAction {
     return getAllTrials(token)
       .then((trials) => {
         dispatch(setTrialsSuccess(trials))
-        console.log(trials)
       })
       .catch((error: Error) => {
         dispatch(setError(error.message))
@@ -81,7 +80,6 @@ export function addTrial(trial: AddTrials, token: string): ThunkAction {
     return addNewTrial(trial, token)
       .then((trial) => {
         dispatch(addTrialSucess(trial))
-        console.log(trial)
       })
       .catch((error: Error) => {
         dispatch(setError(error.message))

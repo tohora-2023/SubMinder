@@ -40,7 +40,10 @@ export default function manageCalendarEvents(
     } else if (frequency === 'yearly') {
       interval = 365
     }
-    currentDate = new Date(currentDate.getTime() + interval * 86400000) // 86400000 = 1 day in milliseconds
+    const oneDayInMilliseconds = 86400000
+    currentDate = new Date(
+      currentDate.getTime() + interval * oneDayInMilliseconds
+    )
 
     occurrenceCount++
   }

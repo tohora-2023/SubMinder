@@ -9,6 +9,7 @@ interface Prop {
   category?: string
   website?: string
   price?: number
+  reminder?: boolean
 }
 
 export async function addSubs(
@@ -21,6 +22,7 @@ export async function addSubs(
     category,
     website,
     price,
+    reminder,
   }: Prop,
   userAuthId: string,
   db = connection
@@ -36,25 +38,31 @@ export async function addSubs(
       website,
       price,
       userAuthId,
+      reminder,
     })
     .returning('*')
   return newSub.id
 }
 
 interface Subscription {
-  id: number
+  id?: number
+  name?: string
+  image?: string
   frequency: string
   startDate: Date
   endDate: Date
+  category?: string
+  website?: string
+  price?: number
+  userAuthId?: string
+  reminder?: boolean
 }
 
 export async function getSubById(
   id: number,
   db = connection
 ): Promise<Subscription> {
-  const [subById] = await db('subscriptions')
-    .where('id', id)
-    .select('id', 'frequency', 'startDate', 'endDate')
+  const [subById] = await db('subscriptions').where('id', id).select('*')
 
   return subById
 }

@@ -14,15 +14,12 @@ export default function AddSubs() {
   const [category, setCategory] = useState('')
   const [website, setWebsite] = useState('')
   const [price, setPrice] = useState(0)
+  const [reminder, setReminder] = useState(false)
   const { getAccessTokenSilently } = useAuth0()
-  const { data, loading, error } = useAppSelector(
-    (state) => state.subscriptions
-  )
+  const { loading, error } = useAppSelector((state) => state.subscriptions)
   const navigate = useNavigate()
 
-  useEffect(() => {}, [])
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     if (price === 0) {
@@ -37,6 +34,7 @@ export default function AddSubs() {
       category,
       website,
       price,
+      reminder,
     }
     const token = await getAccessTokenSilently()
     const { id } = await addNewSub(newSub, token)
@@ -44,13 +42,18 @@ export default function AddSubs() {
     interface DayProp {
       scheduleDate?: string
       isLastDate?: boolean
+      isEmailSent?: boolean
     }
 
     for (const day of paymentDates) {
       const scheduleDate = day.date
       const isLastDate = day === paymentDates[paymentDates.length - 1]
       const subscriptionId = id
-      const dayForCallender: DayProp = { scheduleDate, isLastDate: false }
+      const dayForCallender: DayProp = {
+        scheduleDate,
+        isLastDate: false,
+        isEmailSent: false,
+      }
       if (isLastDate) {
         dayForCallender.isLastDate = true
       }
@@ -117,6 +120,7 @@ export default function AddSubs() {
         />
 
         <br />
+
         <label htmlFor="endDate">End Date </label>
         <input
           type="date"
@@ -165,6 +169,18 @@ export default function AddSubs() {
           className="focus:ring-primary block w-full border-gray-400 px-4 py-2 leading-5 placeholder-gray-500 focus:border-transparent focus:outline-none focus:ring-2"
           required
         />
+        <br />
+
+        <label htmlFor="reminder">
+          <span className="ml-2 text-gray-700">Reminder </span>
+          <input
+            type="checkbox"
+            checked={reminder}
+            onChange={(e) => setReminder(e.target.checked)}
+            className="form-checkbox text-primary h-5 w-5 transition duration-150 ease-in-out"
+          />
+        </label>
+        <br />
         <br />
 
         <button

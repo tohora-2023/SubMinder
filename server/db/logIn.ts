@@ -7,7 +7,7 @@ interface Props {
   image?: string
 }
 
-export async function addUserLogIn(
+export async function addUserOrReturnNull(
   { firstName, lastName, userName, image }: Props,
   authID: string,
   db = connection

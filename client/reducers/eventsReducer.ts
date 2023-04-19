@@ -4,6 +4,7 @@ import {
   SET_ERROR,
   SET_EVENTS_SUCESS,
   EventsAction,
+  SET_EVENTS_UPDATE,
 } from '../actions/events'
 
 export interface EventsState {
@@ -40,6 +41,22 @@ const EventsReducer = (
         loading: false,
         error: action.payload,
         data: [],
+      }
+    // case updateIsEmailSend
+    // Add case to change state.data[?].isEmailSent === true
+    case SET_EVENTS_UPDATE:
+      return {
+        loading: false,
+        error: undefined,
+        data: state.data.map((sub) => {
+          const updatedSub = action.payload.find(
+            (updated) => updated.id === sub.id
+          )
+          if (updatedSub) {
+            return { ...sub, isEmailSent: updatedSub.isEmailSent }
+          }
+          return sub
+        }),
       }
     default:
       return state

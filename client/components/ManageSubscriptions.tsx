@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { useAuth0 } from '@auth0/auth0-react'
 import SubItem from './SubItem'
+import Email from './EmailReminder'
 import Trials from './Trials'
 
 function ManageSubscription() {
@@ -36,6 +37,7 @@ function ManageSubscription() {
 
   return (
     <>
+      <Email />
       <div className="right main-page-container flex py-2">
         <button className="ml-auto border border-accent-yellow px-4 py-2 font-medium text-accent-yellow">
           <Link to="/addsubscription">Add a new subscription</Link>

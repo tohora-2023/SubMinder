@@ -23,6 +23,7 @@ function App() {
     image?: string
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleAddLogInInfo = async (token: string) => {
     const userInfo: UserLogInProp = {
       firstName: user?.given_name,
@@ -34,6 +35,7 @@ function App() {
     setIsAuthComplete(true)
   }
   useEffect(() => {
+    
     const handleLogIn = async () => {
       try {
         const token = await getAccessTokenSilently()
@@ -45,7 +47,7 @@ function App() {
     if (isAuthenticated) {
       handleLogIn()
     }
-  }, [getAccessTokenSilently, isAuthenticated])
+  }, [getAccessTokenSilently, handleAddLogInInfo, isAuthenticated])
 
   return (
     <>

@@ -20,6 +20,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
         category,
         website,
         price,
+        reminder
       } = req.body
       const newSub = await addSubs(
         {
@@ -31,6 +32,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res: Response) => {
           category,
           website,
           price,
+          reminder,
         },
         auth0Id
       )
